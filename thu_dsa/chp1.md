@@ -48,7 +48,7 @@ _To measure is to know. If you cannot measure it, you cannot improve it
 
 考虑我们要评价两个不同算法的优劣，一个很自然的思想是实验测量，通过测量这两个算法在同一问题实例(instance)P的情况下，两个算法的运行代价。即
 
-$$T_A(P) = the_cost_of_algorithm_A_to_solve_instance_P$$
+$$T_A(P) = the\ cost\ of\ algorithm\ A\ to\ solve\ instance\ P$$
 
 可是，这样的测量真的有意义吗？
 
