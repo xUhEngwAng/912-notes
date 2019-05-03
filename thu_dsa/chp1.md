@@ -56,7 +56,7 @@ $$T_A(P) = the\ cost\ of\ algorithm\ A\ to\ solve\ instance\ P$$
 
 那好，我们对不同的问题实例进行抽象。根据经验，一般的算法的运行代价和问题的规模是相关的。一般说来，问题的规模越大，算法运行的代价越大(当然也有反例，如Hailstone)。这样，我们就可以把基于问题实例P的测量，转化为基于一系列规模为n的问题实例P的测量，即
 
-$$ T_A(n) = the_cost_of_algorithm_to_solve_instances_of_scale_n $$
+$$ T_A(n) = the\ cost\ of\ algorithm\ to\ solve\ instances\ of\ scale\ n $$
 
 有下面两种方案：
 
@@ -97,5 +97,5 @@ $$ T_A(n) = the_cost_of_algorithm_to_solve_instances_of_scale_n $$
 
 由于每步基本操作的运行时间是固定的，因此我们可以使用算法执行所需要的基本操作的次数来评价一个算法。这样
 
-$$T(n) = number_of_basic_operations_to_solve_a_problem_of_scale_n$$
+$$T(n) = number\ of\ basic\ operations\ to\ solve\ a\ problem\ of\ scale\ n$$
 
