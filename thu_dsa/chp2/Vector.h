@@ -54,6 +54,9 @@ public:
 	T pop(int index);
 	T pop(int lo, int hi);//return the last element popped
 	int remove(T const &elem);//remove first element matched, return index, -1 if not found
+	int unique(void); //return the number of elements deleted
+	void map(void(*visit)(T&));
+	template <typename VST> void map(VST& visit);
 };
 
 //protected methods
@@ -163,6 +166,29 @@ int Vector<T>::remove(T const &elem){
 	while (--pos >= 0 && _elem[pos] != elem);
 	if(pos != -1) pop(pos);
 	return pos;
+}
+
+template <typename T>
+int Vector<T>::unique(){
+	int count = 0;
+	for(int pos = 1; pos != _size;){
+		if (find(_elem[pos], 0, pos) == -1) ++pos;
+		else{
+			pop(pos);
+			++count;
+		}
+	}
+	return count;
+}
+
+template <typename T>
+void Vector<T>::map(void(*visit)(T&)){
+	for (int ix = 0; ix != _size; ++ix) visit(_elem[ix]);
+}
+
+template <typename T> template <typename VST>
+void Vector<T>::map(VST& visit) {
+	for (int ix = 0; ix != _size; ++ix) visit(_elem[ix]);
 }
 
 #endif
