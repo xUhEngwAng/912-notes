@@ -13,7 +13,7 @@ using std::endl;
 template<typename T>
 class Vector{
 protected:
-	T* _elem;
+	T*  _elem;
 	int _size;
 	int _capacity;
 
@@ -39,6 +39,10 @@ public:
 	void print(void);
 	int find(T const &elem);
 	int find(T const &elem, int lo, int hi);
+	int search(T const &elem, int lo, int hi);
+	int fib_search(T const &elem, int lo, int hi);
+	int binary_search(T const &elem, int lo, int hi);
+	int interpolation_search(T const &elem, int lo, int hi);
 	int getSize() { return _size; }
 	int getCapacity() { return _capacity; }
 	bool empty(){ return _size == 0;}
@@ -55,6 +59,7 @@ public:
 	T pop(int lo, int hi);//return the last element popped
 	int remove(T const &elem);//remove first element matched, return index, -1 if not found
 	int unique(void); //return the number of elements deleted
+	int uniquify(void);//unique method for sorted vector
 	void map(void(*visit)(T&));
 	template <typename VST> void map(VST& visit);
 };
@@ -115,6 +120,28 @@ int Vector<T>::find(T const &elem, int lo, int hi){
 	int pos = hi;
 	while (--pos >= lo && _elem[pos] != elem);
 	return pos;
+}
+
+template <typename T>
+int Vector<T>::search(T const &elem, int lo, int hi){
+	int mid;
+	while (lo < hi) {
+		mid = (lo + hi) >> 1;
+		if (elem < _elem[mid]) hi = mid;
+		else if (_elem[mid] < elem) lo = mid + 1;
+		else return mid;
+	}
+	return lo - 1;
+}
+
+template <typename T>
+int Vector<T>::binary_search(T const &elem, int lo, int hi){
+	int mid;
+	while(lo < hi){
+		mid = (lo + hi) >> 1;
+		elem < _elem[mid] ? hi = mid : lo = mid + 1;
+	}
+	return lo - 1;
 }
 
 
@@ -179,6 +206,15 @@ int Vector<T>::unique(){
 		}
 	}
 	return count;
+}
+
+template <typename T>
+int Vector<T>::uniquify(){
+	int i = 0, j = 0;
+	while (++j != _size)
+		if (_elem[i] != _elem[j]) _elem[++i] = _elem[j];
+	_size = i + 1;
+	return j - i - 1;
 }
 
 template <typename T>

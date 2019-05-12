@@ -11,6 +11,7 @@ void test_insert();
 void test_delete();
 void test_find();
 void test_unique();
+void test_search();
 void test_map();
 
 int main(){
@@ -20,6 +21,7 @@ int main(){
 	test_delete();
 	test_find();
 	test_unique();
+	test_search();
 	test_map();
 
 	system("pause");
@@ -136,6 +138,41 @@ void test_unique(){
 	assert(v.unique() == 8);
 	assert(v.getSize() == 10);
 	assert(v[9] == 5);
+
+	// test basic function
+	int B[] = { 1,1,1,2,2,3,3,3,3,3,4,4,5,6,6,7,7,7,8,8,9,9,9,9,9,9 };
+	v = Vector<int>(B, 26);
+	assert(v.uniquify() == 17);
+	assert(v.getSize() == 9);
+	for (int ix = 0; ix != 9; ++ix)
+		assert(v[ix] == ix + 1);
+
+	//test running time
+	//remain to be done
+
+	cout << "test passed." << endl;
+}
+
+void test_search(){
+	cout << "run test_search...";
+	int A[] = { 2,5,6,8,9,10,13,14,17,19,21,22,30,32 };
+	Vector<int> v(A, 14);
+
+	//test search
+	assert(v.search(14, 0, v.getSize()) == 7);
+	assert(v.search(14, 9, v.getSize()) == 8);
+	assert(v.search(1, 0, v.getSize()) == -1);
+
+	//test binary_search
+	assert(v.binary_search(14, 0, v.getSize()) == 7);
+	assert(v.binary_search(15, 0, v.getSize()) == 7);
+	assert(v.binary_search(14, 9, v.getSize()) == 8);
+	
+	int B[] = { 1,1,1,2,2,3,3,3,3,3,4,4,5,6,6,7,7,7,8,8,9,9,9,9,9,9 };
+	v = Vector<int>(B, 0, 26);
+	assert(v.binary_search(3, 0, v.getSize()) == 9);
+	assert(v.binary_search(9, 0, v.getSize()) == 25);
+	assert(v.binary_search(0, 0, v.getSize()) == -1);
 
 	cout << "test passed." << endl;
 }
