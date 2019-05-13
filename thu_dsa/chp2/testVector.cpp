@@ -1,6 +1,11 @@
+#include "Fib.h"
 #include "Vector.h"
+#include <time.h>
 #include <cassert>
 #include <iostream>
+
+#define NUMOFLOOPS 1000
+#define ELEMENT_NUM 10000
 
 using std::cout;
 using std::endl;
@@ -13,6 +18,7 @@ void test_find();
 void test_unique();
 void test_search();
 void test_map();
+void test_bubbleSort();
 
 int main(){
 	test_constructor();
@@ -22,6 +28,7 @@ int main(){
 	test_find();
 	test_unique();
 	test_search();
+	test_bubbleSort();
 	test_map();
 
 	system("pause");
@@ -163,6 +170,11 @@ void test_search(){
 	assert(v.search(14, 9, v.getSize()) == 8);
 	assert(v.search(1, 0, v.getSize()) == -1);
 
+	//test fib_search
+	assert(v.fib_search(14, 0, v.getSize()) == 7);
+	assert(v.fib_search(14, 9, v.getSize()) == 8);
+	assert(v.fib_search(1, 0, v.getSize()) == -1);
+
 	//test binary_search
 	assert(v.binary_search(14, 0, v.getSize()) == 7);
 	assert(v.binary_search(15, 0, v.getSize()) == 7);
@@ -173,6 +185,33 @@ void test_search(){
 	assert(v.binary_search(3, 0, v.getSize()) == 9);
 	assert(v.binary_search(9, 0, v.getSize()) == 25);
 	assert(v.binary_search(0, 0, v.getSize()) == -1);
+
+	cout << "test passed." << endl;
+}
+
+void test_bubbleSort(){
+	cout << "run test_bubbleSort...\n";
+	int A[] = { 2,3,4,6,1,0,9,8,7,5 };
+	Vector<int> v(A, 10);
+	assert(v.unordered() == 5);
+
+	v.bubbleSort();
+	assert(v.unordered() == 0);
+	for (int ix = 0; ix != 10; ++ix)
+		assert(v[ix] == ix);
+	
+	srand((unsigned)time(NULL));
+	Vector<int> v1;
+	for (int ix = 0; ix != ELEMENT_NUM; ++ix)
+		v1.push_back(rand());
+	assert(v1.getSize() == ELEMENT_NUM);
+	assert(v1.unordered() != 0);
+
+	clock_t begin = clock();
+	v1.bubbleSort();
+	clock_t end = clock();
+	assert(v.unordered() == 0);
+	cout << "Running time: " << end - begin << endl;
 
 	cout << "test passed." << endl;
 }

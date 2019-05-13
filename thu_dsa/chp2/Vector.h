@@ -1,6 +1,7 @@
 #ifndef VECTOR_H_
 #define VECTOR_H_
 
+#include "Fib.h"
 #include <iostream>
 
 #define DEFAULT_CAPACITY 3
@@ -21,6 +22,9 @@ protected:
 	void copyfrom(T* const A, int lo, int hi);
 	void copyfrom(Vector<T> const &V, int lo, int hi);
 	void expand();
+	void swap(T &one, T &two);
+	void merge(int lo, int mid, int hi);
+	int bubble(int lo, int hi);
 	//void shrink();
 
 public:
@@ -45,6 +49,8 @@ public:
 	int interpolation_search(T const &elem, int lo, int hi);
 	int getSize() { return _size; }
 	int getCapacity() { return _capacity; }
+	int unordered() { return unordered(0, _size); }
+	int unordered(int lo, int hi);
 	bool empty(){ return _size == 0;}
 
 	//writable interfaces
@@ -54,7 +60,7 @@ public:
 	Vector<T>& operator=(Vector<T> const &V);
 	void push_back(T const &elem);
 	void insert(int pos, T const &elem);
-	T pop_back(void) { return 	_elem[--_size]; }
+	T pop_back(void) { return _elem[--_size]; }
 	T pop(int index);
 	T pop(int lo, int hi);//return the last element popped
 	int remove(T const &elem);//remove first element matched, return index, -1 if not found
@@ -62,12 +68,18 @@ public:
 	int uniquify(void);//unique method for sorted vector
 	void map(void(*visit)(T&));
 	template <typename VST> void map(VST& visit);
+
+	//sorting algorithms
+	void bubbleSort() { bubbleSort(0, _size); }
+	void bubbleSort(int lo, int hi);
+	void mergeSort() { mergeSort(0, _size); }
+	void mergeSort(int lo, int hi);
 };
 
 //protected methods
 template <typename T>
 void Vector<T>::copyfrom(T* const A, int lo, int hi) {
-	_capacity = (hi - lo) << 1;
+	_capacity = MAX((hi - lo) << 1, DEFAULT_CAPACITY);
 	_size = 0;
 	_elem = new T[_capacity];
 	while (lo != hi) _elem[_size++] = A[lo++];
@@ -83,8 +95,28 @@ void Vector<T>::expand(){
 	if (_size < _capacity) return;
 	//else double capacity
 	T* tmp = _elem;
-	delete[]_elem;
 	copyfrom(tmp, 0, _size);
+	delete[]tmp;
+}
+
+template <typename T>
+void Vector<T>::swap(T &one, T &two){
+	T temp;
+	temp = one;
+	one = two;
+	two = temp;
+}
+
+template <typename T>
+int Vector<T>::bubble(int lo, int hi){
+	int lastSwap = 0;
+	while(++lo != hi){
+		if(_elem[lo] < _elem[lo - 1]){
+			swap(_elem[lo], _elem[lo - 1]);
+			lastSwap = lo;
+		}
+	}
+	return lastSwap;
 }
 
 //constructors
@@ -133,6 +165,19 @@ int Vector<T>::search(T const &elem, int lo, int hi){
 	}
 	return lo - 1;
 }
+template <typename T>
+int Vector<T>:: fib_search(T const &elem, int lo, int hi){
+	Fib fib(hi - lo);
+	int mid;
+	while(lo < hi){
+		while (hi - lo <= fib.get()) fib.prev();
+		mid = fib.get() + lo;
+		if (elem < _elem[mid]) hi = mid;
+		else if (_elem[mid] < elem) lo = mid + 1;
+		else return mid;
+	}
+	return lo - 1;
+}
 
 template <typename T>
 int Vector<T>::binary_search(T const &elem, int lo, int hi){
@@ -144,6 +189,14 @@ int Vector<T>::binary_search(T const &elem, int lo, int hi){
 	return lo - 1;
 }
 
+template <typename T>
+int Vector<T>::unordered(int lo, int hi){
+	int reversed = 0;
+	while(++lo != hi){
+		if (_elem[lo] < _elem[lo - 1]) ++reversed;
+	}
+	return reversed;
+}
 
 // writable interfaces
 template<typename T>
@@ -218,13 +271,19 @@ int Vector<T>::uniquify(){
 }
 
 template <typename T>
-void Vector<T>::map(void(*visit)(T&)){
+void Vector<T>::map(void(*visit)(T&)) {
 	for (int ix = 0; ix != _size; ++ix) visit(_elem[ix]);
 }
 
 template <typename T> template <typename VST>
 void Vector<T>::map(VST& visit) {
 	for (int ix = 0; ix != _size; ++ix) visit(_elem[ix]);
+}
+
+//sorting algorithms
+template <typename T>
+void Vector<T>::bubbleSort(int lo, int hi){
+	while (lo < (hi = bubble(lo, hi)));
 }
 
 #endif
