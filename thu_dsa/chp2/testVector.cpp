@@ -17,8 +17,10 @@ void test_delete();
 void test_find();
 void test_unique();
 void test_search();
+void test_search_performance();
 void test_map();
 void test_bubbleSort();
+void test_mergeSort();
 
 int main(){
 	test_constructor();
@@ -28,7 +30,9 @@ int main(){
 	test_find();
 	test_unique();
 	test_search();
+	test_search_performance();
 	test_bubbleSort();
+	test_mergeSort();
 	test_map();
 
 	system("pause");
@@ -175,6 +179,11 @@ void test_search(){
 	assert(v.fib_search(14, 9, v.getSize()) == 8);
 	assert(v.fib_search(1, 0, v.getSize()) == -1);
 
+	//test interpolation_search
+	assert(v.interpolation_search(14, 0, v.getSize()) == 7);
+	assert(v.interpolation_search(14, 9, v.getSize()) == 8);
+	assert(v.interpolation_search(1, 0, v.getSize()) == -1);
+
 	//test binary_search
 	assert(v.binary_search(14, 0, v.getSize()) == 7);
 	assert(v.binary_search(15, 0, v.getSize()) == 7);
@@ -185,6 +194,49 @@ void test_search(){
 	assert(v.binary_search(3, 0, v.getSize()) == 9);
 	assert(v.binary_search(9, 0, v.getSize()) == 25);
 	assert(v.binary_search(0, 0, v.getSize()) == -1);
+
+	cout << "test passed." << endl;
+}
+
+void test_search_performance(){
+	cout << "run test_search_performance..." << endl;
+	srand((unsigned)time(NULL));
+	Vector<int> v1;
+	for (int ix = 0; ix != ELEMENT_NUM; ++ix)
+		v1.push_back(rand());
+	v1.mergeSort();
+
+	//test binary search
+	cout << "run binary_search...";
+	clock_t begin = clock();
+	for(int ix = 0; ix != NUMOFLOOPS; ++ix)
+		assert(v1.binary_search(v1[824], 0, v1.getSize()) == 824);
+	clock_t end = clock();
+	cout << "Running time: " << end - begin << endl;
+
+	//test plain old search
+	cout << "run plain old search...";
+	begin = clock();
+	for (int ix = 0; ix != NUMOFLOOPS; ++ix)
+		assert(v1.search(v1[824], 0, v1.getSize()) == 824);
+	end = clock();
+	cout << "Running time: " << end - begin << endl;
+
+	//test fib search
+	cout << "run fib_search...";
+	begin = clock();
+	for (int ix = 0; ix != NUMOFLOOPS; ++ix)
+		assert(v1.fib_search(v1[824], 0, v1.getSize()) == 824);
+	end = clock();
+	cout << "Running time: " << end - begin << endl;
+
+	//test interpolation search
+	cout << "run binary_search...";
+	begin = clock();
+	for (int ix = 0; ix != NUMOFLOOPS; ++ix)
+		assert(v1.interpolation_search(v1[824], 0, v1.getSize()) == 824);
+	end = clock();
+	cout << "Running time: " << end - begin << endl;
 
 	cout << "test passed." << endl;
 }
@@ -209,6 +261,33 @@ void test_bubbleSort(){
 
 	clock_t begin = clock();
 	v1.bubbleSort();
+	clock_t end = clock();
+	assert(v.unordered() == 0);
+	cout << "Running time: " << end - begin << endl;
+
+	cout << "test passed." << endl;
+}
+
+void test_mergeSort(){
+	cout << "run test_mergeSort..." << endl;
+	int A[] = { 2,3,4,6,1,0,9,8,7,5 };
+	Vector<int> v(A, 10);
+	assert(v.unordered() == 5);
+
+	v.mergeSort();
+	assert(v.unordered() == 0);
+	for (int ix = 0; ix != 10; ++ix)
+		assert(v[ix] == ix);
+
+	srand((unsigned)time(NULL));
+	Vector<int> v1;
+	for (int ix = 0; ix != ELEMENT_NUM; ++ix)
+		v1.push_back(rand());
+	assert(v1.getSize() == ELEMENT_NUM);
+	assert(v1.unordered() != 0);
+
+	clock_t begin = clock();
+	v1.mergeSort();
 	clock_t end = clock();
 	assert(v.unordered() == 0);
 	cout << "Running time: " << end - begin << endl;

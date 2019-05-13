@@ -108,6 +108,18 @@ void Vector<T>::swap(T &one, T &two){
 }
 
 template <typename T>
+void Vector<T>::merge(int lo, int mid, int hi){
+	int leftLen = mid - lo;
+	T* tmp = new T[leftLen];
+	for (int ix = 0; ix != leftLen; ++ix) tmp[ix] = _elem[ix + lo];
+
+	for (int pos = lo, ix = 0, jx = mid; ix != leftLen;) {
+		if (hi <= jx || tmp[ix] <= _elem[jx]) _elem[pos++] = tmp[ix++];
+		if (jx < hi && _elem[jx] < tmp[ix])  _elem[pos++] = _elem[jx++];
+	}
+}
+
+template <typename T>
 int Vector<T>::bubble(int lo, int hi){
 	int lastSwap = 0;
 	while(++lo != hi){
@@ -185,6 +197,20 @@ int Vector<T>::binary_search(T const &elem, int lo, int hi){
 	while(lo < hi){
 		mid = (lo + hi) >> 1;
 		elem < _elem[mid] ? hi = mid : lo = mid + 1;
+	}
+	return lo - 1;
+}
+
+template <typename T>
+int Vector<T>::interpolation_search(T const &elem, int lo, int hi){
+	int mid;
+	while(lo < hi){
+		mid = lo + (elem - _elem[lo])*(hi - lo) / (_elem[hi] - _elem[lo]);
+		if (mid < lo || mid >= hi) break;
+
+		if (elem < _elem[mid]) hi = mid;
+		else if (_elem[mid] < elem) lo = mid + 1;
+		else return mid;
 	}
 	return lo - 1;
 }
@@ -284,6 +310,16 @@ void Vector<T>::map(VST& visit) {
 template <typename T>
 void Vector<T>::bubbleSort(int lo, int hi){
 	while (lo < (hi = bubble(lo, hi)));
+}
+
+template <typename T>
+void Vector<T>::mergeSort(int lo, int hi){
+	if (hi - lo < 2) return;
+
+	int mid = (lo + hi) >> 1;
+	mergeSort(lo, mid);
+	mergeSort(mid, hi);
+	merge(lo, mid, hi);
 }
 
 #endif
