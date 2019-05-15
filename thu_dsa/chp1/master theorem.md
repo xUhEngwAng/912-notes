@@ -9,9 +9,9 @@ We all know that for `divide-and-conquer` algorithms, there are two way to analy
 
 ## Introduction
 
-First we'll make some abstractions. Lets' consider an algorithm implemented in the form of a recursion. Generally, we can assume that to solve a problem of scale `n`, we can divide it into `a` subproblems, whose scale would be `n/b`, with $f(n)$ being the time to create the subproblems and combine their results in the above procedure.
+First we'll make some abstractions. Let's consider an algorithm implemented in the form of a recursion. Generally, we can assume that to solve a problem of scale `n`, we can divide it into `a` subproblems, whose scales would be `n/b`, with $f(n)$ being the time to create the subproblems and combine their results in the above procedure.
 
-The runtime of subck an algorithm on an input of size 'n', usually denoted $T(n)$, can be expressed by the recurrence relation
+The runtime of an algorithm on an input of size 'n', usually denoted $T(n)$, can be expressed by the recurrence relation
 
 $$
 T(n) = aT(\frac{n}{b}) + f(n)
