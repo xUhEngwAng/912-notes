@@ -9,9 +9,9 @@ We all know that for `divide-and-conquer` algorithms, there are two way to analy
 
 ## Introduction
 
-First we'll make some abstractions. Lets' consider an algorithm implemented in the form of a recursion. Generally, we can assume that to solve a problem of scale `n`, we can divide it into `a` subproblems, whose scale would be `n/b`, with f(n) being the time to create the subproblems and combine their results in the above procedure.
+First we'll make some abstractions. Lets' consider an algorithm implemented in the form of a recursion. Generally, we can assume that to solve a problem of scale `n`, we can divide it into `a` subproblems, whose scale would be `n/b`, with $f(n)$ being the time to create the subproblems and combine their results in the above procedure.
 
-The runtime of subck an algorithm on an input of size 'n', usually denoted T(n), can be expressed by the recurrence relation
+The runtime of subck an algorithm on an input of size 'n', usually denoted $T(n)$, can be expressed by the recurrence relation
 
 $$
 T(n) = aT(\frac{n}{b}) + f(n)
@@ -19,7 +19,7 @@ $$
 
 ## Generic solution
 
-First we'll assume f(n) being in the form of $f(n) = n^d$. Generally, this is indeed the most common form of f(n).In this way, the equation should look like this:
+First we'll assume $f(n)$ being in the form of $f(n) = n^d$. Generally, this is indeed the most common form of $f(n)$.In this way, the equation should look like this:
 
 $$
 T(n) = aT(\frac{n}{b}) + n^d
@@ -58,11 +58,11 @@ $$
 
 > Case 1: q = 1
 
-$T(n) = K * n^d = log_{b}^{n} * n^d = O(logn · n^d) $
+$T(n) = k * n^d = log_{b}^{n} * n^d = O(logn · n^d) $
 
 > Case 2: q < 1
 
-Then T(n) is a convergent geometric progression. So T(n) can be expressed as:
+Then $T(n)$ is a convergent geometric progression. So $T(n)$ can be expressed as:
 
 $$
 T(n) = O(n^d)
