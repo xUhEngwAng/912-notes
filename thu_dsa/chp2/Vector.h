@@ -205,7 +205,7 @@ template <typename T>
 int Vector<T>::interpolation_search(T const &elem, int lo, int hi){
 	int mid;
 	while(lo < hi){
-		mid = lo + (elem - _elem[lo])*(hi - lo) / (_elem[hi] - _elem[lo]);
+		mid = lo + (elem - _elem[lo])*(hi - lo - 1) / (_elem[hi - 1] - _elem[lo]);
 		if (mid < lo || mid >= hi) break;
 
 		if (elem < _elem[mid]) hi = mid;
