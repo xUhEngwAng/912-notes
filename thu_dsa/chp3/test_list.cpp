@@ -11,6 +11,9 @@ void test_pop();
 void test_find();
 void test_deduplicate();
 void test_uniquify();
+void test_search();
+void test_selection_sort();
+void test_insertion_sort();
 
 int main(){
 	cout << "Running tests......" << endl;
@@ -21,6 +24,9 @@ int main(){
 	test_find();
 	test_deduplicate();
 	test_uniquify();
+	test_search();
+	test_selection_sort();
+	test_insertion_sort();
 
 	cout << "All tests passed." << endl;
 	system("pause");
@@ -130,13 +136,64 @@ void test_deduplicate(){
 void test_uniquify(){
 	List<int> l1;
 	int i[] = {5,8,12,14,15,19,20,22,29,36};
-	for (int ix = 0; ix != 11; ix++) {
+	for (int ix = 0; ix != 10; ix++) {
 		l1.push_back(i[ix]);
 		l1.push_back(i[ix]);
 	}
 	
-	assert(l1.getSize() == 22);
-	assert(l1.uniquify() == 11);
-	for (int ix = 0; ix != 11; ix++)
+	assert(l1.getSize() == 20);
+	assert(l1.uniquify() == 10);
+	for (int ix = 0; ix != 10; ix++)
 		assert(l1[ix] == i[ix]);
+}
+
+void test_search(){
+	List<int> l1;
+	int i[] = { 5,8,12,14,15,19,20,22,29,36 };
+	for (int ix = 0; ix != 10; ix++) {
+		l1.push_back(i[ix]);
+	}
+
+	assert(l1.search(8)->val == 8);
+	assert(l1.search(14, 6, l1.last())->val == 14);
+	assert(l1.search(30, 5, l1.last())->val == 29);
+	assert(l1.search(1, 5, l1.last())->val == 14);
+}
+
+void test_selection_sort(){
+	List<int> l1;
+	int a[] = { 2,9,8,4,1,0,7,6,3,5 };
+	for (int ix = 0; ix != 10; ix++) {
+		l1.push_back(a[ix]);
+	}
+
+	l1.selection_sort(l1.first(), 5);
+	assert(l1[0] == 1);
+	assert(l1[1] == 2);
+	assert(l1[2] == 4);
+	assert(l1[3] == 8);
+	assert(l1[4] == 9);
+
+	l1.selection_sort();
+	for (int ix = 0; ix != 10; ++ix)
+		assert(l1[ix] == ix);
+}
+
+void test_insertion_sort(){
+	List<int> l1;
+	int a[] = { 2,9,8,4,1,0,7,6,3,5 };
+	for (int ix = 0; ix != 10; ix++) {
+		l1.push_back(a[ix]);
+	}
+
+	l1.insertion_sort(l1.first(), 5);
+	assert(l1[0] == 1);
+	assert(l1[1] == 2);
+	assert(l1[2] == 4);
+	assert(l1[3] == 8);
+	assert(l1[4] == 9);
+
+	l1.insertion_sort();
+	for (int ix = 0; ix != 10; ++ix)
+		assert(l1[ix] == ix);
 }

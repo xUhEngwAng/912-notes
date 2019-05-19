@@ -62,10 +62,10 @@ public:
 	void insert(int pos, T const &elem);
 	T pop_back(void) { return _elem[--_size]; }
 	T pop(int index);
-	T pop(int lo, int hi);//return the last element popped
-	int remove(T const &elem);//remove first element matched, return index, -1 if not found
-	int unique(void); //return the number of elements deleted
-	int uniquify(void);//unique method for sorted vector
+	T pop(int lo, int hi);			//return the last element popped
+	int remove(T const &elem);		//remove first element matched, return index, -1 if not found
+	int unique(void);				//return the number of elements deleted
+	int uniquify(void);				//unique method for sorted vector
 	void map(void(*visit)(T&));
 	template <typename VST> void map(VST& visit);
 

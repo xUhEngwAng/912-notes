@@ -11,7 +11,8 @@ private:
 	int             size;
 
 protected:// internal methods
-
+	ListNodePosi(T) selectMax(ListNodePosi(T) p, int n);
+	void swap(T &one, T &two);
 
 public:
 	//constructors
@@ -28,6 +29,8 @@ public:
 	ListNodePosi(T) last() const { return tail->prev; }
 	ListNodePosi(T) find(T const &val) const { return find(val, size, tail); }		//find val from all elements of the list
 	ListNodePosi(T) find(T const &val, int n, ListNodePosi(T) p) const;				//find val from a range of n elements before p
+	ListNodePosi(T) search(T const &val, int n, ListNodePosi(T) p) const;			//find val in a sorted List<T>
+	ListNodePosi(T) search(T const &val) const { return search(val, size, tail); }	//find val universally ina sorted List<T>
 	T& operator[](int rank);
 	int getSize() const { return size; }
 	bool empty() const { return size == 0; }
@@ -44,12 +47,37 @@ public:
 	ListNodePosi(T) pop(int rank);
 	ListNodePosi(T) pop(ListNodePosi(T) p);
 
+	//sort algorithms
+	void selection_sort() { selection_sort(head->succ, size); }
+	void selection_sort(ListNodePosi(T) p, int n);
+	void insertion_sort() { insertion_sort(head->succ, size); }
+	void insertion_sort(ListNodePosi(T) p, int n);
+
+
 	//deduplicate & uniquify
 	int deduplicate();
 	int uniquify();
 };
 
 /*----------implementations of class List----------*/
+
+// internal methods
+template <typename T>
+void List<T>::swap(T &one, T &two){
+	T tmp = one;
+	one   = two;
+	two   = tmp;
+}
+
+template <typename T>
+ListNodePosi(T) List<T>::selectMax(ListNodePosi(T) p, int n){
+	ListNodePosi(T) maxPosi = p;
+	while(--n){
+		p = p->succ;
+		if (maxPosi->val < p->val) maxPosi = p;
+	}
+	return maxPosi;
+}
 
 //constructors
 template <typename T>
@@ -114,6 +142,15 @@ ListNodePosi(T) List<T>::find(T const &val, int n, ListNodePosi(T) p) const {
 	while ((p = p->prev) != head && n--)
 		if (p->val == val) return p;
 	return nullptr;
+}
+
+template <typename T>
+ListNodePosi(T) List<T>::search(T const &val, int n, ListNodePosi(T) p) const{
+	for(int ix = 0; ix != n; ++ix){
+		p = p->prev;
+		if (p->val <= val) return p;
+	}
+	return p->prev;
 }
 
 template <typename T>
@@ -188,6 +225,31 @@ ListNodePosi(T) List<T>::pop(ListNodePosi(T) p){
 	p->succ->prev = p->prev;
 	--size;
 	return p;
+}
+
+//sort algorithms
+template <typename T>
+void List<T>::selection_sort(ListNodePosi(T) p, int n){
+	ListNodePosi(T) currMax;
+	ListNodePosi(T) tail = p;
+	for (int ix = 0; ix != n; ++ix, tail = tail->succ);
+
+	for (; n != 1; --n) {
+		currMax = selectMax(p, n);
+		swap(currMax->val, tail->prev->val);
+		tail = tail->prev;
+	}
+}
+
+template <typename T>
+void List<T>::insertion_sort(ListNodePosi(T) p, int n){
+	ListNodePosi(T) target;
+	for(int ix = 1; ix != n; ix++){
+		p = p->succ;
+		target = search(p->val, ix, p);
+		insert_before(target->succ, p->val);
+		pop(p);
+	}
 }
 
 //deduplicate & uniquify
