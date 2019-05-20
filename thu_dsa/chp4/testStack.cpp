@@ -9,7 +9,7 @@
 void test_basic();
 void test_capacity();
 
-int main(){
+int stack_test_main(){
 	test_basic();
 	test_capacity();
 
