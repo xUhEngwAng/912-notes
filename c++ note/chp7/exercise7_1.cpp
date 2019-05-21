@@ -14,8 +14,12 @@ struct Sales_data{
 	}
 };
 
-void add(Sales_data one, Sales_data two){
-	one.combine(two);
+Sales_data add(Sales_data const &one, Sales_data const &two){
+	Sales_data res;
+	res.bookNo     = one.bookNo;
+	res.units_sold = one.units_sold + two.units_sold;
+	res.revenue    = one.revenue + two.revenue;
+	return res;
 }
 
 istream& read(istream &is, Sales_data &data){
@@ -25,7 +29,7 @@ istream& read(istream &is, Sales_data &data){
 	return is;
 }
 
-ostream& print(ostream &os, Sales_data const data){
+ostream& print(ostream &os, Sales_data const &data){
 	os << "book number: "   << data.bookNo << endl;
 	os << "units sold: "    << data.units_sold << endl;
 	os << "total revenue: " << data.revenue << endl;
