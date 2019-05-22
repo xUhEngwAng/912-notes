@@ -85,6 +85,7 @@ Take in two objects(data1 and data2) at the same time, and step into the `if` bl
 > Exercise 7.11: Add constructors to your Sales_data class and write a program to use each of the constructors.
 
 [exercise7_11.h](exercise7_11.h)
+
 [exercise7_11.cpp](exercise7_11.cpp)
 
 > Exercise 7.12: Move the definition of the Sales_data constructor that takes an istream into the body of the Sales_data class.
@@ -169,4 +170,5 @@ But there's a drawback in this manner. For example, in constructor3, `Sales_data
 > Exercise 7.15: Add appropriate constructors to your Person class.
 
 [exercise7_15.h](exercise7_15.h)
+
 [exercise7_15.cpp](exercise7_15.cpp)
