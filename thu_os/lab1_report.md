@@ -610,3 +610,336 @@ for (; ph < eph; ph ++) {
 ```
 ((void (*)(void))(ELFHDR->e_entry & 0xFFFFFF))();
 ```
+
+## 练习5：实现函数调用堆栈跟踪函数 （需要编程）
+
+我们需要在lab1中完成`kdebug.c`中函数`print_stackframe`的实现，可以通过函数`print_stackframe`来跟踪函数调用堆栈中记录的返回地址。在如果能够正确实现此函数，可在lab1中执行 “make qemu”后，在qemu模拟器中得到类似如下的输出：
+
+```
+……
+ebp:0x00007b28 eip:0x00100992 args:0x00010094 0x00010094 0x00007b58 0x00100096
+    kern/debug/kdebug.c:305: print_stackframe+22
+ebp:0x00007b38 eip:0x00100c79 args:0x00000000 0x00000000 0x00000000 0x00007ba8
+    kern/debug/kmonitor.c:125: mon_backtrace+10
+ebp:0x00007b58 eip:0x00100096 args:0x00000000 0x00007b80 0xffff0000 0x00007b84
+    kern/init/init.c:48: grade_backtrace2+33
+ebp:0x00007b78 eip:0x001000bf args:0x00000000 0xffff0000 0x00007ba4 0x00000029
+    kern/init/init.c:53: grade_backtrace1+38
+ebp:0x00007b98 eip:0x001000dd args:0x00000000 0x00100000 0xffff0000 0x0000001d
+    kern/init/init.c:58: grade_backtrace0+23
+ebp:0x00007bb8 eip:0x00100102 args:0x0010353c 0x00103520 0x00001308 0x00000000
+    kern/init/init.c:63: grade_backtrace+34
+ebp:0x00007be8 eip:0x00100059 args:0x00000000 0x00000000 0x00000000 0x00007c53
+    kern/init/init.c:28: kern_init+88
+ebp:0x00007bf8 eip:0x00007d73 args:0xc031fcfa 0xc08ed88e 0x64e4d08e 0xfa7502a8
+<unknow>: -- 0x00007d72 –
+……
+```
+
+请完成实验，看看输出是否与上述显示大致一致，并解释最后一行各个数值的含义。
+
+提示：可阅读小节“函数堆栈”，了解编译器如何建立函数调用关系的。在完成lab1编译后，查看lab1/obj/bootblock.asm，了解bootloader源码与机器码的语句和地址等的对应关系；查看lab1/obj/kernel.asm，了解 ucore OS源码与机器码的语句和地址等的对应关系。
+
+要求完成函数kern/debug/kdebug.c::print_stackframe的实现，提交改进后源代码包（可以编译执行），并在实验报告中简要说明实现过程，并写出对上述问题的回答。
+
+> 基本原理：为什么可以实现函数调用堆栈的跟踪？
+
+在函数的嵌套调用过程中，硬件会保存一些寄存器信息，以便于函数调用完成后返回被调用函数的下一条语句。这些被保存的信息，一般会包括一些会被改变的的通用寄存器，下一条执行的指令地址(IP)。之前我的理解就仅限于此，因为这两个信息已经足以使函数返回到之前被打断的位置。在这种情况下是不能实现函数调用堆栈的跟踪的。
+
+但是实际系统在保存这两个信息以外，在进行函数调用时，还会将当前的`ebp`寄存器压栈，并且将`esp`寄存器的值赋给`ebp`。这可以在任何函数调用的汇编语句中看到：
+
+```asm
+int
+kern_init(void) {
+	100000:       55                      push   %ebp
+	100001:       89 e5                   mov    %esp,%ebp
+```
+
+这相当于建立了一个当前被调用函数的堆栈，因为将`ebp`更新为`esp`，意味着堆栈段清空，而以后该函数用到的一些局部变量，将全部存储在以新的`ebp`开始的堆栈里面。
+
+但是这里最重要的是，由于在更新`ebp`的语句之前，将原来的`ebp`压入了堆栈。这意味着当前的`esp`(也是新的`ebp`)正好指向上一个函数堆栈的起始位置。这样，通过`ebp`，就可以将函数嵌套调用路径上的各个函数全部串接起来。这也就是跟踪函数调用堆栈的原理。实际上，各个编译器报错时的函数调用关系就是这样产生的。
+
+> 具体`print_stackframe`函数的实现。
+
+可以看到，题目中不仅要求要打印函数调用堆栈的`ebp`，还需要`eip`，函数的参数，以及函数所在的文件以及函数等信息。要获取这些信息，就需要了解函数调用时各个寄存器的入栈次序。
+
+在调用某个函数时：
+
++ 首先要由原函数将被调用函数的参数压入栈中，从而正确实现函数的调用。
++ `call`语句的执行，将使得`eip`被硬件压入栈中。
++ 在被调用函数体内，会由编译器自动加上`push %ebp; mov %esp, %ebp`的操作
++ 这以后，是当前函数的局部栈，存放当前函数要用到的局部变量等。
+
+因此可以看到，以`ebp`为基准，可以轻松地获得`eip`和函数的参数等信息，如`eip`的信息，就存储在`ebp + 4`的位置，可以使用内嵌汇编来获得。但是需要注意的是，这里的`eip`并不是与`ebp`配套的`eip`，而是被调用函数的返回地址。要获取当前函数的`eip`信息，可以采用同样的思想，即调用一个读取`eip`的函数，在该函数中读取到的`eip`就是我们期望获得的`eip`了。
+
+```c
+static __noinline uint32_t
+read_eip(void) {
+    uint32_t eip;
+    asm volatile("movl 4(%%ebp), %0" : "=r" (eip));
+    return eip;
+}
+```
+
+注意到该函数的修饰符为`__noinline`，因为就是需要真正的函数调用，才能由硬件压入当前的`eip`，从而可被读取出。
+
+但除此以外，还需要获得某一个函数的其他信息，即其所在的文件，以及在当前文件中的位置。此外还有函数参数的个数。这些信息，是存储在所谓的`stab table`里面。
+
+`stab`是一个c代码调试信息的格式，当使用gcc编译c代码时，使用`-g`指令，会使编译器添加额外的调试信息，包括行号，变量的类型以及范围，以及函数的参数个数等。而这些信息就存储在`stab table`里面。而读取`stab`格式好像比较繁琐，所以老师已经提供了相应的api，所以直接调用就可以了。
+
+这样，`print_stackframe`的代码如下：
+
+```c
+void
+print_stackframe(void) {
+     /* LAB1 YOUR CODE : STEP 1 */
+     /* (1) call read_ebp() to get the value of ebp. the type is (uint32_t);
+      * (2) call read_eip() to get the value of eip. the type is (uint32_t);
+      * (3) from 0 .. STACKFRAME_DEPTH
+      *    (3.1) printf value of ebp, eip
+      *    (3.2) (uint32_t)calling arguments [0..4] = the contents in address (unit32_t)ebp +2 [0..4]
+      *    (3.3) cprintf("\n");
+      *    (3.4) call print_debuginfo(eip-1) to print the C calling function name and line number, etc.
+      *    (3.5) popup a calling stackframe
+      *           NOTICE: the calling funciton's return addr eip  = ss:[ebp+4]
+      *                   the calling funciton's ebp = ss:[ebp]
+      */
+	struct eipdebuginfo info;
+	uint32_t curr_arg, offset, ix, count, eip, ebp;
+	uint8_t  flag = 1;
+	eip = read_eip();
+	ebp = read_ebp();
+	for(ix = 0; ix != STACKFRAME_DEPTH && flag;ix++){
+		cprintf("ebp:0x%08x eip:0x%08x ", ebp, eip);
+		
+		if(debuginfo_eip(eip, &info) != 0)
+			 flag = 0;
+		for(count = 0; count != info.eip_fn_narg; count++){
+			offset = 8 + 4 * count;
+			asm volatile("addl %1, %0":"+r"(offset): "r"(ebp)); 
+			asm volatile("movl (%1), %0" : "=r"(curr_arg): "r"(offset));
+			cprintf(" 0x%08x", curr_arg);
+		}
+		cprintf("\n");
+		
+		print_debuginfo(eip);
+		
+		asm volatile("movl 4(%1), %0":"=r"(eip):"r"(ebp));
+		asm volatile("movl (%1), %0":"=r"(ebp):"r"(ebp));
+	}	
+}
+```
+
+其中，函数的一些信息，如行号，文件名之类的，直接通过函数`debuginfo_eip`获得。
+
+关于这个函数，在完成的过程中还是遇到了不少问题的，总结如下：
+
++ gcc内联汇编不够熟悉。一开始总是在内联汇编中直接指定寄存器，如`movl %%eax, %%ebx`，然而这样根本不能编译通过。这是因为可能这些寄存器已经在用了，是不能随便改变的，所以还是使用内联汇编的扩展语法比较稳妥。
++ 一开始追踪`ebp`的调用时，是将当前的`ebp`寄存器中的值读出，然后将这个值作为地址，利用地址所指的数据去更新`ebp`，即
+
+```
+asm volatile("movl %%ebp, %0":"=r"(ebp))
+asm volatile("movl (%0), %%ebp": "r"(ebp))
+```
+
+这个思路我本来觉得挺好的，但是在更新`ebp`后我之前定义的局部变量就都失效了，就是说具有一个未定义的值。因此，也印证了各个变量的确是存储在当前函数的局部堆栈里面，一旦修改了`ebp`，就索引不到这些变量了。
++ 还应该注意到最后两句内联汇编的次序。之前也说过，`ebp + 4`的值并不是与当前`ebp`对应的`eip`，而是上层函数的返回地址。因此，需要先读取这个`eip`，再更新`ebp`，才能使两者对应起来。
++ 感觉题目给的示例输出有问题啊，似乎是直接指定了函数的参数固定输出四个。而我的代码是根据`debuginfo`给出的函数参数个数信息，逐个进行打印的。
++ 最后一行的数值？至今没看懂是什么意思。
+
+## 练习6：完善中断初始化和处理 （需要编程）
+
+请完成编码工作和回答如下问题：
+
++ 中断描述符表（也可简称为保护模式下的中断向量表）中一个表项占多少字节？其中哪几位代表中断处理代码的入口？
++ 请编程完善kern/trap/trap.c中对中断向量表进行初始化的函数idt_init。在idt_init函数中，依次对所有中断入口进行初始化。使用mmu.h中的SETGATE宏，填充idt数组内容。每个中断的入口由tools/vectors.c生成，使用trap.c中声明的vectors数组即可。
++ 请编程完善trap.c中的中断处理函数trap，在对时钟中断进行处理的部分填写trap函数中处理时钟中断的部分，使操作系统每遇到100次时钟中断后，调用print_ticks子程序，向屏幕上打印一行文字”100 ticks”。
+
+要求完成问题2和问题3 提出的相关函数实现，提交改进后的源代码包（可以编译执行），并在实验报告中简要说明实现过程，并写出对问题1的回答。完成这问题2和3要求的部分代码后，运行整个系统，可以看到大约每1秒会输出一次”100 ticks”，而按下的键也会在屏幕上显示。
+
+### 中段描述符表
+
+> 中断描述符表的结构？
+
+和全局描述符表一样，中断描述符表的每一个表项占8个字节，其每一个表项叫做门描述符。和段描述符不一样，它没有段大小(20位)字段，因为可以通过查段表获得。
+
+为了要能描述中断服务程序的入口地址，门描述符显然应该具有
+
++ 段描述符，2个字节。这样，查到段描述符后，显然还需要查段表，才能获得入口程序的物理地址。
++ 偏移量，4个字节
+
+除此以外，还需要一些控制字，来描述优先级，中断类型(硬中断，异常，陷入)等信息。其具体结构如下：
+
+```c
+/* Gate descriptors for interrupts and traps */
+struct gatedesc {
+    unsigned gd_off_15_0 : 16;        // low 16 bits of offset in segment
+    unsigned gd_ss : 16;            // segment selector
+    unsigned gd_args : 5;            // # args, 0 for interrupt/trap gates
+    unsigned gd_rsv1 : 3;            // reserved(should be zero I guess)
+    unsigned gd_type : 4;            // type(STS_{TG,IG32,TG32})
+    unsigned gd_s : 1;                // must be 0 (system)
+    unsigned gd_dpl : 2;            // descriptor(meaning new) privilege level
+    unsigned gd_p : 1;                // Present
+    unsigned gd_off_31_16 : 16;        // high bits of offset in segment
+};
+```
+
+### 初始化中断描述符表(`init_idt`)
+
+> 既然中断描述符表存放了中断服务程序的入口地址，那么只需要将这些入口地址按照中断描述符的格式填入就可以了。但是有一个问题，中断描述符表最多有256个表项，所有这些中断号全都已经定义了中断服务程序了吗？
+
+答案是对，也不对。
+
+首先来看中断的执行过程。这和我原来想象中的不太一样。按照我的想象，通过硬件判断出中断号后以后，通过查idt表，就可以获得服务程序的入口地址，进而转到中断服务程序去执行。
+
+但这个想法其实不太能经得起推敲。因为256个中断号，其中前32个(0~31)是系统保留的，用于异常和不可屏蔽中断，其它的都是可以留给用户定义的。如果这些用户定义的中断服务程序更换了地址，那么为了使它们生效，还需要重新加载中段描述符表，这种操作我反正是没有听说过。
+
+因此，比较好的方法就是固定各个中断服务程序的入口地址。实际上也的确是这么做的，这些入口地址也称为中断向量。但是这又会带来一个问题，应该给每个中断服务程序预留多少空间呢，因为每个中断服务程序理论上都是可以很大的，固定了入口地址带来了不便性。
+
+实际的方法差不多是上面两者的折中，即中断向量里面进行的操作是固定的，无非是将一些信息压栈。然后所有中断向量都会跳转到同一个函数，在这个函数中再根据先前保存的各个信息(尤其是中断号)，跳转到对应的实际的中断处理程序，这些处理程序可以是用户定义的，它们可以存在于内存的各个位置，就和普通的程序无异。
+
+这样，初始化`idt`表的工作，其实就是将中断向量里面的各个入口地址按格式填入的过程，问题就变得很简单了：
+
+```c
+static struct pseudodesc idt_pd = {
+    sizeof(idt) - 1, (uintptr_t)idt
+};
+
+/* idt_init - initialize IDT to each of the entry points in kern/trap/vectors.S */
+void
+idt_init(void) {
+     /* LAB1 YOUR CODE : STEP 2 */
+     /* (1) Where are the entry addrs of each Interrupt Service Routine (ISR)?
+      *     All ISR's entry addrs are stored in __vectors. where is uintptr_t __vectors[] ?
+      *     __vectors[] is in kern/trap/vector.S which is produced by tools/vector.c
+      *     (try "make" command in lab1, then you will find vector.S in kern/trap DIR)
+      *     You can use  "extern uintptr_t __vectors[];" to define this extern variable which will be used later.
+      * (2) Now you should setup the entries of ISR in Interrupt Description Table (IDT).
+      *     Can you see idt[256] in this file? Yes, it's IDT! you can use SETGATE macro to setup each item of IDT
+      * (3) After setup the contents of IDT, you will let CPU know where is the IDT by using 'lidt' instruction.
+      *     You don't know the meaning of this instruction? just google it! and check the libs/x86.h to know more.
+      *     Notice: the argument of lidt is idt_pd. try to find it!
+      */
+	extern uintptr_t __vectors[];
+	
+	uint16_t cs;
+	asm volatile("movw %%cs, %0":"=r"(cs));
+	uint32_t ix;
+	for(ix = 0; ix < 256; ++ix)
+		SETGATE(idt[ix], 0, cs, __vectors[ix], 0);
+	
+	lidt(&idt_pd);
+}
+```
+
+其中，`__vectors`数组中存放了各个中断向量的入口地址，但这个地址只是一个偏移量，还需要结合当前的代码段选择子`cs`，就可以初始化`idt`了。和段表一样，最后需要告诉操作系统这个中断描述符表在内存中的位置，即将其信息写入`idtr`寄存器中。
+
+> 中断执行全过程。
+
+只初始化`idt`表也太简单了，再来探索下中断执行的一些细节部分。
+
+我们已经知道，中断的执行是通过以下几步：
+
++ 通过硬件的操作，找出中断号，然后交给相应的中断向量（涉及到查`idt`表）
++ 中断向量里面将中断号和错误信息压入堆栈，然后跳转到`__alltraps`代码段(因为是使用`jmp`指令，所以不是函数)
++ 在`__alltraps`继续把各个寄存器压栈，包括四个段寄存器(`ds`, `es`, `fs`, `gs`)，所有的通用寄存器(`edi`, `esi`, `ebp`, `esp`, `ebx`, `edx`, `ecx`, `eax`)。足可见中断是一件大事，要把所有寄存器都准备好。
++ `__alltraps`调用`trap`函数
++ 在`trap`函数中，调用`trap_dispatch`函数，转到具体的中断服务例程
+
+需要注意的是，`trap_dispatch`函数接受一个指向`trapframe`结构体的指针。这个指针是通过将`esp`压栈实现的，也就是说该指针就是`esp`，而对应的结构体，就是被压入栈中的数据。`trapframe`结构体如下所示：
+
+```c
+/* registers as pushed by pushal */
+struct pushregs {
+    uint32_t reg_edi;
+    uint32_t reg_esi;
+    uint32_t reg_ebp;
+    uint32_t reg_oesp;            /* Useless */
+    uint32_t reg_ebx;
+    uint32_t reg_edx;
+    uint32_t reg_ecx;
+    uint32_t reg_eax;
+};
+
+struct trapframe {
+    struct pushregs tf_regs;
+    uint16_t tf_gs;
+    uint16_t tf_padding0;
+    uint16_t tf_fs;
+    uint16_t tf_padding1;
+    uint16_t tf_es;
+    uint16_t tf_padding2;
+    uint16_t tf_ds;
+    uint16_t tf_padding3;
+    uint32_t tf_trapno;
+    /* below here defined by x86 hardware */
+    uint32_t tf_err;
+    uintptr_t tf_eip;
+    uint16_t tf_cs;
+    uint16_t tf_padding4;
+    uint32_t tf_eflags;
+    /* below here only when crossing rings, such as from user to kernel */
+    uintptr_t tf_esp;
+    uint16_t tf_ss;
+    uint16_t tf_padding5;
+} __attribute__((packed));
+```
+
+可见，`trapframe`的低字节就是在`__alltraps`中被压入栈中的那些寄存器(因为栈是从高字节向低字节生长的)，其中的`tf_err`, `tf_trapno`是在中断向量`vectors`中被压入栈的，而`tf_eip`, `tf_cs`, `tf_eflags`都是硬件压入栈中的(所以这也是中断和函数调用的区别)。并且我们还可以看到，如果该中断涉及特权级的转换(从用户态转换到内核态)，硬件还会压入`tf_esp`以及`tf_ss`，以便中断返回时从内核堆栈切换回用户堆栈。
+
+### 时钟中断
+
+这个练习的代码太简单了，不想多说，就直接贴程序吧：
+
+```c
+/* trap_dispatch - dispatch based on what type of trap occurred */
+extern int ticks_count;
+static void
+trap_dispatch(struct trapframe *tf) {
+    char c;
+
+    switch (tf->tf_trapno) {
+    case IRQ_OFFSET + IRQ_TIMER:
+        /* LAB1 YOUR CODE : STEP 3 */
+        /* handle the timer interrupt */
+        /* (1) After a timer interrupt, you should record this event using a global variable (increase it), such as ticks in kern/driver/clock.c
+         * (2) Every TICK_NUM cycle, you can print some info using a funciton, such as print_ticks().
+         * (3) Too Simple? Yes, I think so!
+         */
+		
+		if(++ticks_count == TICK_NUM){
+			ticks_count = 0;
+			print_ticks();
+		}
+        break;
+    case IRQ_OFFSET + IRQ_COM1:
+        c = cons_getc();
+        cprintf("serial [%03d] %c\n", c, c);
+        break;
+    case IRQ_OFFSET + IRQ_KBD:
+        c = cons_getc();
+        cprintf("kbd [%03d] %c\n", c, c);
+        break;
+    //LAB1 CHALLENGE 1 : YOUR CODE you should modify below codes.
+    case T_SWITCH_TOU:
+    case T_SWITCH_TOK:
+        panic("T_SWITCH_** ??\n");
+        break;
+    case IRQ_OFFSET + IRQ_IDE1:
+    case IRQ_OFFSET + IRQ_IDE2:
+        /* do nothing */
+        break;
+    default:
+        // in kernel, it must be a mistake
+        if ((tf->tf_cs & 3) == 0) {
+            print_trapframe(tf);
+            panic("unexpected trap in kernel.\n");
+        }
+    }
+}
+```
+
+可以看到，在`trap_dispatch`里面才是进行实质的中断处理，主要是判断当前中断的中断号(存储在`trapframe`结构体中)，我觉得应该可以用其他信息，来进行中断服务例程。
+
+关于这个程序，唯一想说的还是那个全局变量`ticks_count`，我将它定义在了`init.c`里面，但是总感觉不够优雅，我也不知道应该怎么优雅...
