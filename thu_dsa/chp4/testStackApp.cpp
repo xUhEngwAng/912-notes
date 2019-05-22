@@ -8,12 +8,14 @@ using std::endl;
 
 void test_convert();
 void test_paren();
+void test_evaluate();
 
 int main(){
 	cout << "Running tests......" << endl;
 	test_convert();
 	test_paren();
-
+	test_evaluate();
+	
 	cout << "All tests passed." << endl;
 	system("pause");
 	return 0;
@@ -30,4 +32,9 @@ void test_paren(){
 	assert(paren("()()") == true);
 	assert(paren("[(])") == false);
 	assert(paren("{[()]{[({})]}}") == true);
+}
+
+void test_evaluate(){
+	assert(evaluate("2*5+(3+4-2*7)/2") == 6.5);
+	assert(evaluate("(0!+ 1) * 2 ^ (3!+ 4) - (5!- 67 - (8 + 9))") == 2012);
 }

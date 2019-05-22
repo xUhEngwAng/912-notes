@@ -1,11 +1,20 @@
 #include "../chp2/Fib.h"
 #include "stackApp.h"
+#include <string>
+
+/*-----------build-in functions----------*/
+int readNumber(char* &expr);
+int fac(int n);
+inline char orderBetween(char optr1, char optr2);
+int findOptr(char optr);
+double cal(char optr, double opnd);
+double cal(double opnd1, char optr, double opnd2);
 
 /*
-* @brief : convert a decimal digit n to any base(2 <= base <= 36)
-* @args  :
-* @return: return the result in the form of char*
-*/
+ * @brief : convert a decimal digit n to any base(2 <= base <= 36)
+ * @args  :
+ * @return: return the result in the form of char*
+ */
 char* convert(__int64 n, int base){
 	Stack<char> charStack;
 	while(n != 0){
@@ -20,13 +29,13 @@ char* convert(__int64 n, int base){
 }
 
 /*
-* @brief : to judge if an expression of matches
-* @args  : exp
-* @return: return true if matches
-*/
+ * @brief : to judge if an expression of matches
+ * @args  : exp
+ * @return: return true if matches
+ */
 bool paren(const char exp[]){
 	Stack<char> parenStack;
-	char currParen, popped;
+	char currParen;
 	for(int ix = 0; (currParen = exp[ix]) != '\0'; ++ix){
 		switch(currParen){
 		case '(':
@@ -52,4 +61,120 @@ bool paren(const char exp[]){
 		}
 	}
 	return parenStack.empty()? true : false;
+}
+
+/*
+ * @brief : to compute the value of an infix expression
+ * @args  : infixExpr
+ * @return: return the value in double
+ * @others: only consider valid infix expression
+ */
+double evaluate(char* infixExpr){
+	Stack<double> opnd;
+	Stack<char>   optr;
+	double opnd1, opnd2;
+	optr.push('\0');
+	while(!optr.empty()){
+		if (isdigit(*infixExpr)) opnd.push(readNumber(infixExpr));
+		else{
+			if (*infixExpr == ' ' || *infixExpr == '\t') { // skip white spaces
+				++infixExpr;
+				continue;
+			}
+
+			switch(orderBetween(optr.top(), *infixExpr)){
+			case '>':
+				if (optr.top() == '!') opnd.push(cal(optr.pop(), opnd.pop()));
+				else{
+					opnd2 = opnd.pop();
+					opnd1 = opnd.pop();
+					opnd.push(cal(opnd1, optr.pop(), opnd2));
+				}
+				break;
+
+			case '<':
+				optr.push(*infixExpr++);
+				break;
+
+			case '=':
+				infixExpr++;
+				optr.pop();
+				break;
+			}
+		}
+	}
+	return opnd.pop();
+}
+
+/*-----------build-in functions----------*/
+int readNumber(char* &expr){
+	int res = 0;
+	while(isdigit(*expr)){
+		res = res * 10 + *expr - '0';
+		expr++;
+	}
+	return res;
+}
+
+inline char orderBetween(char optr1, char optr2){
+	return pri[findOptr(optr1)][findOptr(optr2)];
+}
+
+int findOptr(char optr){
+	if (optr == '+')  return 0;
+	if (optr == '-')  return 1;
+	if (optr == '*')  return 2;
+	if (optr == '/')  return 3;
+	if (optr == '^')  return 4;
+	if (optr == '!')  return 5;
+	if (optr == '(')  return 6;
+	if (optr == ')')  return 7;
+	if (optr == '\0') return 8;
+}
+
+int fac(int n){
+	int res = 1;
+	for (; n != 0; res *= n, n--);
+	return res;
+}
+
+double cal(char optr, double opnd){
+	double res = 0.0;
+	switch(optr){
+	case '!':
+		res = fac(opnd);
+		break;
+	default:
+		break;
+	}
+	return res;
+}
+
+double cal(double opnd1, char optr, double opnd2) {
+	double res = 0.0;
+	switch (optr){
+	case '+':
+		res = opnd1 + opnd2;
+		break;
+
+	case '-':
+		res = opnd1 - opnd2;
+		break;
+
+	case '*':
+		res = opnd1 * opnd2;
+		break;
+
+	case '/':
+		res = opnd1 / opnd2;
+		break;
+
+	case '^':
+		res = pow(opnd1, opnd2);
+		break;
+
+	default:
+		break;
+	}
+	return res;
 }

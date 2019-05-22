@@ -3,6 +3,8 @@
 
 #include "Stack.h"
 
+#define NOPTR 9
+
 static char digits[] = { '0','1','2','3','4','5','6','7','8','9',
 						'a','b','c','d','e','f','g','h','i','j',
 						'k','l','m','n','o','p','q','r','s','t',
@@ -15,10 +17,31 @@ static char digits[] = { '0','1','2','3','4','5','6','7','8','9',
 char* convert(__int64 n, int base);
 
 /*
-* @brief : to judge if an expression of parens matches
-* @args  : exp
-* @return: return true if matches
-*/
+ * @brief : to judge if an expression of parens matches
+ * @args  : exp
+ * @return: return true if matches
+ */
 bool paren(const char exp[]);
+
+//pri[stack top optr][curr optr]
+const char pri[NOPTR][NOPTR] = {
+	/*          +    -    *    /    ^    !    (    )    \0 */
+	/*  +  */  '>', '>', '<', '<', '<', '<', '<', '>', '>',
+	/*  -  */  '>', '>', '<', '<', '<', '<', '<', '>', '>',
+	/*  *  */  '>', '>', '>', '>', '<', '<', '<', '>', '>',
+	/*  /  */  '>', '>', '>', '>', '<', '<', '<', '>', '>',
+	/*  ^  */  '>', '>', '>', '>', '>', '<', '<', '>', '>',
+	/*  !  */  '>', '>', '>', '>', '>', '>', '<', '>', '>',
+	/*  (  */  '<', '<', '<', '<', '<', '<', '<', '=', ' ',
+	/*  )  */  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+	/*  \0 */  '<' ,'<', '<', '<', '<', '<', '<', ' ', '=' };
+
+/*
+ * @brief : to compute the value of an infix expression
+ * @args  : infixExpr
+ * @return: return the value in double
+ * @others: only consider valid infix expression 
+ */
+double evaluate(char* infixExpr);
 
 #endif
