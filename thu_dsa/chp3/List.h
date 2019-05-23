@@ -74,7 +74,7 @@ ListNodePosi(T) List<T>::selectMax(ListNodePosi(T) p, int n){
 	ListNodePosi(T) maxPosi = p;
 	while(--n){
 		p = p->succ;
-		if (maxPosi->val < p->val) maxPosi = p;
+		if (maxPosi->val <= p->val) maxPosi = p;
 	}
 	return maxPosi;
 }
@@ -253,14 +253,15 @@ void List<T>::insertion_sort(ListNodePosi(T) p, int n){
 }
 
 //deduplicate & uniquify
+//deduplicate & uniquify
 template <typename T>
-int List<T>::deduplicate(){
+int List<T>::deduplicate() {
 	int oldSize = size;
 	ListNodePosi(T) p = head->succ;
 	ListNodePosi(T) tmp;
-	for (; p != tail; p = p->succ){
-		for(tmp = head->succ; tmp != p; tmp = tmp->succ){
-			if(tmp->val == p->val){
+	for (; p != tail; p = p->succ) {
+		for (tmp = head->succ; tmp != p; tmp = tmp->succ) {
+			if (tmp->val == p->val) {
 				pop(tmp);
 				break;
 			}
