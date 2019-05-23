@@ -6,9 +6,9 @@
 #define NOPTR 9
 
 static char digits[] = { '0','1','2','3','4','5','6','7','8','9',
-						'a','b','c','d','e','f','g','h','i','j',
-						'k','l','m','n','o','p','q','r','s','t',
-						'u','v','w','x','y','z' };
+						 'a','b','c','d','e','f','g','h','i','j',
+					 	 'k','l','m','n','o','p','q','r','s','t',
+						 'u','v','w','x','y','z' };
 /*
  * @brief : convert a decimal digit n to any base(2 <= base <= 36)
  * @args  : 
@@ -43,5 +43,13 @@ const char pri[NOPTR][NOPTR] = {
  * @others: only consider valid infix expression 
  */
 double evaluate(char* infixExpr);
+
+/*
+ * @brief : to convert an infix expression to a postfix one
+ * @args  : infixExpr
+ * @return: return the converted postfix expression
+ * @others: only consider valid infix expression
+ */
+char* toPostfix(char* infixExpr);
 
 #endif

@@ -1,5 +1,6 @@
 #include "../chp2/Fib.h"
 #include "stackApp.h"
+#include <stdlib.h>
 #include <string>
 
 /*-----------build-in functions----------*/
@@ -9,6 +10,7 @@ inline char orderBetween(char optr1, char optr2);
 int findOptr(char optr);
 double cal(char optr, double opnd);
 double cal(double opnd1, char optr, double opnd2);
+void append(char* &des, char c);
 
 /*
  * @brief : convert a decimal digit n to any base(2 <= base <= 36)
@@ -106,6 +108,42 @@ double evaluate(char* infixExpr){
 	return opnd.pop();
 }
 
+/*
+ * @brief : to convert an infix expression to a postfix one
+ * @args  : infixExpr
+ * @return: return the converted postfix expression
+ * @others: only consider valid infix expression
+ */
+char* toPostfix(char* infixExpr){
+	char* postfixExpr = "";
+	Stack<char> optr;
+	optr.push('\0');
+	while(!optr.empty()){
+		if (isdigit(*infixExpr)) append(postfixExpr, *infixExpr++);
+		else{
+			if (*infixExpr == ' ' || *infixExpr == '\t') { // skip white spaces
+				++infixExpr;
+				continue;
+			}
+			switch(orderBetween(optr.top(), *infixExpr)){
+			case '>':
+				append(postfixExpr, optr.pop());
+				break;
+
+			case '<':
+				optr.push(*infixExpr++);
+				break;
+
+			case '=':
+				optr.pop();
+				++infixExpr;
+				break;
+			}
+		}
+	}
+	return postfixExpr;
+}
+
 /*-----------build-in functions----------*/
 int readNumber(char* &expr){
 	int res = 0;
@@ -177,4 +215,17 @@ double cal(double opnd1, char optr, double opnd2) {
 		break;
 	}
 	return res;
+}
+
+/*
+ * @brief : to append a char to an array of char, even if the array is already full
+ * @args  : char* des, char c
+ * @return: void
+ * @others: the array can automatically expand itself when needed
+ */
+void append(char* &des, char c){
+	int n = strlen(des);
+	char* tmp = des;
+	des = new char[n + 2];
+	sprintf(des, "%s%c\0", tmp, c);
 }
