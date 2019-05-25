@@ -1,16 +1,13 @@
-#include "Fib.h"
-#include <iostream>
-using std::cout;
-using std::endl;
+#include "Vector.h"
 
 //constructor
 Fib::Fib(int n) {
-	elem = Vector<int>();
+	Vector<int>();
 	int prev = 0, current = 1, tmp;
 
-	elem.push_back(prev);
+	push_back(prev);
 	while (current < n) {
-		elem.push_back(current);
+		push_back(current);
 
 		tmp = prev;
 		prev = current;
@@ -20,14 +17,14 @@ Fib::Fib(int n) {
 
 //external interfaces
 void Fib::print() {
-	for (int ix = 0; ix != elem.getSize(); ++ix)
-		cout << elem[ix] << endl;
+	for (int ix = 0; ix != getSize(); ++ix)
+		cout << operator[](ix) << endl;
 }
 
 int Fib::get() {
-	return elem[elem.getSize() - 1];
+	return operator[](getSize() - 1);
 }
 
 void Fib::prev() {
-	elem.pop_back();
+	pop_back();
 }

@@ -1,7 +1,6 @@
 #ifndef VECTOR_H_
 #define VECTOR_H_
 
-#include "Fib.h"
 #include <iostream>
 
 #define DEFAULT_CAPACITY 3
@@ -10,6 +9,10 @@
 
 using std::cout;
 using std::endl;
+
+template<typename T> 
+class Vector;
+class Fib;
 
 template<typename T>
 class Vector{
@@ -321,5 +324,16 @@ void Vector<T>::mergeSort(int lo, int hi){
 	mergeSort(mid, hi);
 	merge(lo, mid, hi);
 }
+
+
+class Fib : public Vector<int> {
+public:
+	//constructor
+	Fib(int n);
+
+	int  get();
+	void print();
+	void prev();
+};
 
 #endif
