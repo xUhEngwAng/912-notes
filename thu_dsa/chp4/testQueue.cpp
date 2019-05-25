@@ -9,7 +9,7 @@ void test_constructor();
 void test_enqueue();
 void test_dequeue();
 
-int main(){
+int test_queue_main(){
 	clock_t begin = clock();
 	cout << "Running tests." << endl;
 

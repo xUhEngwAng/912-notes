@@ -1,4 +1,3 @@
-#include "../chp2/Fib.h"
 #include "stackApp.h"
 #include <iostream>
 #include <cassert>

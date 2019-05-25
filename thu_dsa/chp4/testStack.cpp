@@ -1,4 +1,3 @@
-#include "../chp2/Fib.h"
 #include "Stack.h"
 #include "time.h"
 #include <iostream>
@@ -9,7 +8,7 @@
 void test_basic();
 void test_capacity();
 
-int stack_test_main(){
+int test_stack_main(){
 	test_basic();
 	test_capacity();
 
