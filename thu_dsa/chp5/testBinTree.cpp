@@ -6,6 +6,7 @@ using std::cout;
 using std::endl;
 
 void test_insert();
+void test_size();
 void test_preTraversal();
 void test_inTraversal();
 void test_postTraversal();
@@ -15,6 +16,7 @@ int main(){
 	cout << "Running test." << endl;
 
 	test_insert();
+	test_size();
 	test_preTraversal();
 	test_inTraversal();
 	test_postTraversal();
@@ -54,6 +56,16 @@ void test_insert(){
 	assert(right->leftChild == nullptr);
 	assert(right->rightChild == nullptr);
 	assert(left->height == 0 && right->height == 0);
+}
+
+void test_size(){
+	BinTree<int> intTree;
+	BinNodePosi(int) root = intTree.insertAsRoot(8);
+	assert(root->size() == 1);
+	intTree.insertAsLC(root, 7);
+	assert(root->size() == 2);
+	intTree.insertAsRC(root, 14);
+	assert(root->size() == 3);
 }
 
 template <typename T>

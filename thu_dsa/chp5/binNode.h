@@ -68,7 +68,7 @@ void BinNode<T>::goAlongLeftBranch(Stack<BinNodePosi(T)> &S){
 template <typename T>
 int BinNode<T>::size() const {
 	int leftSize = this->leftChild ? this->leftChild->size() : 0;
-	int rightSize = this - rightChild ? this->rightChild->size() : 0;
+	int rightSize = this -> rightChild ? this->rightChild->size() : 0;
 	return leftSize + rightSize + 1;
 }
 
