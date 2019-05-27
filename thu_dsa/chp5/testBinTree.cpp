@@ -130,6 +130,8 @@ void test_postTraversal(){
 
 	root->postOrder_Re(Print<int>());
 	cout << endl;
+	root->postOrder_It(Print<int>());
+	cout << endl;
 }
 
 void test_levelTraversal(){

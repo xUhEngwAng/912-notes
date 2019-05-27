@@ -12,6 +12,7 @@ protected:
 	template <typename VST> 
 	void visitAlongLeftBranch(VST &visit, Stack<BinNodePosi(T)> &S);
 	void goAlongLeftBranch(Stack<BinNodePosi(T)> &S);
+	void goToHLVFL(Stack<BinNodePosi(T)> &S);							//Highest Leaf Visible From Left
 
 public:
 	BinNodePosi(T) parent;
@@ -61,6 +62,19 @@ void BinNode<T>::goAlongLeftBranch(Stack<BinNodePosi(T)> &S){
 		S.push(curr);
 		curr = curr->leftChild;
 	}
+}
+
+template <typename T>
+void BinNode<T>::goToHLVFL(Stack<BinNodePosi(T)> &S){
+	BinNodePosi(T) curr;
+	while(curr = S.top()){
+		if(curr->leftChild){
+			if (curr->rightChild) S.push(curr->rightChild);
+			S.push(curr->leftChild);
+		}
+		else S.push(curr->rightChild);
+	}
+	S.pop();
 }
 
 //public interfaces
@@ -149,6 +163,18 @@ void BinNode<T>::postOrder_Re(VST &visit){
 	if (this->leftChild)  this->leftChild->postOrder_Re(visit);
 	if (this->rightChild) this->rightChild->postOrder_Re(visit);
 	visit(this->data);
+}
+
+template <typename T> template <typename VST>
+void BinNode<T>::postOrder_It(VST &visit){
+	Stack<BinNodePosi(T)> S;
+	BinNodePosi(T) curr = this;
+	S.push(curr);
+	while(!S.empty()){
+		if(S.top() != curr->parent) goToHLVFL(S);
+		curr = S.pop();
+		visit(curr->data);
+	}
 }
 
 template <typename T> template <typename VST>
