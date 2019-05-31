@@ -1,4 +1,4 @@
-Conclusion on Chapter Two: List
+Conclusion on Chapter Three: List
 ===============================
 
 ## List是采取动态的存储策略
