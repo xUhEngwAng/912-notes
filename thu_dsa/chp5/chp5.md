@@ -272,7 +272,7 @@ void BinNode<T>::inOrder_It2(VST &visit) {
 
 后续遍历的访问过程如下图所示：
 
-![后续遍历的访问过程]()
+![后续遍历的访问过程](images/postOrder.png)
 
 综上所述，后序遍历的非递归算法如下：
 
