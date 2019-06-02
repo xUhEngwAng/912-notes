@@ -111,3 +111,194 @@ wald(T) = wald(T^{'}) + W_a + W_b
 $$
 假设$T$并不是最优带权编码树，则存在一个比$T$更优的编码树$T_1$，满足$wald(T_1) < wald(T)$，那么将$T_1$中`x`和`y`结点合并成为`z`结点，对应的编码树$T_{1}^{'}$满足$wald(T_{1}^{'}) = wald(T_1) - W_a - W_b < wald(T^{'})$，所以$T_{1}^{'}$是一棵比$T^{'}$更优的带权编码树，与假设矛盾。
 
+## 二叉树的遍历
+
+### 先序遍历
+
+> 先序遍历递归算法。
+
+这个就不多说了。关键还是体会它的思想，即首先访问根节点，再访问左子树，最后再访问右子树，这个顺序递归地进行。根据这样的思想，可以构思出一种迭代进行先序遍历的方法。
+
+> 先序遍历迭代算法。
+
+在递归算法中，两个递归调用都处于函数中的最后的操作，类似于尾递归，因此不难写出迭代版本的遍历算法。由于左子树总是先于右子树访问，即使左子树中具有较高深度的结点，也会先于右子树中具有较小深度的结点，所以首先需要将右子树结点延迟缓冲起来，待访问了左子树中所有结点，再来访问右子树。因此，这里考虑使用一个栈。
+
+每步迭代，都是首先访问当前结点。然后将右子树和左子树依次进栈。由于栈后进先出的性质，在下一次迭代中，左子树首先被弹出作为当前结点，将迭代过程继续下去。在某一次弹栈时，如果栈为空，则标志着当前结点访问完毕（左右子树都为空），并且所有祖先结点都访问完毕（栈为空），则循环结束。其具体的代码如下：
+
+```cpp
+template <typename T> template <typename VST>
+void preOrder_It1(BinNodePosi(T) x, VST& viist){
+	Stack<BinNodePosi(T)> S;
+	S.push(x);
+	while(!S.empty()){
+		x = S.pop();
+		visit(x->data);
+		if(x->rightChild) S.push(x->rightChild);
+		if(x->leftChild)  S.push(x->leftChild);
+	} 
+}
+```
+
+可以用数学归纳法证明，该算法是可以实现二叉树的先序遍历的（这里懒得写了，打公式真烦）。
+
+> 先序遍历第二版迭代算法。
+
+上面的算法固然是可以工作，但是它其实就是从递归来的，看它的代码，其实和递归差别不是很大，并不能揭示先序遍历的本质--访问每个结点的直接后继是谁？让人感觉有些美中不足。
+
+为了写第二版算法，首先需要探究二叉树的先序遍历究竟是以怎样的先后次序进行。
+
+从根节点开始，不断向左子树访问，直到当前结点x不拥有左子树，这也相当于左子树已经访问完毕，此时转入当前结点x的右子树。右子树访问完毕后，即以x为根的子树已经访问完毕，此时应该转入x父亲的右子树，随后是x父亲的父亲的右子树，然后是x父亲的父亲的...整个访问过程可以如下面这张图所示：
+
+![先序遍历访问顺序](images/preOrder.png)
+
+从上面的归纳以及这张图可以看出，先序遍历的过程可以总结为：自上而下对左侧分支进行访问，随后自下而上对右侧分支进行访问。由于右子树的访问是自下而上的，因此需要一个栈来实现延迟缓冲的功能。整体的代码如下：
+
+```cpp
+template <typename T> template <typename VST>
+void visitAlongLeftBranch(BinNodePosi(T) x, VST &visit, Stack<BinNodePosi(T)> &S){
+	while(x){
+		visit(x->data);
+		S.push(x->rightChild);
+		x = x->leftChild;
+	}
+}
+
+template <typename T> template <typename VST>
+void preOrder_It2(BinNodePosi(T) x, VST &visit){
+	Stack<BinNodePosi(T)> S;
+	S.push(x);
+	while(!S.empty()){
+		x = S.pop();
+		visitAlongLeftBranch(x, visit, S);
+	}
+}
+```
+
+这里的分析思路其实挺重要的，会一直延续到后面的中序遍历和后续遍历迭代版算法。
+
+### 中序遍历
+
+> 中序遍历递归版算法。
+
+这个也直接略过了。反正就是说有限访问左子树，再访问根节点，最后访问右子树。通过这样的思路，要能设计出迭代版的中序遍历算法。
+
+> 中序遍历迭代版算法。
+
+仿照先序遍历的思路，先分析中序遍历中各个节点访问的先后次序--谁是第一个被访问的结点，以及每个结点的直接后继又是谁？
+
+同样是从根节点开始，不断地沿着左子树向下走。不同的是，这里向下行进的过程中不能访问当前结点，只有俟到当前结点的左子树完成访问时，才能轮到当前结点，因此想到引入一个栈来实现延迟缓冲的功能。走到最左侧的第一个没有左子树的叶子结点时，没有左子树也相当于已经完成了左子树的访问，于是随后便访问当前结点x，然后转入到x的右子树。
+
+当x的右子树完成访问时，即标志着以x为根的字数访问完毕，随机访问x的父亲结点，然后访问x的父亲的右字结点。x的右兄弟结点访问完毕时，即标志着以x的父亲的根的子树访问完毕，随机访问x父亲的父亲，然后是x父亲的父亲的父亲...整个访问过程如下图所示：
+
+![中序遍历的访问次序](images/inOrder.png)
+
+所以中序遍历迭代版的算法如下：
+
+```
+template <typename T>
+void goAlongLeftBranch(BinNodePosi(T) x, Stack<BinNodePosi(T) &S){
+	while(x){
+		S.push(x);
+		x = x->leftChild;
+	}
+}
+
+template <typename T> template <typename VST>
+void inOrder_It1(BinNodePosi(T) x, VST &visit){
+	Stack<BinNodePosi(T)> S;
+	while(true){
+		goAlongLeftBranch(x, S);
+		if(S.empty()) break;
+		x = S.pop();
+		visit(x->data);
+		x = x->rightChild;
+	}
+}
+```
+
+> 中序遍历非递归算法的优化。
+
+上面的代码固然已经甩递归算法几条街了。但是这里还是用到了一个栈，栈的最大高度等于二叉树的最大高度，即需要额外的$O(h)$的空间复杂度，在最坏的情况下与n相当。现在考虑在空间上对该算法进行优化。
+
+由于前面二叉树结点的定义中，还定义了一个指向`parent`的`BinNodePosi(T)`变量。是否可以利用这个变量来实现访问的回溯，从而规避栈的使用。具体的代码如下：
+
+```cpp
+template <typename T> template <typename VST>
+void BinNode<T>::inOrder_It2(VST &visit) {
+	BinNodePosi(T) curr = this;
+	bool backTrack = false;
+	while(curr){
+		if (!backTrack) {
+			while (curr->leftChild) curr = curr->leftChild;
+			backTrack = true;
+		}
+		else{
+			visit(curr->data);
+			if (curr->rightChild) {
+				curr = curr->rightChild;
+				backTrack = false;
+			}
+			else{
+				while (curr->parent && curr == curr->parent->rightChild) curr = curr->parent;
+				curr = curr->parent;
+			}
+		}
+	}
+}
+```
+
+上面的算法主要讨论了两种情况：回溯与非回溯。
+
++ 非回溯代表了一开始的情形，以及从某个子树的根节点刚转入其右孩子的情形，对于非回溯的情况，不断地沿着左边路径向下移动，直到当前结点不再具有左子树。前面说过，没有左子树相当于左子树访问完毕，即左子树访问完毕后回溯到当前结点，因此设回溯标志`backTrack`为`true`。
+
++ 回溯表示某个结点的左子树或者右子树访问完毕后，回溯到当前结点的情形。如果当前结点有右子树，则去访问右子树，并且将回溯标识`backTrack`置`false`。而如果当前结点没有右子树，也代表了右子树访问完毕，亦即以当前结点为根的子树访问完毕。如果当前结点是右边结点的话，则继续上溯，代表路径上的各个祖先结点都已经访问完毕。直到当前结点是左边结点，代表当前结点父亲的左子树访问完毕，接下来应该访问父亲结点。由于仍然是回溯的情形，这里不修改回溯标志位。需要注意的是，通过这种方式回溯得到的结点，其右子树一定是尚未访问过的。
+
+### 后序遍历
+
+> 后序遍历递归算法。
+
+和前面一样。所谓后续遍历，就是先访问左子树，再访问右子树，最后访问根节点，递归的进行下去。同样地，需要设计出相应的非递归算法。
+
+> 后序遍历非递归算法。
+
+首要的还是分析后续遍历各个节点之间的先后次序--哪个结点首先被访问，每个结点的直接后继是谁？
+
+从根节点出发，不断沿着左子树向下进行，直到当前结点不具有左子树。此时应该进入右子树，然后重复上面的过程。这样，第一个被访问的结点，应该是最高左侧可见结点，即从左边向右看过去，未被遮挡的最高叶节点，该结点既可以是左节点，也可是右节点。从而，显而易见，这里也需要引入一个栈来实现延迟缓冲的作用。根据上面的分析，应该是当前结点首先入栈，其次是右孩子，最后是左孩子。
+
+当一个结点访问完毕时，代表着以该结点为根的子树访问完毕，此时应该弹栈以访问下一个结点。此时弹栈无非两种情况：
+
++ 当前结点是左结点。则弹栈的结点是当前结点的右结点。对右结点的处理应该继续迭代地访问右结点的最高左侧可见结点。
++ 当前结点是右结点。则弹栈的结点是当前结点的父结点。此时应该访问当前结点，然后直接进入下一步的迭代，再次进行弹栈操作。
+
+综上所述，后序遍历的非递归算法如下：
+
+```cpp
+//Highest Leaf Visible From Left
+template <typename T>
+void goHLVFL(Stack<BinNodePosi(T)> S){
+	BinNodePosi(T) x;
+	while(x = S.top()){
+		if(x->leftChild){
+			if(x->rightChild) S.push(x->rightChild);
+			S.push(x->leftChild);
+		}
+		else S.push(x->rightChild);
+	}
+	S.pop();
+}
+
+template <typename T> template <typename VST>
+void postOrder_It(BinNodePosi(T) x, VST &visit){
+	Stack<BinNodePosi(T)> S;
+	S.push(x);
+	while(!S.empty()){
+		if(S.top() != x->parent) goHLVFL(S);
+		x = S.pop();
+		visit(x->data);
+	}
+}
+```
+
+### 层序遍历
+
+层序遍历是按照自上而下，自左而右的次序遍历，不涉及任何的逆序，延迟缓冲之类的操作。因此就不使用栈了，转而使用队列。代码略过不表。

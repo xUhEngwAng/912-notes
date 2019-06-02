@@ -111,7 +111,9 @@ void test_inTraversal(){
 
 	root->inOrder_Re(Print<int>());
 	cout << endl;
-	root->inOrder_It(Print<int>());
+	root->inOrder_It1(Print<int>());
+	cout << endl;
+	root->inOrder_It2(Print<int>());
 	cout << endl;
 }
 

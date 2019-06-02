@@ -37,7 +37,8 @@ public:
 	template <typename VST> void preOrder_It1(VST &visit);
 	template <typename VST> void preOrder_It2(VST &visit);
 	template <typename VST> void inOrder_Re(VST &visit);
-	template <typename VST> void inOrder_It(VST &visit);
+	template <typename VST> void inOrder_It1(VST &visit);
+	template <typename VST> void inOrder_It2(VST &visit);
 	template <typename VST> void postOrder_Re(VST &visit);
 	template <typename VST> void postOrder_It(VST &visit);
 	template <typename VST> void levelOrder(VST &visit);
@@ -145,7 +146,7 @@ void BinNode<T>::inOrder_Re(VST &visit){
 }
 
 template <typename T> template <typename VST>
-void BinNode<T>::inOrder_It(VST &visit){
+void BinNode<T>::inOrder_It1(VST &visit){
 	Stack<BinNodePosi(T)> S;
 	BinNodePosi(T) curr = this;
 	while(true){
@@ -155,6 +156,29 @@ void BinNode<T>::inOrder_It(VST &visit){
 		curr = S.pop();
 		visit(curr->data);
 		curr = curr->rightChild;
+	}
+}
+
+template <typename T> template <typename VST>
+void BinNode<T>::inOrder_It2(VST &visit) {
+	BinNodePosi(T) curr = this;
+	bool backTrack = false;
+	while(curr){
+		if (!backTrack) {
+			while (curr->leftChild) curr = curr->leftChild;
+			backTrack = true;
+		}
+		else{
+			visit(curr->data);
+			if (curr->rightChild) {
+				curr = curr->rightChild;
+				backTrack = false;
+			}
+			else{
+				while (curr->parent && curr == curr->parent->rightChild) curr = curr->parent;
+				curr = curr->parent;
+			}
+		}
 	}
 }
 
