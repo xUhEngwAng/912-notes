@@ -34,6 +34,7 @@ public:
 	//constructors
 	Vector();
 	Vector(int capacity);
+	Vector(int size, T const &value);
 	Vector(T* const A, int n) { copyfrom(A, 0, n); }
 	Vector(T* const A, int lo, int hi) { copyfrom(A, lo, hi); }
 	Vector(Vector<T> const &V) { copyfrom(V._elem, 0, V._size); }
@@ -147,6 +148,15 @@ Vector<T>::Vector(int capacity) {
 	_capacity = capacity;
 	_size = 0;
 	_elem = new T[_capacity];
+}
+
+template<typename T>
+Vector<T>::Vector(int size, T const &value){
+	_capacity = size << 1;
+	_size     = size;
+	_elem = new T[_capacity];
+	for (int ix = 0; ix != _size; ++ix)
+		_elem[ix] = value;
 }
 
 //read-only interfaces

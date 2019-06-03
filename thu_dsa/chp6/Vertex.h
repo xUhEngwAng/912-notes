@@ -15,6 +15,7 @@ public:
 	int inDegree   = 0;
 	int outDegree  = 0;
 
+	Vertex() = default;
 	Vertex(Tv data) : data(data) {}
 };
 

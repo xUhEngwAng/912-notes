@@ -8,7 +8,7 @@ typedef enum { UNDISCOVERED, DISCOVERED, VISITED } VStatus;
 typedef enum { UNDETERMINED, TREE, BACKWARD, FORWARD, CROSS } Etype;
 
 //abstract class Graph
-template <typename Tv> template <typename Te>
+template <typename Tv, typename Te>
 class Graph{
 private:
 	void reset();
@@ -38,11 +38,11 @@ public:
 
 	//directed egde methods
 	virtual bool exists(int, int) = 0;
-	virtual void insertEdge(Te const&, int, int, int) = 0;
+	virtual void insertEdge(Te const&, double, int, int) = 0;
 	virtual Te   removeEdge(int, int) = 0;
 	virtual Etype& type(int, int) = 0;
 	virtual Te& edge(int, int) = 0;
-	virtual int& weight(int, int) = 0;
+	virtual double& weight(int, int) = 0;
 
 	//Graph related algorithms
 	void bfs(int);

@@ -66,6 +66,12 @@ void test_constructor() {
 	assert(V5.getSize() == 2);
 	assert(V5.getCapacity() == 4);
 
+	Vector<int> V6(10, 0);
+	assert(V6.getSize() == 10);
+	assert(V6.getCapacity() == 20);
+	for (int ix = 0; ix != 10; ++ix)
+		assert(V6[ix] == 0);
+
 	cout << "test passed." << endl;
 }
 
