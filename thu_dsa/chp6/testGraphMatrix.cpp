@@ -9,7 +9,7 @@ void test_vertex_insert();
 void test_vertex_delete();
 void test_edge_insert();
 
-int main(){
+int GraphMatrix_test_main(){
 	cout << "Running tests" << endl;
 
 	test_constructor();
