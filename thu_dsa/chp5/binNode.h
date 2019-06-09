@@ -26,11 +26,12 @@ public:
 	//constructor
 	BinNode() : parent(nullptr), leftChild(nullptr), rightChild(nullptr), height(0), color(0), npl(0) {};
 	BinNode(T const &val) : parent(nullptr), leftChild(nullptr), rightChild(nullptr), data(val), height(0), color(0), npl(0) {};
+	BinNode(T const &val, BinNodePosi(T) p): parent(p), leftChild(nullptr), rightChild(nullptr), data(val), height(0), color(0), npl(0) {};
 
 	int size() const;									//compute the size of the tree rooted at current node
 	BinNodePosi(T) insertAsLC(T const &val);			//always assume that this.leftChild  == nullptr
 	BinNodePosi(T) insertAsRC(T const &val);			//always assume that this.rightChild == nullptr
-	BinNodePosi(T) succ() const;						//return the direct successor of current node
+	BinNodePosi(T) succ();						//return the direct successor of current node
 
 	//tree traversal
 	template <typename VST> void preOrder_Re(VST &visit);
@@ -103,6 +104,20 @@ BinNodePosi(T) BinNode<T>::insertAsRC(T const &val){
 	this->rightChild = currNode;
 
 	return currNode;
+}
+
+template <typename T>
+BinNodePosi(T) BinNode<T>::succ(){
+	BinNodePosi(T) succ;
+	if(rightChild){
+		succ = rightChild;
+		while (succ->leftChild) succ = succ->leftChild;
+	}else{
+		succ = this;
+		while(succ->parent && succ == succ->parent->rightChild) succ = succ->parent;
+		succ = succ->parent;
+	}
+	return succ;
 }
 
 //tree traversal

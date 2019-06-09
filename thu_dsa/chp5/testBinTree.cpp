@@ -7,6 +7,7 @@ using std::endl;
 
 void test_insert();
 void test_size();
+void test_succ();
 void test_preTraversal();
 void test_inTraversal();
 void test_postTraversal();
@@ -17,6 +18,7 @@ int main(){
 
 	test_insert();
 	test_size();
+	test_succ();
 	test_preTraversal();
 	test_inTraversal();
 	test_postTraversal();
@@ -66,6 +68,25 @@ void test_size(){
 	assert(root->size() == 2);
 	intTree.insertAsRC(root, 14);
 	assert(root->size() == 3);
+}
+
+void test_succ(){
+	//construct a binary tree
+	BinTree<int> intTree;
+	BinNodePosi(int) root = intTree.insertAsRoot(8);
+	BinNodePosi(int) left = intTree.insertAsLC(root, 7);
+	BinNodePosi(int) right = intTree.insertAsRC(root, 14);
+	BinNodePosi(int) first = intTree.insertAsLC(left, 4);
+	intTree.insertAsRC(left, 3);
+	intTree.insertAsLC(right, 12);
+	intTree.insertAsRC(right, 18);
+
+	//test succ
+	int inOrder[] = { 4, 7, 3, 8, 12, 14, 18 };
+	BinNodePosi(int) x = first;
+	for (int ix = 0; x; ++ix, x = x->succ()) {
+		assert(x->data == inOrder[ix]);
+	}
 }
 
 template <typename T>
