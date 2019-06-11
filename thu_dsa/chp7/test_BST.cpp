@@ -58,19 +58,19 @@ void test_remove(){
 
 	assert(bstTree.root()->data.key == 5);
 	//remove leaf
-	assert(bstTree.remove(6) == nullptr);//no succ
+	assert(bstTree.remove(6));//no succ
 	assert(bstTree.size() == 8);
 	assert(bstTree.search(6) == nullptr);
 
 	//remove intermediate node
-	assert(bstTree.remove(4)->data.value == "three");
+	assert(bstTree.remove(4));
 	assert(bstTree.size() == 7);
 	assert(bstTree.search(4) == nullptr);
 	assert(bstTree.search(3)->parent->data.key == 2);
 	assert(bstTree.search(2)->rightChild->data.key == 3);
 
 	//remove root node
-	assert(bstTree.remove(5) == nullptr);
+	assert(bstTree.remove(5));
 	assert(bstTree.size() == 6);
 	assert(bstTree.root()->data.key == 7);
 	assert(bstTree.root()->leftChild->data.key == 2 && bstTree.root()->rightChild->data.key == 8);

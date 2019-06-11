@@ -31,7 +31,7 @@ public:
 	int size() const;									//compute the size of the tree rooted at current node
 	BinNodePosi(T) insertAsLC(T const &val);			//always assume that this.leftChild  == nullptr
 	BinNodePosi(T) insertAsRC(T const &val);			//always assume that this.rightChild == nullptr
-	BinNodePosi(T) succ();						//return the direct successor of current node
+	BinNodePosi(T) succ();								//return the direct successor of current node
 
 	//tree traversal
 	template <typename VST> void preOrder_Re(VST &visit);

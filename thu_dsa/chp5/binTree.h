@@ -3,7 +3,9 @@
 
 #include "binNode.h"
 
-#define MAX(X, Y) ((X)>(Y)?(X):(Y))
+#define FROMPARENTTO(X) (X->parent?__root: X==X->parent->leftChild? X->parent->leftChild: X->parent->rightChild)
+#define STATURE(X)      ((X)?(X)->height: -1)
+#define MAX(X, Y)       ((X)>(Y)?(X):(Y))
 
 template <typename T>
 class BinTree{
@@ -12,6 +14,7 @@ protected:
 	int            __size;
 	bool updateHeight(BinNodePosi(T) x);
 	void updateHeightAbove(BinNodePosi(T) x);
+	BinNodePosi(T) higherChild(BinNodePosi(T) x);
 
 public:
 	//constructor
@@ -44,6 +47,13 @@ bool BinTree<T>::updateHeight(BinNodePosi(T) x){
 template <typename T>
 void BinTree<T>::updateHeightAbove(BinNodePosi(T) x){
 	for (; x && updateHeight(x); x = x->parent);
+}
+
+template <typename T>
+BinNodePosi(T) BinTree<T>::higherChild(BinNodePosi(T) x){
+	if (!x->leftChild) return x->rightChild;
+	if (!x->rightChild) return x->leftChild;
+	return x->leftChild->height < x->rightChild->height ? x->rightChild : x->leftChild;
 }
 
 //public interfaces
