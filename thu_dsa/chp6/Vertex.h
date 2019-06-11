@@ -11,7 +11,7 @@ public:
 	int parent     = -1;
 	int dTime      = -1;
 	int fTime      = -1;
-	int priority   = 0;
+	int priority   = INT_MAX;
 	int inDegree   = 0;
 	int outDegree  = 0;
 
