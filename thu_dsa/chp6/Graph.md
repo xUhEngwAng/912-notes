@@ -167,7 +167,7 @@ DFS的时间复杂度也与BFS一致。
 
 + 若$active(u) \subseteq active(v)$，则u是v的后代。
 + 若$active(u) \supseteq active(v)$，则u是v的祖先。
-+ 若$active(u) \and active(v) = \phi$，则u和v无关。
++ 若$active(u) \cap active(v) = \phi$，则u和v无关。
 
 > dfs的应用。
 
