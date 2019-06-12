@@ -55,7 +55,7 @@ Conclusion on Chapter Six: Graph
 + w是x的父结点。例如一开始就从w进入x，然后x在遍历它的邻居时又发现了w。这种情况下x与w之间的边是一条回边(Backward)，表示指向祖先顶点。要注意的是，这里的w只可能是x的父结点，而不可能是x更高的祖先结点。这是因为如果w是x比父结点更高的顶点的话，x早在访问w时就应该被发现了，从而w只能是x的父结点。
 + w是x祖先结点的邻居，经由x的祖先结点就已经访问到了w。这种情形对应了跨边(Cross)，表示x与w没有直接的血缘关系，来自相互独立的两个分支。
 
-对于上面两种情况，由于指向父结点的回边感觉不是很有意思，我们在bfs中不加以区分，全部统一标记为跨边。因此bfs的算法可以表述如下：
+对于上面两种情况，由于指向父结点的回边感觉不是很有意义，我们在bfs中不加以区分，全部统一标记为跨边。因此bfs的算法可以表述如下：
 
 ```cpp
 template <typename Tv, typename Te>
@@ -111,3 +111,64 @@ void Graph<Tv, Te>::bfs(int start){
 此外，由bfs访问顶点的次序可以看出，bfs总是优先访问离当前顶点最近的顶点，这使得bfs可以用以发现图中的最短路径。但是这里的最短路径只能是拓扑结构的最短路径，或者说无权图，或者等权图的最短路径。
 
 然后，邓公说还可以用来做连通分量的分解，无向图的环路检测，以后再探索一下。
+
+> 深度优先搜索(dfs, Depth First Search)策略。
+
+dfs其实等价于树的先序遍历。简单说来，就是尽可能深地去遍历下一个顶点，也就是所谓的深度优先遍历。
+
+等价于bfs，dfs也会在遍历结束后生成一棵支撑树(Spaning Tree)。除此以外，dfs还需要保存原图的一些其他信息，也就是对应遍历结束后除了树边的其他类型的边，这里包括前向边(Forward)，回边(Backward)，以及跨边(Cross)，详细说明如下：
+
++ 树边：访问到状态仍然是`UNDISCOVERED`的邻居，它们之间的边构成支撑树的一条边。随后递归地进入该邻居继续dfs。
++ 回边：访问到状态是`DISCOVERED`的邻居。这意味着该邻居是当前顶点的一个祖先。该边指向一个祖先顶点，故称之为回边。不难看出，出现回边意味着图中存在环路。
++ 前向边：与回边相对应，表示指向后继结点的边。当访问到的邻居状态为`VISITED`，并且访问时间晚于当前顶点时，就会出现前向边。
++ 跨边：类似于bfs中出现过的跨边，表示当前顶点与被访问到的邻居没有直接血缘关系。当访问到的邻居状态为`VISITED`，并且访问时间早于当前顶点时，就会出现跨边。
+
+需要注意的是，这里的边的信息仅限于有向图。这是因为，在无向图中，区分回边和前向边没有意义，因为有一条回边就会有一条后向边，两者完全等效。此外，无向图中不存在跨边（我说不清楚，自己思考一下吧）。
+
+除了边的信息以外，根据上面的讨论，还需要记录各个顶点被发现以及被访问的时间，分别记为`dtime`和`ftime`。至此，DFS的代码可以表述如下：
+
+```cpp
+template <typename Tv, typename Te>
+void Graph<Tv, Te>::DFS(int x, int& clock){
+	dtime(x)  = ++clock;
+	status(x) = DISCOVERED;
+	for(int w = firstNeighbor(x); w != -1; w = nextNeighbor(x, w)){
+		switch(status(w)){
+			case UNDISCOVERD:
+				parent(w) = x;
+				type(x, w)= TREE;
+				DFS(w, clock);
+				break;
+
+			case DISCOVERED:
+				type(x, w) = BACKWARD;
+				break;
+
+			case VISITED:
+			default:
+				type(x, w) = dtime(x) < dtime(w)? FORWARD: CROSS;
+				break;
+		}
+	}
+	ftime(x)  = ++clock;
+	status(x) = VISITED;
+}
+```
+
+与bfs类似，当图不连通时，需要多次调用DFS才能完成全图的深度优先遍历。同样，这时得到的是一个DFS遍历森林。
+
+DFS的时间复杂度也与BFS一致。
+
+> dfs的括号引理。
+
+根据各个顶点的发现时间`dtime`和访问时间`ftime`，可以对顶点进行分类，获得顶点之间的祖先与后代关系信息。
+
+记`active(u) = [dtime(x), ftime(x)]`为顶点x在有向图G中的活跃期，括号引理即
+
++ 若$active(u) \subseteq active(v)$，则u是v的后代。
++ 若$active(u) \supseteq active(v)$，则u是v的祖先。
++ 若$active(u) \and active(v) = \phi$，则u和v无关。
+
+> dfs的应用。
+
+dfs是图遍历算法中最重要的一个。大量与图相关的算法都是由dfs导出的，比如连通分量分解，拓扑排序等。此外，dfs还可以用来做带权图的最短路径算法框架。
