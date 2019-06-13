@@ -9,8 +9,6 @@
 
 template <typename K, typename V>
 class AVL: public BST<K, V>{
-protected:
-
 public:
 	BinNodePosi(T) insert(K const &key, V const &value);
 	bool           remove(K const &key);
