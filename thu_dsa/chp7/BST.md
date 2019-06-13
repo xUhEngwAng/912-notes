@@ -29,13 +29,13 @@ BST的定义是，对于树中的每一个结点，都满足顺序性，即任�
 
 关于这个定义，要注意的是这里必须强调是左右子树的所有顶点都要满足顺序性，而不是<左孩子不大于w，右孩子不小于w>。例如，下面这棵树就不是一个BST。
 
-[non-BST](images/non-BST.png)
+![non-BST](images/non-BST.png)
 
 > BST的整体单调性。
 
 我们说，任何一棵BST，都是满足整体单调性的，即中序遍历序列必然单调非降。也就是说，BST的局部有序性可以推出整体单调性。如下面这张图所示：
 
-[BSTmonotony](images/monotony.png)
+![BSTmonotony](images/monotony.png)
 
 这个性质可以证明如下：
 
@@ -56,7 +56,7 @@ BST的定义是，对于树中的每一个结点，都满足顺序性，即任�
 
 利用BST的局部有序性，可以高效地实现对目标算法的查找。这个问题这里就不讲了，毕竟太基础。但是我们可以看一下这个算法的运行过程，如下图所示：
 
-[BST-Search](images/BSTSearch.png)
+![BST-Search](images/BSTSearch.png)
 
 可以看到，BST的整个搜索过程是在仿照有序向量的二分查找，只不过这里的有序向量就是BST的中序遍历序列。这也是前面说BST神似`Vector`的原因。
 
