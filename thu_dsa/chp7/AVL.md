@@ -32,7 +32,7 @@ Conclusion on AVL
 
 AVL数是引入了一个平衡因子(Balance Factor)的概念，所谓平衡因子，即左右子树高度之差：
 $$
-Balance_Factor(v) = height(v.leftChild) - height(v.rightChild)
+BalanceFactor(v) = height(v.leftChild) - height(v.rightChild)
 $$
 而AVL的定义是，任何结点的平衡因子的绝对值不超过1。
 
