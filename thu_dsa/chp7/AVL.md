@@ -32,7 +32,7 @@ Conclusion on AVL
 
 AVL数是引入了一个平衡因子(Balance Factor)的概念，所谓平衡因子，即左右子树高度之差：
 $$
-Balance-Factor(v) = height(v.leftChild) - height(v.rightChild)
+Balance_Factor(v) = height(v.leftChild) - height(v.rightChild)
 $$
 而AVL的定义是，任何结点的平衡因子的绝对值不超过1。
 
@@ -41,7 +41,7 @@ $$
 对于树高为h的AVL树，我们说它的结点数不少于$fib(h + 3) - 1$，其中$fib(1) = 1, fib(2) = 1$。从而包含n个结点的AVL树其高度不超过$O(logn)$，从而AVL树是一棵适度平衡的BST。其证明如下：
 
 + 首先对于树高为1的平凡的情况，$n = 1, h = 0$，$fib(h + 3) - 1 = 2 - 1 = 1$，满足上述结论。
-+ 对于任意树高h，结点最少的情况下，其左右子树树高分别为$h - 1, h - 2$，从而结点数$T(h) \ ge T(h - 1) + T(h - 2) + 1 \ge = fib(h + 2) + fib(h + 1) - 1 = fib(h + 3) - 1$。故得证。
++ 对于任意树高h，结点最少的情况下，其左右子树树高分别为$h - 1, h - 2$，从而结点数$T(h) \ge T(h - 1) + T(h - 2) + 1 \ge = fib(h + 2) + fib(h + 1) - 1 = fib(h + 3) - 1$。故得证。
 
 由于Fibonacci数呈现一个指数级数，所以反过来，任意含n个结点的AVL树，其树高不高于$O(logn)$。
 
