@@ -85,7 +85,7 @@ BST的插入算法主要要考虑的问题是不能破坏BST的局部有序性�
 ```cpp
 BinNodePosi(T) BST<T>::insert(T const &key){
 	BinNodePosi(T) &pos = search(key);
-	if(pos) return pos;								//key already existss
+	if(pos) return pos;								//key already exists
 	//else
 	pos = new BinNode(key, __hot);
 	++__size;

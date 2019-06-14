@@ -28,7 +28,7 @@ BinNodePosi(T) AVL<K, V>::insert(K const &key, V const &value){
 			BinNodePosi(T) parent  = x->parent;
 			BinNodePosi(T) newRoot = rotateAt(higherChild(higherChild(x)));
 			if (parent)
-				x == parent->leftChild ? parent->leftChild : parent->rightChild = newRoot;
+				(x == parent->leftChild ? parent->leftChild : parent->rightChild) = newRoot;
 			else __root = newRoot;
 			break;
 		}
@@ -48,11 +48,11 @@ bool AVL<K, V>::remove(K const &key) {
 			BinNodePosi(T) parent  = x->parent;
 			BinNodePosi(T) newRoot = rotateAt(higherChild(higherChild(x)));
 			if (parent)
-				x == parent->leftChild ? parent->leftChild : parent->rightChild = newRoot;
+				(x == parent->leftChild ? parent->leftChild : parent->rightChild) = newRoot;
 			else __root = newRoot;
 			x = newRoot;
 		}
-		updateHeight(x);
+		else updateHeight(x);
 	}
 	--__size;
 	return true;
