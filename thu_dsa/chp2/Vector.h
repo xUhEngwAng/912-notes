@@ -47,6 +47,7 @@ public:
 	void print(void);
 	int find(T const &elem);
 	int find(T const &elem, int lo, int hi);
+	int search(T const &elem) { return search(elem, 0, _size); }
 	int search(T const &elem, int lo, int hi);
 	int fib_search(T const &elem, int lo, int hi);
 	int binary_search(T const &elem, int lo, int hi);
