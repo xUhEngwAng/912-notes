@@ -12,8 +12,8 @@ class BinTree{
 protected:
 	BinNodePosi(T) __root;
 	int            __size;
-	bool updateHeight(BinNodePosi(T) x);
-	void updateHeightAbove(BinNodePosi(T) x);
+	virtual bool updateHeight(BinNodePosi(T) x);
+	virtual void updateHeightAbove(BinNodePosi(T) x);
 	BinNodePosi(T) higherChild(BinNodePosi(T) x);
 
 public:

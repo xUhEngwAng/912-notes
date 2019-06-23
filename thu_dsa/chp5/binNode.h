@@ -6,6 +6,8 @@
 
 #define BinNodePosi(T) BinNode<T>*
 
+typedef enum{RED, BLACK} Color;
+
 template <typename T>
 class BinNode{
 protected:
@@ -18,15 +20,14 @@ public:
 	BinNodePosi(T) parent;
 	BinNodePosi(T) leftChild;
 	BinNodePosi(T) rightChild;
+	Color          color;
 	T              data;
 	int            height;
-	int            color;
 	int            npl;
 
 	//constructor
-	BinNode() : parent(nullptr), leftChild(nullptr), rightChild(nullptr), height(0), color(0), npl(0) {};
-	BinNode(T const &val) : parent(nullptr), leftChild(nullptr), rightChild(nullptr), data(val), height(0), color(0), npl(0) {};
-	BinNode(T const &val, BinNodePosi(T) p): parent(p), leftChild(nullptr), rightChild(nullptr), data(val), height(0), color(0), npl(0) {};
+	BinNode() : parent(nullptr), leftChild(nullptr), rightChild(nullptr), height(0), color(BLACK), npl(0) {};
+	BinNode(T const &val, BinNodePosi(T) p = nullptr, Color color = BLACK) : parent(p), leftChild(nullptr), rightChild(nullptr), data(val), height(0), color(color), npl(0) {};
 
 	int size() const;									//compute the size of the tree rooted at current node
 	BinNodePosi(T) insertAsLC(T const &val);			//always assume that this.leftChild  == nullptr

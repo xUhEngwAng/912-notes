@@ -13,6 +13,7 @@ public:
 	V  value;
 
 	//constructor
+	entry() = default;
 	entry(K k, V v) : key(k), value(v) {}
 
 	//overload operator
