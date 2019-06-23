@@ -33,9 +33,6 @@ BinNodePosi(T) RedBlack<K, V>::zig(BinNodePosi(T) p){
 
 	x->rightChild = p;
 	p->parent = x;
-
-	updateHeight(p);
-	updateHeight(x);
 	return x;
 }
 
@@ -47,9 +44,6 @@ BinNodePosi(T) RedBlack<K, V>::zag(BinNodePosi(T) p) {
 
 	x->leftChild = p;
 	p->parent = x;
-
-	updateHeight(p);
-	updateHeight(x);
 	return x;
 }
 
@@ -80,6 +74,8 @@ void RedBlack<K, V>::solveDoubleRed(BinNodePosi(T) x){
 		BinNodePosi(T) newRoot = rotateAt(x);
 		if (gg)
 			(g == gg->leftChild ? gg->leftChild : gg->rightChild) = newRoot;
+		else __root = newRoot;
+
 		newRoot->color = BLACK;
 		newRoot->leftChild->color = RED;
 		newRoot->rightChild->color = RED;
@@ -101,6 +97,8 @@ void RedBlack<K, V>::solveDoubleRed(BinNodePosi(T) x){
 
 template <typename K, typename V>
 void RedBlack<K, V>::solveDoubleBlack(BinNodePosi(T) x){
+	if (x == __root) return;			//recursion base
+	//else
 	BinNodePosi(T) p = (x ? x->parent : __hot);
 	BinNodePosi(T) s = (x == p->leftChild ? p->rightChild : p->leftChild);
 
@@ -109,8 +107,9 @@ void RedBlack<K, V>::solveDoubleBlack(BinNodePosi(T) x){
 		BinNodePosi(T) redChild = ISRED(s->leftChild) ? s->leftChild : s->rightChild;
 		BinNodePosi(T) g = p->parent;
 		BinNodePosi(T) newRoot = rotateAt(redChild);
-		if(g)
-			(p == g->leftChild? g->leftChild: g->rightChild) = newRoot: 
+		if (g)
+			(p == g->leftChild ? g->leftChild : g->rightChild) = newRoot;
+		else __root = newRoot;
 		redChild->color = BLACK;
 		updateHeight(newRoot->leftChild);
 		updateHeight(newRoot->rightChild);
@@ -125,7 +124,7 @@ void RedBlack<K, V>::solveDoubleBlack(BinNodePosi(T) x){
 		return;
 	}
 	//case three: p is black
-	if(ISBLACK(p)){
+	if(ISBLACK(p) && ISBLACK(s)){
 		p->color = BLACK;
 		s->color = RED;
 		updateHeight(p);
@@ -139,7 +138,9 @@ void RedBlack<K, V>::solveDoubleBlack(BinNodePosi(T) x){
 		BinNodePosi(T) g = p->parent;
 		if(s == p->leftChild) zig(p);
 		else                  zag(p);
+		s->parent = g;
 		if (g) (p == g->leftChild ? g->leftChild : g->rightChild) = s;
+		else                        __root = s;
 		solveDoubleBlack(x);
 	}
 
@@ -166,7 +167,7 @@ bool RedBlack<K, V>::remove(K const &key){
 	BinNodePosi(T) succ = removeAt(x, __hot);
 	--__size;
 	if (ISRED(succ)) {
-		succ->color == BLACK;
+		succ->color = BLACK;
 		return true;
 	}
 	if (!BLACK_HEIGHT_CHANGED(__hot)) return true;
