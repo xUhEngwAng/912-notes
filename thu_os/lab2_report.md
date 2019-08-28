@@ -551,3 +551,66 @@ tlb_invalidate(pgdir, la);
 ```
 
 因为只要的确取消了`la`到`ptep`的映射关系，无论`page->ref`是否减到了零，都应该使当前页表项无效化，并且刷新快表`TLB`。然而最神奇的是，我这个错误的代码还通过了测试......
+
+### 建立页表
+
+实现了`get_pte`函数之后，就可以方便地建立页表了。这里ucore内核是建立了一个覆盖全部物理地址空间的页表，将从`KERNBASE`到`KERNBASE + KMEMSIZE`的虚拟地址空间，一一映射到从`0x00000000`开始的物理地址空间，该页表的映射关系满足
+
+```
+linear addr - 0xC0000000 = phy addr
+```
+
+这个过程可以用`get_pte`函数快捷地实现，简单说来就是对于这里的虚拟地址`va`，调用`get_pte(pg_dir, va, create = 1)`得到其对应的页表项，并且用与之对应的物理地址`va - 0xC0000000`来填写页表项的高20位，并且设置相应的标志位。具体的代码在`boot_map_segment`中实现：
+
+```c
+//boot_map_segment - setup&enable the paging mechanism
+// parameters
+//  la:   linear address of this memory need to map (after x86 segment map)
+//  size: memory size
+//  pa:   physical address of this memory
+//  perm: permission of this memory  
+static void
+boot_map_segment(pde_t *pgdir, uintptr_t la, size_t size, uintptr_t pa, uint32_t perm) {
+    assert(PGOFF(la) == PGOFF(pa));
+    size_t n = ROUNDUP(size + PGOFF(la), PGSIZE) / PGSIZE;
+    la = ROUNDDOWN(la, PGSIZE);
+    pa = ROUNDDOWN(pa, PGSIZE);
+    for (; n > 0; n --, la += PGSIZE, pa += PGSIZE) {
+        pte_t *ptep = get_pte(pgdir, la, 1);
+        assert(ptep != NULL);
+        *ptep = pa | PTE_P | perm;
+    }
+}
+```
+
+这样，只需要调用`boot_map_segment(boot_pgdir, KERNBASE, KMEMSIZE, 0, PTE_W)`就可以实现上述的全局页表。
+
+但是需要注意的是，此时还不能使能页机制，因为此时的段机制的映射关系还是
+
+```
+virt addr - 0xC0000000 = linear addr
+```
+
+如果此时使能页机制，虚拟地址，线性地址与物理地址之间的关系将会是
+
+```
+virt addr - 0xC0000000 = linear addr = phy addr + 0xC0000000
+```
+
+此时又会出现虚拟地址不能正确映射到物理地址的情况。为了解决这个问题，我们只需要在使能页机制之后立即修改段机制为对等映射，这样就可以得到最终的地址映射关系：
+
+```
+virt addr = linear addr = phy addr + 0xC0000000
+```
+
+在修改段机制之前，我们只需要保证操作系统的代码可以正常运行，其实只需让index为0的页目录项的内容等于以索引值为`KERNBASE>>22`的目录表项的内容即可。目前内核大小不超过4M（实际上是3M，因为内核从`0x000100000`开始编址），这样就只需要让页表在`0 ~ 4MB`的线性地址与`KERNBASE ~ KERNBASE + 4MB`的线性地址获得相同的映射即可，都映射到`0 ~ 4MB`的物理地址空间，具体实现在`pmm.c`中`pmm_init`函数的语句：
+
+```c
+boot_pgdir[0] = boot_pgdir[PDX(KERNBASE)];
+```
+
+这样，在更新了段表(`gdt_init()`)以后，再将设置的临时映射关系解除(`boot_pgdir[0] = 0`)，就得到我们期望的物理地址，线性地址以及虚拟地址的映射关系了。
+
+## 自映射机制
+
+可以查看实验指导书吧，我不想写了......还是非常巧妙的，值得一看。
