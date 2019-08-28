@@ -8,8 +8,8 @@ int* makeNext(char* str){
 	next = new int[len];
 	next[0] = -1;
 	while(i < len - 1){
-		if(j < 0 || str[i] == str[j]) next[++i] = ++j;
-		else						  j = next[j];
+		if(j < 0 || str[i] == str[j])	next[++i] = ++j;
+		else							j = next[j];
 	}
 	return next;
 }
