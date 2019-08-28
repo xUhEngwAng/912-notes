@@ -442,7 +442,7 @@ boot_pgdir = boot_alloc_page();
 
 通过设置页表和对应的页表项，可建立虚拟内存地址和物理内存地址的对应关系。其中的`get_pte`函数是设置页表项环节中的一个重要步骤。此函数找到一个虚地址对应的二级页表项的内核虚地址，如果此二级页表项不存在，则分配一个包含此项的二级页表。本练习需要补全`get_pte`函数in`kern/mm/pmm.c`，实现其功能。请仔细查看和理解`get_pte`函数中的注释。`get_pte`函数的调用关系图如下所示：
 
-[get_pte call graph](images/get_pte.png)
+![get_pte call graph](images/get_pte.png)
 
 请在实验报告中简要说明你的设计实现过程。请回答如下问题：
 
@@ -506,7 +506,7 @@ get_pte(pde_t *pgdir, uintptr_t la, bool create) {
 
 当释放一个包含某虚地址的物理内存页时，需要让对应此物理内存页的管理数据结构Page做相关的清除处理，使得此物理内存页成为空闲；另外还需把表示虚地址与物理地址对应关系的二级页表项清除。请仔细查看和理解`page_remove_pte`函数中的注释。为此，需要补全在`kern/mm/pmm.c`中的`page_remove_pte`函数。`page_remove_pte`函数的调用关系图如下所示：
 
-![page_remove_pte](images/page_remove_pte.png)
+![page_remove_pte call graph](images/page_remove_pte.png)
 
 请在实验报告中简要说明你的设计实现过程。请回答如下问题：
 
