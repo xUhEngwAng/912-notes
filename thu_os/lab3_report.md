@@ -69,7 +69,7 @@ struct mm_struct {
 };
 ```
 
-可以看到，`mm_struct`维护了一个页目录表`mm_struct::pgdir`，它是当前进程的页目录表，将当前进程的虚拟地址映射到物理地址上。此外，`mm_struct::mmap_list`其实是`vma_struct`的链表的头节点，通过这个`mmap_list`可以将当前进程的各个虚拟地址空间连接起来，并且用`map_count`来指示这些虚拟地址空间的数量。通过这两个数据结构，就可以实现进程的虚拟地址空间向物理地址空间的映射，如图图所示：
+可以看到，`mm_struct`维护了一个页目录表`mm_struct::pgdir`，它是当前进程的页目录表，将当前进程的虚拟地址映射到物理地址上。此外，`mm_struct::mmap_list`其实是`vma_struct`的链表的头节点，通过这个`mmap_list`可以将当前进程的各个虚拟地址空间连接起来，并且用`map_count`来指示这些虚拟地址空间的数量。通过这两个数据结构，就可以实现进程的虚拟地址空间向物理地址空间的映射，如图所示：
 
 ![virt_memory2phy_memory](images/vm2pm.png)
 
