@@ -138,7 +138,7 @@ make qemu
 
 lab3中采用的方法是将这两个信息接合起来考虑，首先根据错误码来定位某些原因引起的页访问异常，再利用`CR2`寄存器中的线性地址，通过手动查当前进程的页目录表，来进一步对页访问异常进行定位。页访问异常错误的结构如下所示：
 
-![page_fault_errorcode](images/page_fault_errorcode.png)
+![page_fault_errorcode](images/page_fault_error_code.png)
 
 我们这里只用到了第零位和第一位，毕竟目前还没有用户态，第二位的内核访问/用户访问也无从说起。根据错误码来对页访问异常进行辨别的代码如下所示：
 
@@ -184,12 +184,11 @@ do_pgfault(struct mm_struct *mm, uint32_t error_code, uintptr_t addr) {
 
 ### 给未被映射的地址映射上物理页
 
-如果访问的地址尚未被映射到物理页，则在页访问异常的处理函数`do_pgfault`中，需要给该也分配一个新的物理页帧，并且将分配的物理页的地址以及相关的权限信息填入到页表项中，这和我们前面的内容是一致的。
+如果访问的地址尚未被映射到物理页，则在页访问异常的处理函数`do_pgfault`中，需要给该页也分配一个新的物理页帧，并且将分配的物理页的地址以及相关的权限信息填入到页表项中，这和我们前面的内容是一致的。
 
 但是这里需要考虑特殊的情况，假如当前内存中已经没有空闲的页面了，又应该如何操作呢？在lab2中我们是直接返回错误码，然后就退出了，但是这在引入了虚拟内存地址的现在显然是不合适的。因此，此时是需要调用页面置换算法，从当前进程的页面中，选择一个置换到外存中，随后再进行存储空间的分配。然后这一系列的操作，老师都已经封装成的一个函数，见下面的代码：
 
 ```c
-	
 	uint32_t perm = PTE_U;
     if (vma->vm_flags & VM_WRITE) {
         perm |= PTE_W;
@@ -250,3 +249,125 @@ alloc_pages(size_t n) {
         }
     }
 ```
+
+## 练习2：补充完成基于FIFO的页面替换算法（需要编程）
+
+完成`vmm.c`中的`do_pgfault`函数，并且在实现`FIFO`算法的`swap_fifo.c`中完成`map_swappable`和`swap_out_victim`函数。通过对`swap`的测试。注意：在`LAB2 EXERCISE 2`处填写代码。执行
+
+```
+make　qemu
+```
+
+后，如果通过`check_swap`函数的测试后，会有`check_swap() succeeded!`的输出，表示练习2基本正确。
+
+请在实验报告中简要说明你的设计实现过程。
+
+请在实验报告中回答如下问题：
+
++ 如果要在ucore上实现"extended clock页替换算法"请给你的设计方案，现有的`swap_manager`框架是否足以支持在ucore中实现此算法？如果是，请给你的设计方案。如果不是，请给出你的新的扩展和基此扩展的设计方案。并需要回答如下问题
+	- 需要被换出的页的特征是什么？
+	- 在ucore中如何判断具有这样特征的页？
+	- 何时进行换入和换出操作？
+
+###`FIFO`算法的实现
+
+`FIFO`算法其实就维护一个按页面在内存中的驻留时间排序的队列。在未出现缺页异常的页面访问时，`FIFO`算法不需要做任何操作，因为此时访问的页面必然早就进入了内存，并且早就被添加到页面队列了。因此，只有在产生页面异常时，`FIFO`算法才具有实质性的操作，包括首先将队列头取出，它代表了驻留内存时间最长的页面，对应于`swap_out_victim`函数，将其换出到外存当中；继而将新进入的页面添加到队列尾，对应于`map_swappable`函数。
+
+为了实现`FIFO`算法，对于每一个进程，我们都需要维护这样的一个驻留页面队列，事实上，`mm_struct::sm_priv`就是为了页面置换算法而预留的，由于它是一个`void*`类型的指针，即它可以指向任何类型，因此这个变量不只是可以用来维护`FIFO`的驻留页面队列，对于其他的页面置换算法，该变量也可以用来指向它们所需要维护的数据结构。
+
+除此以外，还需要扩展`struct Page`结构体，需要给它增加一个新的字段，将这些驻留在内存中的页面链接起来，并且使`mm_struct::sm_priv`作为这个链表的头节点。这样，通过对进程进行描述的`mm_struct`结构体，就还可以获得该进程的页面访问信息了。
+
+但是目前为止还存在一个问题--`struct Page`是对物理页帧进行描述的结构体，通过物理页帧并不能直接找到与之映射的虚拟页面，从而找不到对应于该物理页帧的页表项，而将页面换出是需要修改页表项的。为了解决这个问题，还需要给`struct Page`增加一个字段，指出当前映射到它的虚拟地址。这样，`struct Page`的结构如下所示：
+
+```c
+/* *
+ * struct Page - Page descriptor structures. Each Page describes one
+ * physical page. In kern/mm/pmm.h, you can find lots of useful functions
+ * that convert Page to other data types, such as phyical address.
+ * */
+struct Page {
+    int ref;                        // page frame's reference counter
+    uint32_t flags;                 // array of flags that describe the status of the page frame
+    unsigned int property;          // the num of free block, used in first fit pm manager
+    list_entry_t page_link;         // free list link
+    list_entry_t pra_page_link;     // used for pra (page replace algorithm)
+    uintptr_t pra_vaddr;            // used for pra (page replace algorithm)
+};
+```
+
+到目前为止，终于可以实现`FIFO`算法了，对于`map_swappable`函数，主要功能就是将刚进入内存的页面，添加到页面队列的队尾，即页面链表的最后。而`swap_out_victim`函数，主要功能就是取出页面队列的队首，并且将该被置换的页面返回。具体的实现如下：
+
+```c
+/*
+ * (3)_fifo_map_swappable: According FIFO PRA, we should link the most recent arrival page at the back of pra_list_head qeueue
+ */
+static int
+_fifo_map_swappable(struct mm_struct *mm, uintptr_t addr, struct Page *page, int swap_in)
+{
+    list_entry_t *head=(list_entry_t*) mm->sm_priv;
+    list_entry_t *entry=&(page->pra_page_link);
+ 
+    assert(entry != NULL && head != NULL);
+    //record the page access situlation
+    /*LAB3 EXERCISE 2: YOUR CODE*/ 
+    //(1)link the most recent arrival page at the back of the pra_list_head qeueue.
+    list_add_before(head, entry);
+    return 0;
+}
+/*
+ *  (4)_fifo_swap_out_victim: According FIFO PRA, we should unlink the  earliest arrival page in front of pra_list_head qeueue,
+ *                            then set the addr of addr of this page to ptr_page.
+ */
+static int
+_fifo_swap_out_victim(struct mm_struct *mm, struct Page ** ptr_page, int in_tick)
+{
+     list_entry_t *head=(list_entry_t*) mm->sm_priv;
+         assert(head != NULL);
+     assert(in_tick==0);
+     /* Select the victim */
+     /*LAB3 EXERCISE 2: YOUR CODE*/ 
+     //(1)  unlink the  earliest arrival page in front of pra_list_head qeueue
+     //(2)  set the addr of addr of this page to ptr_page
+     list_entry_t *victim = list_next(head);
+     list_del(victim);
+     struct Page* p = le2page(victim, pra_page_link);
+     *ptr_page = p;
+     return 0;
+}
+
+```
+
+相关的实现都非常简单啊，我就不多说了。
+
+### 缺页异常的处理
+
+接下来是应该补全`do_pgfault`函数，前面已经处理了页面不存在的情况，还剩下页面不在内存中，而是驻留在外存的情况没有处理。
+
+这里首先需要解决一个问题，如果页面在外存中，那么又应该如何在外存中找到该页面呢？我们这里的方法是利用了“交换表项”(swap_entry)，它的结构如图所示：
+
+![swap_entry](images/swap_entry.png)
+
+它的高24位，是当前页面所驻留的磁盘扇区号，这样只要读对应的磁盘扇区，就可以将该页面从外存中换入内存了。需要说明的是，这里我们并没有利用额外的空间来存储这个“交换表项”，而是继续沿用页表项来存储这样的磁盘扇区号的。可以这样做是因为，可以通过`PTE_P`位的值来将页表项与“交换表项”区别开，当`PTE_P`位的值是1时，当前页表项就是存储内存中某个页面的起始地址以及相关的权限；当`PTE_P`位的值是0时，当前的页表项就成了“交换表项”，用来保存被交换到磁盘上的该页的磁盘扇区号。
+
+这样，为了处理缺页异常，只需要调用`swap_out_victim`，将某一页置换出内存，再将被访问的页换入到该物理页帧的空间中，然后将其添加到页面队列的队尾，并且修改对应的页表项就可以了。对应的代码如下：
+
+```c
+ else { // if this pte is a swap entry, then load data from disk to a page with phy addr
+           // and call page_insert to map the phy addr with logical addr
+        if(swap_init_ok) {
+            struct Page *page=NULL;
+            swap_in(mm, addr, &page);
+            page->pra_vaddr = addr;
+            page_insert(mm->pgdir, page, addr, perm | PTE_P);
+            swap_map_swappable(mm, addr, page, 0);
+        }
+        else {
+            cprintf("no swap_init_ok but ptep is %x, failed\n",*ptep);
+            goto failed;
+        }
+   }
+   ...
+```
+
+这里并没有显式地调用`swap_out`函数来将某一页面换出，这是因为在`swap_in`函数的实现中，是首先调用了前面提到的`alloc_pages`函数，在物理内存不够时，通过这个函数来调用`swap_out`以将某个页面换出。由此也可以看出，我们采用的是消极的页面换出机制，即只有在内存空间不足时，才执行页面的换出；在还有剩余的内存空间时，直接给要换入的页面分配新的内存空间，并不执行换出操作。
+
