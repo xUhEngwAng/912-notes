@@ -119,7 +119,7 @@ assert(pgdir_alloc_page(mm->pgdir, USTACKTOP-4*PGSIZE , PTE_USER) != NULL);
 + `esp`的设置：只有在涉及到特权级切换时，才会由硬件压栈的用户栈栈顶指针`esp`，此时应该指向刚设置的用户栈的栈顶，即`esp = USTACKTOP`。
 + 状态字`flags`的设置：由于刚开始执行，也没有什么保存的状态，就设置为可以被中断`FL_IF`就可以了。
 
-完全这样的设置后，只需要执行到中断返回时的`iret`，就可以实现用户应用程序的执行了。具体的代码如下：
+完成这样的设置后，只需要执行到中断返回时的`iret`，就可以实现用户应用程序的执行了。具体的代码如下：
 
 ```c
 	//(6) setup trapframe for user environment
@@ -224,3 +224,310 @@ copy_range(pde_t *to, pde_t *from, uintptr_t start, uintptr_t end, bool share) {
 ### `COW`机制实现
 
 简单的版本的话，就是在`do_fork`函数中，只是让子进程拷贝父进程的地址空间。一旦父进程或者子进程试图写它们共享的空间，可以通过`Page Fault`机制，为该页新分配一个空间，并且修改对应进程的页表。这样，被修改的页就只有修改页的那个进程可以看到，对于其他进程修改都是不可见的。当然，要是具体实现的话，需要考虑许多问题，情况比较复杂，我以后再好好专研吧。
+
+## 练习3: 阅读分析源代码，理解进程执行`fork/exec/wait/exit`的实现，以及系统调用的实现（不需要编码）
+
+请在实验报告中简要说明你对`fork/exec/wait/exit`函数的分析。并回答如下问题：
+
++ 请分析`fork/exec/wait/exit`在实现中是如何影响进程的执行状态的？
++ 请给出ucore中一个用户态进程的执行状态生命周期图（包执行状态，执行状态之间的变换关系，以及产生变换的事件或函数调用）。（字符方式画即可）
+
+### 系统调用的实现
+
+下面就以`exit`为例，来说明系统调用的实现。其他几个系统调用也是根据同样的方法实现的。
+
+我们可以首先找到`user/libs/ulib.c`中的`exit`函数的实现：
+
+```c
+void
+exit(int error_code) {
+    sys_exit(error_code);
+    cprintf("BUG: exit failed.\n");
+    while (1);
+}
+```
+
+可以看到，该函数是通过调用另一个用户态函数`sys_exit`函数来完成它的功能的。可以在`user/libs/syscall.c`中找到该函数：
+
+```c
+static inline int
+syscall(int num, ...) {
+    va_list ap;
+    va_start(ap, num);
+    uint32_t a[MAX_ARGS];
+    int i, ret;
+    for (i = 0; i < MAX_ARGS; i ++) {
+        a[i] = va_arg(ap, uint32_t);
+    }
+    va_end(ap);
+
+    asm volatile (
+        "int %1;"
+        : "=a" (ret)
+        : "i" (T_SYSCALL),
+          "a" (num),
+          "d" (a[0]),
+          "c" (a[1]),
+          "b" (a[2]),
+          "D" (a[3]),
+          "S" (a[4])
+        : "cc", "memory");
+    return ret;
+}
+
+int
+sys_exit(int error_code) {
+    return syscall(SYS_exit, error_code);
+}
+```
+
+看到这里应该就很明了了，原来在`sys_exit`函数中，是通过系统调用`INT 80`，通过中断机制来请求操作系统的服务。为了实现系统调用的中断机制，需要对中段描述符表（`idt`）做一些修改，使得系统调用`0x80`所对应的门描述符具有用户态访问的权限。此外，系统调用的门描述符类型（`type`）应该是陷阱门（`trap gate`）。修改后的`idt_init`函数如下：
+
+```c
+/* idt_init - initialize IDT to each of the entry points in kern/trap/vectors.S */
+void
+idt_init(void) {
+	extern uintptr_t __vectors[];
+	
+	uint32_t ix;
+	for(ix = 0; ix < 256; ++ix)
+		SETGATE(idt[ix], 0, KERNEL_CS, __vectors[ix], DPL_KERNEL);
+	
+	lidt(&idt_pd);
+	SETGATE(idt[T_SYSCALL], 1, KERNEL_CS, __vectors[T_SYSCALL], DPL_USER);
+}
+```
+
+完成中断描述符表的设置后，就可以通过硬件机制找到系统调用的服务程序的入口地址，从而根据系统调用的中断号`#definie T_SYSCALL 0x80`，在`trap_dispatch`函数中找到实际上的处理函数，这里的中断机制在lab1中就已经叙述过了。
+
+```c
+static void
+trap_dispatch(struct trapframe *tf){
+	......
+	switch(tf->tf_trapno){
+	......
+	case T_SYSCALL:
+		syscall();
+		break;
+	......
+	}
+}
+```
+
+从而跳转到实际上的系统调用处理函数`syscall`中。那么这里产生了一个问题，所有的系统调用都是通过同一个中断号`T_SYSCALL`来进入系统调用处理函数的，这样又如何识别不同的系统调用呢？
+
+事实上，在前面的代码就已经有所展示，系统调用所需要的各个参数，都已经保存在各个寄存器中了。因此，在`syscall`函数中，只要读取这几个特定的寄存器，就可以识别系统调用的类型，从而将参数传递给某个特定的系统调用处理函数。以这里的`exit`系统调用为例，通过`syscall`函数，
+
+```c
+static int
+sys_exit(uint32_t arg[]) {
+    int error_code = (int)arg[0];
+    return do_exit(error_code);
+}
+
+static int (*syscalls[])(uint32_t arg[]) = {
+    [SYS_exit]              sys_exit,
+    [SYS_fork]              sys_fork,
+    [SYS_wait]              sys_wait,
+    [SYS_exec]              sys_exec,
+    [SYS_yield]             sys_yield,
+    [SYS_kill]              sys_kill,
+    [SYS_getpid]            sys_getpid,
+    [SYS_putc]              sys_putc,
+    [SYS_pgdir]             sys_pgdir,
+};
+
+#define NUM_SYSCALLS        ((sizeof(syscalls)) / (sizeof(syscalls[0])))
+
+void
+syscall(void) {
+    struct trapframe *tf = current->tf;
+    uint32_t arg[5];
+    int num = tf->tf_regs.reg_eax;
+    if (num >= 0 && num < NUM_SYSCALLS) {
+        if (syscalls[num] != NULL) {
+            arg[0] = tf->tf_regs.reg_edx;
+            arg[1] = tf->tf_regs.reg_ecx;
+            arg[2] = tf->tf_regs.reg_ebx;
+            arg[3] = tf->tf_regs.reg_edi;
+            arg[4] = tf->tf_regs.reg_esi;
+            tf->tf_regs.reg_eax = syscalls[num](arg);
+            return ;
+        }
+    }
+    print_trapframe(tf);
+    panic("undefined syscall %d, pid = %d, name = %s.\n",
+            num, current->pid, current->name);
+}
+```
+
+它将实际上跳转到`sys_exit`函数中，随后调用`kern/process/proc.c`中实现的`do_exit`函数来完成`exit`系统调用的处理。这里我们再看一下`do_exit`是如何真正地实现进程的退出的吧。
+
+## `exit`的实现
+
+在原理课中讲过，当一个进程执行完毕需要退出时，将执行`exit`系统调用，从而在其中将它所占用的资源几乎全部归还给操作系统。为什么是几乎呢？因为归还资源的操作是它自己进行的，只要这个进程还存在，就至少还有进程控制块`PCB`的内存资源没有归还给操作系统。
+
+随后，该进程还不能完全退出，而是进入`ZOMBIE`状态，即僵尸态。这是因为，它在完全退出之前，还需要唤醒父进程，并且等待它的父进程对它的处理，只有父进程完成对它处理，或者父进程不存在，比如已经退出了，该进程才能退出。这也是这里的`do_exit`需要一个`error_code`参数的原因，这样父进程就可以根据这个错误码的不同值，来完成不同的处理结果。在父进程完成对它的处理前，该进程需要调用调度函数`schedule`，让出CPU的控制权。
+
+原理课上就讲到这么多，但是在ucore里面还做了进一步操作。因为当前要退出的进程有可能还有子进程，ucore还完成了这些子进程的移交，从而避免它们成为没有父进程的孩子。具体的操作就是将这些子进程【过继】给了第一个内核线程，其中主要就涉及到几个指针`proc_struct.parent/cptr/optr/yptr`的修改。需要指出的是，这里的`cptr`在进程具有多个孩子的情形下，总是指向最小的一个孩子。具体的代码如下：
+
+```c
+// do_exit - called by sys_exit
+//   1. call exit_mmap & put_pgdir & mm_destroy to free the almost all memory space of process
+//   2. set process' state as PROC_ZOMBIE, then call wakeup_proc(parent) to ask parent reclaim itself.
+//   3. call scheduler to switch to other process
+int
+do_exit(int error_code) {
+    if (current == idleproc) {
+        panic("idleproc exit.\n");
+    }
+    if (current == initproc) {
+        panic("initproc exit.\n");
+    }
+    
+    struct mm_struct *mm = current->mm;
+    if (mm != NULL) {
+        lcr3(boot_cr3);
+        if (mm_count_dec(mm) == 0) {
+            exit_mmap(mm);
+            put_pgdir(mm);
+            mm_destroy(mm);
+        }
+        current->mm = NULL;
+    }
+    current->state = PROC_ZOMBIE;
+    current->exit_code = error_code;
+    
+    bool intr_flag;
+    struct proc_struct *proc;
+    local_intr_save(intr_flag);
+    {
+        proc = current->parent;
+        if (proc->wait_state == WT_CHILD) {
+            wakeup_proc(proc);
+        }
+        while (current->cptr != NULL) {
+            proc = current->cptr;
+            current->cptr = proc->optr;
+    
+            proc->yptr = NULL;
+            if ((proc->optr = initproc->cptr) != NULL) {
+                initproc->cptr->yptr = proc;
+            }
+            proc->parent = initproc;
+            initproc->cptr = proc;
+            if (proc->state == PROC_ZOMBIE) {
+                if (initproc->wait_state == WT_CHILD) {
+                    wakeup_proc(initproc);
+                }
+            }
+        }
+    }
+    local_intr_restore(intr_flag);
+    
+    schedule();
+    panic("do_exit will not return!! %d.\n", current->pid);
+}
+```
+
+## `wait`的实现
+
+在原理课中讲到，当父进程需要等待某一个子进程退出，该子进程退出之后，父进程才能继续执行。在这种情况下，就应该使用`wait`系统调用。`wait`系统调用的实现和`exit`一样，都是一步步通过中断机制，分发到系统调用总控函数`syscall`，然后再调用实质性的处理函数`do_wait`，它也在`kern/process/proc.s`中实现。
+
+在`do_wait`中，进行的主要工作就是查询当前进程是否有某个子进程进入了`ZOMBIE`态，如果当前就已经有`ZOMBIE`态的子进程，则立即对它进行处理，并且返回退出。如果还没有`ZOMBIE`态的子进程，当前进程就会被挂起，进入等待态(`SLEEPING`)，并且不能自己苏醒，必须某个子进程退出才会唤醒该进程。
+
+对子进程的处理，主要是释放它占用的内存资源，即它的进程控制块`PCB`，以及内核堆栈。`do_wait`的具体实现如下：
+
+```c
+// do_wait - wait one OR any children with PROC_ZOMBIE state, and free memory space of kernel stack
+//         - proc struct of this child.
+// NOTE: only after do_wait function, all resources of the child process are free.
+int
+do_wait(int pid, int *code_store) {
+    struct mm_struct *mm = current->mm;
+    if (code_store != NULL) {
+        if (!user_mem_check(mm, (uintptr_t)code_store, sizeof(int), 1)) {
+            return -E_INVAL;
+        }
+    }
+
+    struct proc_struct *proc;
+    bool intr_flag, haskid;
+repeat:
+    haskid = 0;
+    if (pid != 0) {
+        proc = find_proc(pid);
+        if (proc != NULL && proc->parent == current) {
+            haskid = 1;
+            if (proc->state == PROC_ZOMBIE) {
+                goto found;
+            }
+        }
+    }
+    else {
+        proc = current->cptr;
+        for (; proc != NULL; proc = proc->optr) {
+            haskid = 1;
+            if (proc->state == PROC_ZOMBIE) {
+                goto found;
+            }
+        }
+    }
+    if (haskid) {
+        current->state = PROC_SLEEPING;
+        current->wait_state = WT_CHILD;
+        schedule();
+        if (current->flags & PF_EXITING) {
+            do_exit(-E_KILLED);
+        }
+        goto repeat;
+    }
+    return -E_BAD_PROC;
+
+found:
+    if (proc == idleproc || proc == initproc) {
+        panic("wait idleproc or initproc.\n");
+    }
+    if (code_store != NULL) {
+        *code_store = proc->exit_code;
+    }
+    local_intr_save(intr_flag);
+    {
+        unhash_proc(proc);
+        remove_links(proc);
+    }
+    local_intr_restore(intr_flag);
+    put_kstack(proc);
+    kfree(proc);
+    return 0;
+}
+```
+
+要注意`do_wait`要传入一个`pid`参数，当`pid`不等于零时，表示等待具有该`pid`的某个特定进程；当`pid`等于零时，任何子进程的退出都会受到处理。
+
+在前面已经分析过`do_fork`以及`do_execve`的实现了，这里不再赘述。关于它们是如何影响进程的状态的，可以看看我丑陋的字符画。
+
+```
+                               child exit
+                       |--------------------SLEEPING
+                       |                       ^
+                       |                       | wait
+          fork         V        schedule       |
+UNINIT  -------->   RUNNABLE  <---------->  RUNNING
+          exec                                 |  
+                                               | exit
+                                               V
+                                             ZOMBIE
+```
+
+## 进程的切换与退出
+
+之前我一直很迷惑，这里ucore的进程怎么实现切换的，最后又是怎么退出的，一开始感觉非常神奇，后来发现原来是最朴素的策略。原来这里根本就没有什么所谓的时间片轮转算法，没有抢占机制，一切的切换都是进程自己主动通过系统调用执行的。
+
+例如一个进程切换到另一个进程，只有下面几种可能性：
+
++ 主动调用`schedule`，实现进程的切换。
++ 通过`do_wait`函数，在没有子进程退出时，会调用`schedule`来完成切换。
++ 通过`do_exit`函数，进入`ZOMBIE`状态后，会调用`schedule`来完成切换。
+
+此外，进程的退出也是一样，都是自己调用了`exit`系统调用来退出的，这和我们正常的系统不一样，所以一开始不能理解。我们实际用的系统，对于我平时写的沙雕程序，应该是系统或者编译器自动在程序结束时添加了系统调用`exit`，来退出的。
