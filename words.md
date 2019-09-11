@@ -372,7 +372,7 @@ Some Words
 + the writing is on the wall
 > mean that there are clear signs that something will fail or no longer exist
 
-	- The writing is on the wall for the local football club: bankruptcy seems certain.s
+	- The writing is on the wall for the local football club: bankruptcy seems certain.
 
 + monarch
 > (n)a king or queen
@@ -434,7 +434,7 @@ Some Words
 	- They found the television cameras too intrusive.
 
 + embodiment
-> (n)someone of sth that represents or is very typical of an idea of quality.
+> (n)someone or sth that represents or is very typical of an idea of quality.
 
 	- He is the embodiment of evil.
 	- A baby is the embodiment of vulnerability.
@@ -502,7 +502,7 @@ Some Words
 	- the corruption of public morals
 
 + ethical
-> (adj)relating to principles of what is right and wrong, moral.
+> (adj)relating to principles of what is right and wrong, moral.</br>
 > (adj)morally good or correct
 
 	- The use of animals in scientific tests raised difficult ethical questions.
@@ -513,5 +513,55 @@ Some Words
 > (n)a formal statement by a government about its future plans
 
 	- traditional doctrine of divine power
-	- Marxist doctrine
-	- the announcement of the Truman Doctrine.
+	- the Marxist doctrine about perpetual revolution
+	- the announcement of the Truman Doctrine
+
+## 11th, Sep
+
++ cockroach
+> (n)(also roach)a large black or brown insect that lives in dirty houses, especially if they are warm and there is food to eat.
+
++ idiom
+> (n)a group of words that has a special meaning that is different from the ordinary meaning of each separate words. For example, 'under the weather' is an idiom meaning 'ill'.
+
+	- familiar idioms and metaphors, such as 'turning over a new leaf'
+
++ ethnicity
+> (n)the state or fact of belonging to a particular ethnic group.
+
+	- He said his ethnicity had not been important to him.
+
++ discourse
+> (n)a serious speech or piece of writing on a particular subject</br>
+> (n)serious conversation or discussion between people
+
+	- a discourse on art
+	- Candidates should engage in serious political discourse.
+	- "I do not know."And thus ended their discourse.
+
++ assimilation
+> (n)the process of understanding and using new ideas.
+> (n)the process of becoming a accepted part of a country or group.
+
+	- The assimilation of ethnic Germans in the US was accelerated by the two world wars.
+	- Poor assimilation of vitamins and nutrients can cause health problems.
+
++ mouthpiece
+> (n)the part of a musical instrument, telephone etc that you put in your mouth or next to your mouth.
+> (n)a person, newspaper etc that expresses the opinions of a government or a political organization.
+
+	- He shouted into the mouthpiece.
+	- This newspaper is just a Republican mouthpiece.
+
++ literacy
+> (n)the state of being able to read and write
+
+	- a new adult literacy campaign
+	- Many adults have problems with literacy and numeracy.
+
++ ascribe
+> (v)to claim that something is caused by a particular person, situation etc.</br>
+> (v)to claim that something has been written, said, made etc by a particular person
+
+	- The report ascribes the rise in childhood asthma to the increase in pollution.
+	- a quotation that's often been ascribed to Marilyn Monroe
