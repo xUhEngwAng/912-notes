@@ -484,7 +484,7 @@ Some Words
 > (adj)shared or made by every member of a group or society.</br>
 > (n)A collective is a business or farm which is run, and often owned, by a group of people.
 
-	- a collective devision made by all board members.
+	- a collective decision made by all board members.
 	- our collective responsiblity for the environment
 
 + morale
@@ -540,14 +540,14 @@ Some Words
 	- "I do not know."And thus ended their discourse.
 
 + assimilation
-> (n)the process of understanding and using new ideas.
-> (n)the process of becoming a accepted part of a country or group.
+> (n)the process of understanding and using new ideas.</br>
+> (n)the process of becoming an accepted part of a country or group.
 
 	- The assimilation of ethnic Germans in the US was accelerated by the two world wars.
 	- Poor assimilation of vitamins and nutrients can cause health problems.
 
 + mouthpiece
-> (n)the part of a musical instrument, telephone etc that you put in your mouth or next to your mouth.
+> (n)the part of a musical instrument, telephone etc that you put in your mouth or next to your mouth.</br>
 > (n)a person, newspaper etc that expresses the opinions of a government or a political organization.
 
 	- He shouted into the mouthpiece.
@@ -565,3 +565,156 @@ Some Words
 
 	- The report ascribes the rise in childhood asthma to the increase in pollution.
 	- a quotation that's often been ascribed to Marilyn Monroe
+
+## 13th, Sep
+
++ upfront
+> (adj)behaving or talking in an honest way so that people know what you really think, honest.</br>
+> (adj)paid before any work has been done or before goods are supplied.</br>
+> (adv)in the beginning
+
+	- Mo's very upfront with him about their relationship.
+	- an upfront fee of 500 dolloars
+	- Every consumer should know upfront what it is going to cost them.
+
++ eligible
+> (adj)some who is eligible for sth is able or allowed to do it, for example, because they are the right age.</br>
+> (adj)an eligible man or woman is not yet married and is thought by many people to be a suitable partner.
+
+	- Almost half the population are eligible to vote in today's election.
+	- Students on a part-time course are not eligible for a loan.
+	- Stephen was regarded as an eligible bachelor.
+
++ treasury
+> (n)a government department that controls the money that the country collects and spends.</br>
+> (n)a place in a castle, church, palace etc where money or valuable objects are kept.
+
+	- a senior official at the Treasury
+
++ exchequer
+> (n)the British government department that is responsible for collecting taxes and paying out public money, the Treasury.
+
+	- The industry claims it contributes to the Irish exchequer because it generates employment and wealth.
+
++ chancellor
+> (n)a person in a position of the highest or high rank, especially in a government or university
+
+	- A former politician has been appointed Chancellor of the university.
+	- Helmut Kohl, the former German Chancellor 
+
+## 14th, Sep
+
++ roundabout
+> (n)a raised circular area where three or more roads join together and which cars must drive around.</br>
+> (adj)a roundabout way of getting somewhere is longer and more complicated than necessary.</br>
+> (adj)a roundabout way of saying something is not clear, direct or simple.
+
+	- Turn left at the first roundabout.
+	- It was a roundabout way of telling us to leave.
+	- The bus took a very long and roungabout route.
+
++ workout
+> (n)a period of physical exercise, especially as training for a sport.
+
+	- a daily workout in the gym
+	- Give your upper body a workout by using handweights.
+
++ genre
+> (n)a particular type of art, writing, music etc, which has certain features that all examples of this type share
+
+	- a new genre of film-making
+	- his love of films and novels in the horror genre
+
++ fluctuate 
+> (v)if a price or amount fluctuates, it keeps changing and becoming higher and lower.
+
+	- Insect populations fluctuate wildly from year to year.
+	- Prices were volatile, fluctuating between 20 and 40.
+
++ bar
+> (n)all lawyers considered as a group, or the profession of law.
+
+	- sit for the bar: take part in the bar examination
+	- she was admitted to the bar in her early thirties.
+	- Less than a quarter of graduates from the law school pass the bar exam on the first try.
+
++ guild
+> (n)an organization of people who do the same job or have the same interests.
+
+	- the Women's Guild
+	- the Writers' Guild of America
+
++ hindrance
+> (n)something or someone that makes it difficult for you to do something.</br>
+> (n)the act of making it difficult for someone to do something
+
+	- The higher rates have been a hindrance to economic recovery.
+	- The floods have been a major hindrance to relief efforts.
+	- Visitors are allowed to wander without hindrance.
+
++ lucrative
+> (adj)a job or activity that is lucrative lets you earn a lot of money, profitable.
+
+	- He inherited a lucrative business from his father.
+	- Thousands of ex-army officers have found lucrative jobs in private security firms.
+
++ upstart
+> (n)someone who behaves as it they were more important than they really are and who shows a lack of respect towards people who are more experienced and or older.
+
+	- Many prefer a familiar authority figure to a yound upstart.
+
++ statu quo
+> (n)the present situation
+
+	- Certain people always want to maintain the staus quo.
+
++ lone
+> (adj)used to talk about the only person or thing in a place, or the only person or thing that does something.
+	
+	- the lone survivor of the shipwreck
+	- A lone figure was standing at the bus stop.
+
++ outgrow
+> (v)to grow too big for something</br>
+> (v)to no longer do or enjoy something that you used to, because you have grown older and changed
+
+	- Thet outgrew their clother so quickly.
+	- Most children eventually outgrow a tendency towards travel sickness.
+
++ liberal
+> (adj)willing to understand and respect other people's ideas, opinions, and feelings.</br>
+> (adj)allowing people or organizations a lot of political or economic freedom</br>
+> (adj)giving, using, or taking a lot of something, or existing in large quantities
+
+	- I had quite liberal parents.
+	- a liberal democracy with a multiparty political system
+	- As always he is liberal with jokes.
+	- Chemical products were used liberally over agricultural land.
+
++ critical
+> (adj)if you are critical, you criticize someone or something.
+
+	- Many economics are highly critical of the government's economic policies.
+	- Many parents are strongly critical of the school.
+
++ contemptuous
+> (adj)showing that you think someone or something deserves no respect.
+
+	- a contemptuous glance
+	- He's openly contemptuous of all the major political parties.
+
++ set back
+> (v)if something sets you back or sets back a project or plan, it causes a delay.
+
+	- It has set us back in so many aspects that I'm not sure how long it will take for us to catch up.
+
++ citizenry
+> (n)all the citizens in a particular town, country, or state.
+
+	- The country's citizenry is(are) more politically aware than in the past.
+
++ propaganda
+> (n)information which is false or which emphasizes just one part of a situation, used by a government or political group to make people agree with them.
+
+	- the government propaganda machine
+	- the spreading of political propaganda
