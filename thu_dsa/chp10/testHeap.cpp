@@ -1,4 +1,5 @@
 #include "CompleteBinaryHeap.h"
+#include "LeftistHeap.h"
 #include <iostream>
 #include <cassert>
 using std::cout;
