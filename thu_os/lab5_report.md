@@ -363,7 +363,7 @@ syscall(void) {
 
 它将实际上跳转到`sys_exit`函数中，随后调用`kern/process/proc.c`中实现的`do_exit`函数来完成`exit`系统调用的处理。这里我们再看一下`do_exit`是如何真正地实现进程的退出的吧。
 
-## `exit`的实现
+### `exit`的实现
 
 在原理课中讲过，当一个进程执行完毕需要退出时，将执行`exit`系统调用，从而在其中将它所占用的资源几乎全部归还给操作系统。为什么是几乎呢？因为归还资源的操作是它自己进行的，只要这个进程还存在，就至少还有进程控制块`PCB`的内存资源没有归还给操作系统。
 
@@ -430,7 +430,7 @@ do_exit(int error_code) {
 }
 ```
 
-## `wait`的实现
+### `wait`的实现
 
 在原理课中讲到，当父进程需要等待某一个子进程退出，该子进程退出之后，父进程才能继续执行。在这种情况下，就应该使用`wait`系统调用。`wait`系统调用的实现和`exit`一样，都是一步步通过中断机制，分发到系统调用总控函数`syscall`，然后再调用实质性的处理函数`do_wait`，它也在`kern/process/proc.s`中实现。
 
@@ -519,6 +519,74 @@ UNINIT  -------->   RUNNABLE  <---------->  RUNNING
                                                V
                                              ZOMBIE
 ```
+
+### `fork`系统调用的实现
+
+在`lab4_report`中已经阐述了`do_fork`函数的实现，但是这里还有一个问题，在原理课上老师讲到，通过`fork`系统调用创建的子进程和父进程几乎完全相同，在被调度后子进程会从父进程被中断的地方开始执行，这是怎么实现的呢？此外，为了区分开父进程和子进程，可以通过`fork`系统调用的返回值，即父进程的返回值为子进程的`pid`，子进程的返回值为0，如下面的代码：
+
+```c
+main(){
+    .......
+    int pid = fork();
+    if(pid == 0){//child process goes here
+        exec_status = exec("calc", arg0, arg1, ...);
+        ......
+    }else{//parent process goes here
+        ......
+    }
+}
+```
+
+又是如何实现父进程的子进程的返回值不一样的呢？接下来我们将一步一步分析`fork`系统调用实现的步骤。
+
+如前面所说的那样，用户进程调用`fork()`时，会转到用户态系统调用库`user/libs/syscall.c(h)`，在其中会由`syscall`函数调用`INT 80`来请求操作系统的`fork`服务，之后CPU的控制权就转交给了中断服务程序，这里涉及到当前进程（父进程）中断帧的保存，最终实际的`fork`操作由`kern/process/proc.c::do_fork`来完成，`kern/syscall/syscall.c::sys_fork`的实现如下：
+
+```c
+static int
+sys_fork(uint32_t arg[]) {
+    struct trapframe *tf = current->tf;
+    uintptr_t stack = tf->tf_esp;
+    return do_fork(0, stack, tf);
+}
+```
+
+可以看到，调用`do_fork`函数的参数分别是当前进程的用户堆栈`tf->tf_esp`以及中断帧。在`lab4`中已经实现了这个`do_fork`函数，在其中会进行一系列的资源拷贝工作。在`copy_thread`函数中，会把父进程的`tf`拷贝到子进程的`tf`当中。但是，子进程的上下文信息`context`仍然是设置到`forkret`。
+
+到目前为止，我们应该可以看出子进程是如何在父进程中断的地方继续执行的了。子进程被调度后，通过`forkret`，转到中断返回函数，在其中通过`iret`将保存了父进程中断帧的`tf`加载到寄存器当中，这样就相当于恢复了父进程的中断现场。
+
+但是还有一点，它们的返回值是如何做到不同的呢？事实上，注意到在`user/libs/syscall`中，有
+
+```asm
+asm volatile (
+    "int %1;"
+    : "=a" (ret)
+    : "i" (T_SYSCALL),
+      "a" (num),
+      "d" (a[0]),
+      "c" (a[1]),
+      "b" (a[2]),
+      "D" (a[3]),
+      "S" (a[4])
+    : "cc", "memory");
+```
+
+可以看到，`INT 80`的返回值是保存在`eax`寄存器当中的，对于父进程，这个返回值就是`do_fork`的返回值，即子进程的`pid`。而对于子进程而言，注意到在`copy_thread`当中，是将中断帧的`tf_regs.reg_eax`设置为零的：
+
+```c
+static void
+copy_thread(struct proc_struct *proc, uintptr_t esp, struct trapframe *tf) {
+    proc->tf = (struct trapframe *)(proc->kstack + KSTACKSIZE) - 1;
+    *(proc->tf) = *tf;
+    proc->tf->tf_regs.reg_eax = 0;
+    proc->tf->tf_esp = esp;
+    proc->tf->tf_eflags |= FL_IF;
+
+    proc->context.eip = (uintptr_t)forkret;
+    proc->context.esp = (uintptr_t)(proc->tf);
+}
+```
+
+这样在中断返回时，这个零就会被加载到`eax`寄存器中，从而子进程的`fork`返回值就是零了。
 
 ## 进程的切换与退出
 
