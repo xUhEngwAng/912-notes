@@ -574,7 +574,7 @@ Some Words
 > (adv)in the beginning
 
 	- Mo's very upfront with him about their relationship.
-	- an upfront fee of 500 dolloars
+	- an upfront fee of 500 dollars
 	- Every consumer should know upfront what it is going to cost them.
 
 + eligible
@@ -611,7 +611,7 @@ Some Words
 
 	- Turn left at the first roundabout.
 	- It was a roundabout way of telling us to leave.
-	- The bus took a very long and roungabout route.
+	- The bus took a very long and roundabout route.
 
 + workout
 > (n)a period of physical exercise, especially as training for a sport.
@@ -663,10 +663,10 @@ Some Words
 
 	- Many prefer a familiar authority figure to a yound upstart.
 
-+ statu quo
++ status quo
 > (n)the present situation
 
-	- Certain people always want to maintain the staus quo.
+	- Certain people always want to maintain the status quo.
 
 + lone
 > (adj)used to talk about the only person or thing in a place, or the only person or thing that does something.
@@ -678,7 +678,7 @@ Some Words
 > (v)to grow too big for something</br>
 > (v)to no longer do or enjoy something that you used to, because you have grown older and changed
 
-	- Thet outgrew their clother so quickly.
+	- They outgrew their clothes so quickly.
 	- Most children eventually outgrow a tendency towards travel sickness.
 
 + liberal
@@ -694,7 +694,7 @@ Some Words
 + critical
 > (adj)if you are critical, you criticize someone or something.
 
-	- Many economics are highly critical of the government's economic policies.
+	- Many economists are highly critical of the government's economic policies.
 	- Many parents are strongly critical of the school.
 
 + contemptuous
