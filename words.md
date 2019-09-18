@@ -718,3 +718,19 @@ Some Words
 
 	- the government propaganda machine
 	- the spreading of political propaganda
+
+## 18th, Sep
+
++ sift
+> (v)to put flour, sugar etc through a sieve or similar container in order to remove large pieces.</br>
+> (v)to examine information, documents etc carefully in order to find something out or decide what is important and what is not.
+
+	- Sift the flour and baking powder into a medium-sized mixing bowl.
+	- Police are sifting through the evidence.
+	- It' hard to sift out the truth from the lies in this case.
+
++ ornate
+> (adj)covered with a lot of decoration
+
+	- an ornate gold mirror
+	- an ornate iron staircase
