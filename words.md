@@ -734,3 +734,14 @@ Some Words
 
 	- an ornate gold mirror
 	- an ornate iron staircase
+
++ tentative
+> (adj)not definite or certain, and may be changed later.</br>
+> (adj)done without confidence, hesitant
+
+	- I passed on my tentative conclusions to the police.
+	- The government is taking tentative steps towards tackling the country's economic problems.
+	- Albi knocked tentatively and entered.
+
++ semaphore
+> (n)a system of sending messages using two flags, which you hold in different positions to represent letters and numbers
