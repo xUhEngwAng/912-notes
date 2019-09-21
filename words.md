@@ -745,3 +745,11 @@ Some Words
 
 + semaphore
 > (n)a system of sending messages using two flags, which you hold in different positions to represent letters and numbers
+
+## 19th, Sep
+
++ glitch
+> (n)a small fault in a machine or piece of equipment, that stops it working
+
+	- a software glitch
+	- Manufacturing glitches have limited the factory's output.
