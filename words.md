@@ -753,3 +753,126 @@ Some Words
 
 	- a software glitch
 	- Manufacturing glitches have limited the factory's output.
+
+## 23rd, Sep
+
++ akin
+> (adj)very similar to something
+
+	- Something akin to panic overwhelmed him.
+	- Listening to his life story is akin to reading a good adventure novel.
+
++ hijack
+> (v)to use violence or threats to take control of a plane, vehicle, or ship.</br>
+> (v)to take control of something and use it for your own purposes
+
+	- The airliner was hijacked by a group of terrorists.
+	- Some people think the party has been hijacked by right-wing extremists.
+
++ satire
+> (n) a way of criticizing something such as a group of people or a system, in which you deliberately make them seem funny so that people will see their faults</br>
+> (n)a piece of writing, film, play etc that uses this type of criticism.
+
+	- the characteristic use of satire in Jonson's work
+	- a satire on the American political process
+
++ get cracking
+> (v)to start doing something quickly
+
+	- I'd better get cracking on the food for tonight.
+
++ utopia
+> (n)an imaginary perfect world where everyone is happy
+
+	- When plans to rebuild the neighborhood were first announced, I’d been hoping for a utopia.
+
++ asteroid
+> (n)one of the many planets that move around the Sun, especially between Mars and Jupiter
+
++ envisage
+> (v)to think that something is likely to happen in the future
+
+	- The scheme cost a lot more than we had originally envisaged.
+	- It's hard to envisage how it might happen.
+
++ fad
+> (n)something that people like to do for a short time, or that is fashionable for a short time.
+
+	- He doesn't believe environmental concern is a passing fad.
+
++ rosy
+> (adj)seeming to offer hope of success or hapiness</br>
+> (adj)pink
+	
+	- The job prospects for those graduating in engineering are far less rosy now than they used to be.
+	- Letters to relatives in Europe painted a rosy picture of life in the United States.
+	- the kid's rosy cheeks
+
++ enforce
+> (v)the make people obey a rule or law</br>
+> (v)to make something happen or force someone to do something
+
+	- Parking restrictions will be strictly enforced.
+	- Governments make laws and the police enforce them.
+	- It is unlikely that a record company would enforce its views on an established artists.
+
++ statute
+> (n)a law passed by a council, parliament etc and formally written down</bt>
+> (n)a formal rule of an institution or organization
+
+	- Protection for the consumer is laid down by statute.
+	- College statutes forbid drinking on campus.
+
++ check
+> (v)to stop something bad from getting worse or continuing to happen
+
+	- The police are failing to take adequate measures to check the growth in crime.
+
++ to the letter
+> (adv)if you obey instructions or rules to the letter, you do exactly what you have been told to do, giving great attention to every detail.
+
+	- I followed the instructions to the letter and it still went wrong.
+
++ envision
+> (v)to imagine something that you think might happen in the future, especially something that you think will be good, envisage.
+
+	- I envisioned a future of educational excellence.
+	- The company envisions adding at least five stores next year.
+
++ fashion
+> (v)to make or shape something, using your hands or only a few tools
+
+	- He fashioned a box from a few old pieces of wood.
+
++ flourish
+> (v)to develop well and be successful</br>
+> (v)to grow well and be very healthy
+
+	- The economy is booming and small businesses are flourishing.
+	- Most plants will flourish in the rich deep soils here.
+
++ eradicate
+> (v)to completely get rid of something such as a disease or a social problem.
+
+	- an attempt to eradicate inflation
+	- a significant contribution towards the eradication of corruption
+
++ radical
+> (adj)a radical change or difference is very big and important</br>
+> (adj)believing or expressing the belief that there should be great or extreme social or political change.
+
+	- He was known as a radical reformer.
+	- They are proposing radical changes to the way the company is run.
+	- There are radical differences between the two organizations.
+
++ paraphrase
+> (v)to express in a shorted, clearer, or different way what someone has said or written.
+
+	- To paraphrase President Bush, we must restore confidence in our economic sector.
+
++ enact
+> (v)to put something into action, especially to make something law</br>
+> (v)to perform a story or play by acting
+
+	- The authorities have failed so far to enact a law allowing unrestricted emigration.
+	- She often enacted the stories told to her by her father.
