@@ -27,10 +27,12 @@ public:
 	//read-only interfaces
 	ListNodePosi(T) first() const { return head->succ; }
 	ListNodePosi(T) last() const { return tail->prev; }
+	ListNodePosi(T) prev(ListNodePosi(T) p) const { return p->prev; }
+	ListNodePosi(T) next(ListNodePosi(T) p) const { return p->next; }
 	ListNodePosi(T) find(T const &val) const { return find(val, size, tail); }		//find val from all elements of the list
 	ListNodePosi(T) find(T const &val, int n, ListNodePosi(T) p) const;				//find val from a range of n elements before p
 	ListNodePosi(T) search(T const &val, int n, ListNodePosi(T) p) const;			//find val in a sorted List<T>
-	ListNodePosi(T) search(T const &val) const { return search(val, size, tail); }	//find val universally ina sorted List<T>
+	ListNodePosi(T) search(T const &val) const { return search(val, size, tail); }	//find val universally in a sorted List<T>
 	T& operator[](int rank);
 	int getSize() const { return size; }
 	bool empty() const { return size == 0; }
