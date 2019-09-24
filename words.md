@@ -817,7 +817,7 @@ Some Words
 	- It is unlikely that a record company would enforce its views on an established artists.
 
 + statute
-> (n)a law passed by a council, parliament etc and formally written down</bt>
+> (n)a law passed by a council, parliament etc and formally written down</br>
 > (n)a formal rule of an institution or organization
 
 	- Protection for the consumer is laid down by statute.
@@ -875,4 +875,27 @@ Some Words
 > (v)to perform a story or play by acting
 
 	- The authorities have failed so far to enact a law allowing unrestricted emigration.
+	- a project that is to be enacted next year
 	- She often enacted the stories told to her by her father.
+
+## 24th, Sep
+
++ demographics
+> (n)the number and characteristics of people who live in a particular area or form a particular group, especially in relation to their age, how much money they have and what they spend it on
+
+	- The demographics of the country have changed dramatically in recent years.
+	- demographic change
+
++ stem
+> (v)to stop something from happening, spreading, or developing.</br>
+> (V)to stop the flow of liquid
+
+	- The measures are meant to stem the tide of illegal immigration.
+	- an attempt to stem the decline in profits
+	- A tight bandage should stem the bleeding.
+
++ up in arms
+> angry or upset
+
+	- The union is up in arms over the reduction in health benefits.
+
