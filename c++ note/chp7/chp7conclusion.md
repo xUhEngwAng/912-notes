@@ -31,7 +31,7 @@ Sales_data::isbn(&total);
 
 + 从语言的功能层面，一个`const`的对象只能调用它的标记为`const`的成员函数。这是很自然的，因为编译器会认为没有`const`标记的成员函数会修改对象的成员变量。所以，对于只读的成员函数，尽量都标记为`const`,以便其`const`的对象也可以调用这些函数。
 
-+ 从变量类型的方面。对于一般的对象，如`Sales_data total`这种，`this`指针的类型为`Sales_data* const`，即`this`指针是`const pointer to non-const object`，在这种情况下，`this`指针是不能指向`const`的对象的。为了指定`this`指针的类型为`const Sales_data* cosnt`，即`const pointer to const object`，就需要在函数的参数列表和具体实现之间加上`const`修饰符。实际上，这也是`const`对象只能调用`const`成员函数在语言层面的原因。
++ 从变量类型的方面。对于一般的对象，如`Sales_data total`这种，`this`指针的类型为`Sales_data* const`，即`this`指针是`const pointer to non-const object`，在这种情况下，`this`指针是不能指向`const`的对象的。为了指定`this`指针的类型为`const Sales_data* const`，即`const pointer to const object`，就需要在函数的参数列表和具体实现之间加上`const`修饰符。实际上，这也是`const`对象只能调用`const`成员函数在语言层面的原因。
 
 - class scope and defining a member function outside the class 
 - a function to return `this` object
