@@ -29,20 +29,20 @@ public:
 	//constructor
 	QuadList();
 
-	//deconstrutor
-	~QuadList();
-
 	//external interfaces
 
 	//read-only interfaces
 	int  size()  const { return __size; }
 	bool empty() const { return size() == 0; }
-	QuadNodePosi(T) first() const { return empty()? nullptr : __head->next;}
-	QuadNodePosi(T) last()  const { return empty()? nullptr : __tail->prev;}
+	QuadNodePosi(T) first() const { return __head->next;}
+	QuadNodePosi(T) last()  const { return __tail->prev;}
 	QuadNodePosi(T) prev(QuadNodePosi(T) p)  const { return p->prev; }
 	QuadNodePosi(T) next(QuadNodePosi(T) p)  const { return p->next; }
 
 	//writable interfaces
+	void sethead(T entry) { __head->entry = entry; }
+	void settail(T entry) { __tail->entry = entry; }
+	void connectTo(QuadList<T>* down);
 	void insert_before_above(QuadNodePosi(T) p, T const& entry, QuadNodePosi(T) base = nullptr);
 	void insert_after_above(QuadNodePosi(T)p, T const & entry, QuadNodePosi(T) base = nullptr);
 	void remove(QuadNodePosi(T) p);
@@ -51,14 +51,25 @@ public:
 //constructor
 template <typename T>
 QuadList<T>::QuadList(){
-	__head = new QuadNode<T>(MININT);
-	__tail = new QuadNode<T>(MAXINT);
+	__head = new QuadNode<T>();
+	__tail = new QuadNode<T>();
 	__size = 0;
 	__head->next = __tail;
+	__head->prev = __tail;
+	__tail->next = __head;
 	__tail->prev = __head;
 }
 
 //writable interfaces
+
+template <typename T>
+void QuadList<T>::connectTo(QuadList<T>* down){
+	//assert(down != nullptr);
+	__head->below = down->__head;
+	__tail->below = down->__tail;
+	down->__head->above = __head;
+	down->__tail->above = __tail;
+}
 
 template <typename T>
 void QuadList<T>::insert_before_above(QuadNodePosi(T) p, T const & entry, QuadNodePosi(T) base){
@@ -67,7 +78,7 @@ void QuadList<T>::insert_before_above(QuadNodePosi(T) p, T const & entry, QuadNo
 	newNode->prev = p->prev;
 	p->prev = newNode;
 	newNode->prev->next = newNode;
-	base->above = newNode;
+	if(base) base->above = newNode;
 	newNode->below = base;
 	++__size;
 }
