@@ -21,7 +21,7 @@
 
 > 一种递归策略
 
-下面给出一种递归地进行堆合并的策略——设两个堆分别为`A`和`B`，并且保证`A`堆的堆顶大于`B`堆的堆顶，为了将`A``B`两个堆合并，只需要取出`A`的右子树，将`A`的右子树与`B`进行合并，并且将合并后的堆重新作为`A`的右子树。而为了将`A`的右子树与`B`合并，只需要递归地进行上述的策略即可。
+下面给出一种递归地进行堆合并的策略——设两个堆分别为`A`和`B`，并且保证`A`堆的堆顶大于`B`堆的堆顶，为了将`A`，`B`两个堆合并，只需要取出`A`的右子树，将`A`的右子树与`B`进行合并，并且将合并后的堆重新作为`A`的右子树。而为了将`A`的右子树与`B`合并，只需要递归地进行上述的策略即可。
 
 这种策略的正确性是显然的，一次这样的操作后，合并后的堆，其`堆序性质`仍然得到满足。通过不断地取堆的右子树，递归问题的规模不断减小，直到平凡的情况，即`A`的右子树为空，此时直接将`B`堆连接到`A`的右子树即可，因此该算法是有穷的。
 
@@ -29,7 +29,7 @@
 
 为了快速地取出堆的右子树，以及将某棵树连接到一个节点上，这里应该抛弃前面在完全二叉堆采用的向量结构，而是采用二叉树来作为堆的底层结构，此时每次递归的时间复杂度都是`O(1)`，因此整体的时间复杂度为`O(rh1 + rh2)`。可见，为了获得更好的性能，就应该尽量减少堆的最右侧路径长度，左式堆就是这样的一种结构。
 
-## 左式堆
+## 左式堆的概念
 
 首先需要引入`空节点路径长度`的概念——对任意一棵二叉树，引入所有的外部节点，则任意节点的空节点路径长度(npl, null path length)，定义为该节点到外部节点的最短距离，外部节点的`npl`定义为零，即`npl(null) = 0`。
 
@@ -39,7 +39,7 @@
 npl(x) = MIN(npl(lc(x)), npl(rc(x))) + 1;
 ```
 
-对于左式堆中的任一节点，都满足其左孩子的`npl`值，不小于右孩子的`npl`值，即
+对于左式堆中的任一节点，都满足其左孩子的`npl`值，不小于右孩子的`npl`值，即`左倾性`：
 
 ```c
 npl(lc(x)) >= npl(rc(x));
@@ -51,7 +51,7 @@ npl(lc(x)) >= npl(rc(x));
 npl(x) = npl(rc(x)) + 1;
 ```
 
-这样，对于左式堆的根节点，其`npl`等于其右子树的最短路径长度加一，而它的右子树的`npl`，又等于它的右子树的右子树的`npl`加一，即
+这样，对于左式堆的根节点，其`npl`等于其右子树的`npl`加一，而它的右子树的`npl`，又等于它的右子树的右子树的`npl`加一，即
 
 ```c
 npl(root) = npl(rc(root)) + 1 = npl(rc(rc(root))) + 2 = ... = right path length
@@ -77,6 +77,65 @@ $$
 
 ![leftist_heap_structure](leftist_heap_structure.png)
 
-在这样的条件下，我们上面给出的合并算法，其时间复杂度就只有`O(logm + logn)`了，这无疑是对性能的一次极大改进。
+在这样的条件下，我们上面给出的合并算法，其时间复杂度就只有`O(logm + logn)`了，这无疑是对性能的一次极大改进。但是需要注意的是，左式堆只是保证最右侧路径的长度最小，并非左子堆的规模和高度一定会大于右子堆。
 
-但是需要注意的是，左式堆只是保证最右侧路径的长度最小，并非左子堆的规模和高度一定会大于右子堆。
+## 左式堆的实现
+
+左式堆仍然是优先级队列的一种实现方式，因此要实现左式堆，仍然只需要实现优先级队列的几个抽象函数接口，即`getMax`，`insert`和`delMax`。其中`getMax`的实现只需取出左式堆的根节点即可，与完全二叉堆的实现相同，在这里不再赘述。
+
+需要指出的是，左式堆的`insert`接口与`delMax`接口，都可以借助左式堆的`merge`算法快速的实现。对于`insert`接口，无非将一个规模为1的左式堆，与当前的左式堆进行合并，其代码如下：
+
+```cpp
+template <typename K, typename V>
+void LeftHeap<K, V>::insert(entry<K, V> e){
+	BinNodePosi(T) newNode = new BinNode<T>(e);
+	newNode->npl = 1;
+	__root = merge(__root, newNode);
+	__root->parent = nullptr;
+	++__size;
+}
+```
+
+而左式堆的`delMax`函数，无非是在删除了根节点以后，将根节点的两个左子堆进行合并，利用`merge`也可以方便地实现：
+
+```cpp
+template <typename K, typename V>
+entry<K, V> LeftHeap<K, V>::delMax(){
+	entry<K, V> res = getMax();
+	__root = merge(__root->leftChild, __root->rightChild);
+	if (__root) __root->parent = nullptr;
+	--__size;
+	return res;
+}
+```
+
+因此，问题的关键就在于左式堆的`merge`函数，该函数基本按照我们上面提到过的策略进行，只是需要做一些细节上的修改。无论是在`insert`还是`delMax`操作的过程中，都需要动态地维护左式堆的结构，即每次将合并后的堆作为右子树插入到当前节点后，都需要对当前节点的`左倾性`进行检查，一旦发现左子树的`npl`小于右子树，则将左右子树交换。`merge`函数的实现如下：
+
+```cpp
+#define T entry<K, V>
+
+template<typename K, typename V>
+BinNodePosi(T) merge(BinNodePosi(T) a, BinNodePosi(T) b){
+	if (a == nullptr) return b;
+	if (b == nullptr) return a;
+	BinNodePosi(T) temp;
+	if (a->data < b->data){//swap a and b
+		temp = a;
+		a = b;
+		b = temp;
+	}
+	if (a->rightChild == nullptr) a->rightChild = b;
+	else a->rightChild = merge(a->rightChild, b);
+	a->rightChild->parent = a;
+
+	if (NPL(a->leftChild) < NPL(a->rightChild)) {// swap the right chlid and left child of a
+		temp = a->leftChild;
+		a->leftChild = a->rightChild;
+		a->rightChild = temp;
+	}
+	a->npl = NPL(a->rightChild) + 1;
+	return a;
+}
+```
+
+根据前面的分析，`merge`的时间复杂度为`O(logn)`，无论是在`insert`还是`delMax`中，调用`merge`函数以外的操作都可以在`O(1)`时间内完成，因此两个操作的性能都是`O(logn)`。
