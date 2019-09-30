@@ -488,13 +488,13 @@ stride_pick_next(struct run_queue *rq) {
 容易证明，在任何一次进行调度时，就绪队列中的任意两个进程都满足
 
 $$
-| pass_1 - pass_2 | \le stride_max
+| pass_1 - pass_2 | \le stride\_max
 $$
 
 其中，`stride_max`表示所有进程中的最大步进值。这样，可以进一步
 
 $$
-pass_max - pass_min \le BIG_STRIDE
+passMax - passMin \le BIG\_STRIDE
 $$
 
 因此一种解决方案是，对两个`pass`之差的结果进行分析，如果它是介于`-BIG_STRIDE`到`BIG_STRIDE`之间的，则认为是一个合理值，返回正常的结果。若这个差值在上述区间之外，则认为其中一个`pass`已经发生了溢出，因此取相反的结果，对应的比较函数的实现如下：
