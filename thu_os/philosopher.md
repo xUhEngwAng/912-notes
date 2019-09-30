@@ -50,7 +50,7 @@ void philosopher(){
 	//I'm hungry
 	mutex.P();
 	forks[LEFT].P();
-	forks[RIGHT].V();
+	forks[RIGHT].P();
 	eating();
 	forks[LEFT].V();
 	forks[RIGHT].V();
@@ -58,7 +58,7 @@ void philosopher(){
 }
 ```
 
-由于任意时刻只能有两个哲学家在请求叉子，因此至少会有一个哲学家可以同时获得他左右的两只叉子然后开始进餐，第一种情形的死锁的情况在这里不会再发生。但是如果两个请求叉子的哲学家是相邻的，他们中必有一个会进入阻塞状态，此时另外两只叉子还是空闲的，却不能有新的进入就餐状态的哲学家，也就是说这种策略会导致资源的浪费。
+由于任意时刻只能有两个哲学家在请求叉子，因此至少会有一个哲学家可以同时获得他左右的两只叉子然后开始进餐，第一次尝试中死锁的情况在这里不会再发生。但是如果两个请求叉子的哲学家是相邻的，他们中必有一个会进入阻塞状态，此时另外两只叉子还是空闲的，却不能有哲学家进入临界区获得叉子了，也就是说这种策略会导致资源的浪费。
 
 ### 第三次尝试
 
@@ -135,7 +135,6 @@ void check(i){
 //for philosopher i
 void philosopher(){
 	while(true){
-		state[i] = THINKING;
 		thinking();
 		//I'm hungry
 		state[i] = HUNGRY
@@ -144,8 +143,11 @@ void philosopher(){
 		mutex.V();
 		phis[i].P();
 		eating();
+		state[i] = THINKING;
+		mutex.P();
 		check(LEFT);
 		check(RIGHT);
+		mutex.V();
 	}
 }
 ```
