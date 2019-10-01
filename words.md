@@ -899,3 +899,52 @@ Some Words
 
 	- The union is up in arms over the reduction in health benefits.
 
+## 30th, Sep
+
++ legitimacy
+> (n)the quality of being legal
+
+	- The lawyers expressed serious doubts about the legitimacy of military actions.
+
++ impartial
+> (adj)not involved in a particular situation, and therefore able to give a fair opinion or piece of advice
+
+	- A trial must be fair and impartial.
+	- The state must ensure the independence and impartiality of the justice system.
+
++ code of conduct
+> (n)a set of rules about how to behave and do business with other people
+
+	- Doctors say a new code of conduct is urgently needed to protect the doctor-patient relationship.
+
++ judiciary
+> (n)the part of a country's government that is responsible for its legal system, including all the judges in the country's courts
+
+	- The judiciary must think hard before jailing nonviolent offenders.
+
++ ideological
+> (adj)based on strong beliefs or ideas, especially political or economic ideas
+
+	- The party is split by ideological differences.
+	- There are some fairly profound ideological disagreements within the movement.
+
++ dismiss
+> (v)to refuse to consider someone's idea, opinion, etc, because you think it is not serious, true, or important.
+
+	- The government has dismissed criticisms that the country's health policy is a mess.
+	- He just laughed and dismissed my proposal as unrealistic.
+
++ address
+> (v)if you address a problem, you start trying to solve it.
+
+	- Our products address the needs of real users.
+	- The government has to address the rise in violent crimes.
+
++ accountable
+> (adj)responsible for the effects of your actions and willing to explain or be criticised for them
+
+	- The hospital should be held accountable for the quality of care if gives.
+	- Managers must be accountable to their decisions.
+	- The government should be accountable to all the people of the country.
+
+
