@@ -947,4 +947,171 @@ Some Words
 	- Managers must be accountable to their decisions.
 	- The government should be accountable to all the people of the country.
 
+## 2nd, October
 
++ contend
+> (v)to compete against someone in order to gain something</br>
+> (v)to argue or state that something is true
+
+	- Inevitably, fights break out between the members of the contending groups.
+	- the two main groups contending for power
+	- Some astronomers contend that the universe may be younger than previously thought.
+
++ perceptive
+> (adj)someone who is perceptive notices things quickly and understands situations, people's feelings etc well
+
+	- highly perceptive comments
+	- He was one of the most perceptive U.S. political commentators.
+
++ spot-on
+> (adj)exactly right
+
+	- Judith is always spot-on with her advice.
+
++ virtuous
+> (adj)behaving in a very honest and moral way.(oppo) wicked
+
+	- Sue considered herself very virtuous because she neither drank nor smoked.
+	- steer yound men in virtuous directions
+
++ abide
+> (v)used to say that someone dislikes someone or something very much</br>
+> (v)abide by: to accept and obey a decision, agreement etc, even though you may not agree with it
+
+	- I can's abide that man -- he's so self-satisfied.
+	- You have to abide by the referee's decision.
+
+## 3rd, October
+
++ reaffirm
+> (v)to formally state an opinion, belief, or intention agian, especially when someone has questioned you or expressed a doubt
+
+	- The party reaffirmed its commitment to nuclear disarmament.
+	- The government has reaffirmed that education is a top priority.
+
++ disarmament
+> (n)the act of reducing the number of weapons, especially nuclear weapons, that a country has.
+
+	- The goal would be to increase political stability in the region and accelerate the pace of nuclear disarmament.
+
++ dishonour
+> (v)to refuse to keep an agreement or promise
+
+	- The government has been accused of dishonouring its pledge to upgrade London's underground network.
+
++ pledge
+> (n)s serious promise or agreement, especially one made publicly or officially.</br>
+> (v)to make a formal, usually public, promise that you will do something, promise.
+
+	- the government's pledge to make no deals with terrorists
+	- Eisenhower fulfilled his election pledge to end the war.
+	- The new governor pledged to reduce crime.
+	- He pledged his cooperation.
+
++ evade
+> (v)to avoid talking about something, especially because you are trying to hide something.</br>
+> (v)to not do or deal with something that you should do</br>
+> (v)to avoid paying money that you ought to pay, for example tax.
+
+	- I could tell he was trying to evade the issue.
+	- The minister evaded the question.
+	- You can't go on evading your responsibilities in this way.
+	- Employers will always try to find ways to evade tax.
+
++ patchwork
+> (n)a type of sewing in which many coloured squares of cloth are stitched together to make one large piece</br>
+> (n)something that is made up of a lot of different things
+
+	- beds covered in patchwork quilts
+	- a patchwork of woods and fields, typical of the English countryside
+	- The area was a patchwork of local industries.
+
++ defy
+> (v)to refuse to obey a rule or law, or refuse to do what someone in authority tells you to do, disobey</br>
+> (v)defy description/analysis/belief etc: to be almost impossible to describe or understand
+
+	- This was my first (and last) time that I dared to defy my mother.
+	- The beauty of the scene defies description
+
++ stake
+> at stake: if someething is at stake, it is being risked and might be lost or damaged if you are not successful.</br>
+> (n)the stakes involved in in a contest or a risky action are the things that can be gained or lost</br>
+> (v)if you stake something such as your money or your reputation on the result of something, you risk your money or reputationo on it.</br>
+> (n)if you have a stake in a business, you have invested money in it.</br>
+> have a stake in sth: if you have a stake in something, you will get advantages if it's successful, and you feel you have an important connection with it.
+
+	- The tension was naturally high for a game with so much at stake.
+	- The game was usually play for high stakes between two large groups.
+	- He has staked his political future on an election victory.
+	- He holds a 51% stake in the firm.
+	- Young people don't feel they have a stake in the country's future.
+
++ laureate
+> (n)someone who has been given an important prize or honour, especially the nobel prize
+
+	- Nigeria's Nobel laureate, Wole Soyinka.
+
++ hardline
+> (adj)firm and uncompromising
+
+	- a hardline politician
+
++ rally
+> (n)a large public meeting, especially one that is held outdoors to support a political idea, protest etc.</br>
+> (v)to come together, or to bring people together, to support an idea, a political party etc.</br>
+> (v)to return to a better condition
+
+	- 5,000 people held an anti-nuclear rally
+	- We decided to hold a rally to put pressure on the government.
+	- The general rallied his forces to defend the town.
+	- The president has called on the people to rally behind the government.
+	- The nurse said my mother had rallied after a poor night.
+	- The team played badly in the first half of the game but rallied in the second.
+
++ clamp
+> (v)to hold two things together using a clamp</br>
+> (v)to put or hold something in a position so that it cannot move</br>
+> (v)to put limits on what some is allowed to do</br>
+> (v)clamp down: to take firm action to stop a particular type of crime
+
+	- She clamped her hands over her ears.
+	- The President clamped sanctions on the island after the bomb attack.
+	- The police are clamping down on drink-driving offenders.
+
++ teamster
+> (n)someone whose job is to drive a truck
+
++ egregious
+>(adj)extremely bad in a way that is very noticeable.
+
+	- the most egregious abuses of human rights
+	- It was an egregious error for a statesman to show such ignorance.
+
++ ignorant
+> (adj)not knowing facts or information that you ought to know
+
+	- Political historians are often rather ignorant of economics.
+	- an ignorant and uneducated man
+
++ resort
+> (n)last/final resort: what you will do if everything else fails</br>
+> (v)resort to: to do something bad, extreme, or difficult because you cannot think of any other way to deal with a problem
+	
+	- Drug treatment should only be used as a last resort.
+	- Nuclear weapons should be used only as a last resort.
+	- Officials fear that extremists may resort to violence.
+	- His punishing work schedule had made him resort to drugs.
+
++ constituent
+> (n)one of the substances or things that combine to form something</br>
+> (n)someone who votes in a particular area</br>
+> (adj)being one of the parts of something
+
+	- Oxygen is a constituent of air.
+	- Let's look at the constituent parts of this sentence.
+	- the EU and its constituent members
+
++ superfluous
+> (adj)more than is needed or wanted, unnecessary
+
+	- a modern building with no superfluous decoration
