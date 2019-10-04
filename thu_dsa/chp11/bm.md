@@ -112,6 +112,7 @@ int match(char* text, char* pattern){
 		j = m - 1;
 	}
 	delete [] bc;
+	delete [] gs;
 	return i;
 }
 ```

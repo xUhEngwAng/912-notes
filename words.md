@@ -1001,7 +1001,7 @@ Some Words
 
 + pledge
 > (n)s serious promise or agreement, especially one made publicly or officially.</br>
-> (v)to make a formal, usually public, promise that you will do something, promise.
+> (v)to make a formal, usually public promise that you will do something, promise.
 
 	- the government's pledge to make no deals with terrorists
 	- Eisenhower fulfilled his election pledge to end the war.
@@ -1034,14 +1034,14 @@ Some Words
 	- The beauty of the scene defies description
 
 + stake
-> at stake: if someething is at stake, it is being risked and might be lost or damaged if you are not successful.</br>
+> at stake: if something is at stake, it is being risked and might be lost or damaged if you are not successful.</br>
 > (n)the stakes involved in in a contest or a risky action are the things that can be gained or lost</br>
-> (v)if you stake something such as your money or your reputation on the result of something, you risk your money or reputationo on it.</br>
+> (v)if you stake something such as your money or your reputation on the result of something, you risk your money or reputation on it.</br>
 > (n)if you have a stake in a business, you have invested money in it.</br>
 > have a stake in sth: if you have a stake in something, you will get advantages if it's successful, and you feel you have an important connection with it.
 
 	- The tension was naturally high for a game with so much at stake.
-	- The game was usually play for high stakes between two large groups.
+	- The game was usually played for high stakes between two large groups.
 	- He has staked his political future on an election victory.
 	- He holds a 51% stake in the firm.
 	- Young people don't feel they have a stake in the country's future.
