@@ -39,7 +39,18 @@
 int match(char* text, char* pattern){
 	int *bc;
 	makeBC(text, &bc);
-	......
+	int m = strlen(pattern), n = strlen(text);
+
+	int i, j;
+	for(i = 0, j = m - 1;i + j < n;){
+		while((j >= 0) && (pattern[j] == pattern[i + j])) --j;
+		if(j < 0) break;
+		//else
+		i += (bc[text[i + j]] < j? j - bc[text[i + j]]: 1);
+		j = m - 1;
+	}
+	delete [] bc;
+	return i;
 }
 ```
 
@@ -83,7 +94,29 @@ void makeBC(char* const pattern, int* bc){
 
 ![gs_case2](gs_case2.png)
 
-和`bc`算法和`kmp`算法一样，如果这样的对齐位置有多个，应该取出其中移动距离最短的一个，从而不会错过其他的对齐位置。并且仿照`bc`策略和`kmp`算法的思想，可以预先构造一个`gs`表，其中`gs[i]`表示在第`i`个位置比对失败后，按照`好后缀策略`应该采取的位移量。需要指出的是，`gs`表是只依赖于模式串`P`本身的，这是因为和`kmp`类似，文本串的相关字符已经全部和模式串匹配了。以下就主要讨论如何高效地构造`gs`表，而这个问题非常复杂，我只能尽量......
+和`bc`算法和`kmp`算法一样，如果这样的对齐位置有多个，应该取出其中移动距离最短的一个，从而不会错过其他的对齐位置。并且仿照`bc`策略和`kmp`算法的思想，可以预先构造一个`gs`表，其中`gs[i]`表示在第`i`个位置比对失败后，按照`好后缀策略`应该采取的位移量。这样，就可以通过`bc`表和`gs`表把两个策略结合起来，具体说来，由于两个策略都是给出可能匹配的必要条件，因此值得对齐的位置一定同时满足这两个必要条件，在一次匹配失败后，可以同时查询`gs[i]`和`bc[i]`，并且选择它们给出的移动距离的最大值，来作为最终的移动距离，具体的代码如下：
+
+```c
+int match(char* text, char* pattern){
+	int *bc, *gs;
+	makeBC(text, &bc);
+	gs = buildGS(pattern);
+	int m = strlen(pattern), n = strlen(text);
+
+	int i, j;
+	for(i = 0, j = m - 1;i + j < n;){
+		while((j >= 0) && (pattern[j] == pattern[i + j])) --j;
+		if(j < 0) break;
+		//else
+		i += MAX(gs[j], j - bc[text[i + j]]);
+		j = m - 1;
+	}
+	delete [] bc;
+	return i;
+}
+```
+
+需要指出的是，`gs`表是只依赖于模式串`P`本身的，这是因为和`kmp`类似，文本串的相关字符已经全部和模式串匹配了。以下就主要讨论如何高效地构造`gs`表，而这个问题非常复杂，我只能尽量......
 
 ### gs表的构造
 
@@ -216,3 +249,4 @@ int* buildSS(char* P){
 ```
 
 可以注意到，上面的代码中也是含有两重循环，但是由于`lo`和`j`都至多减少到零，而每一次循环都会执行`--j`或者`--lo`，因此循环至多执行`O(m)`次，其时间复杂度仍然是`O(m)`。
+
