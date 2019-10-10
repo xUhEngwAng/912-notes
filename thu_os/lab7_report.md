@@ -126,7 +126,7 @@ static __noinline void __up(semaphore_t *sem, uint32_t wait_state) {
 
 在`ucore`中，是使用`AND`信号量来实现哲学家就餐问题的，关于哲学家就餐问题和`AND`信号量，在[哲学家就餐问题及其实现](philosopher.md)中已经有过了描述和伪代码实现。这里就不再赘述，只是把代码贴在下面：
 
-```
+```c
 int state_sema[N]; /* 记录每个人状态的数组 */
 /* 信号量是一个特殊的整型变量 */
 semaphore_t mutex; /* 临界区互斥 */

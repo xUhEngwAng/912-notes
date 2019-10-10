@@ -659,7 +659,7 @@ Some Words
 	- Thousands of ex-army officers have found lucrative jobs in private security firms.
 
 + upstart
-> (n)someone who behaves as it they were more important than they really are and who shows a lack of respect towards people who are more experienced and or older.
+> (n)someone who behaves as if they were more important than they really are and who shows a lack of respect towards people who are more experienced and or older.
 
 	- Many prefer a familiar authority figure to a yound upstart.
 
@@ -943,7 +943,7 @@ Some Words
 + accountable
 > (adj)responsible for the effects of your actions and willing to explain or be criticised for them
 
-	- The hospital should be held accountable for the quality of care if gives.
+	- The hospital should be held accountable for the quality of care it gives.
 	- Managers must be accountable to their decisions.
 	- The government should be accountable to all the people of the country.
 
@@ -978,7 +978,7 @@ Some Words
 > (v)used to say that someone dislikes someone or something very much</br>
 > (v)abide by: to accept and obey a decision, agreement etc, even though you may not agree with it
 
-	- I can's abide that man -- he's so self-satisfied.
+	- I can't abide that man -- he's so self-satisfied.
 	- You have to abide by the referee's decision.
 
 ## 3rd, October
@@ -1071,7 +1071,7 @@ Some Words
 + clamp
 > (v)to hold two things together using a clamp</br>
 > (v)to put or hold something in a position so that it cannot move</br>
-> (v)to put limits on what some is allowed to do</br>
+> (v)to put limits on what someone is allowed to do</br>
 > (v)clamp down: to take firm action to stop a particular type of crime
 
 	- She clamped her hands over her ears.
@@ -1115,3 +1115,13 @@ Some Words
 > (adj)more than is needed or wanted, unnecessary
 
 	- a modern building with no superfluous decoration
+
+## 4th, October
+
++ sanction
+> (n)official orders or laws stopping trade, communication etc with another country, as a way of forcing its leaders to make political changes</br>
+> (n)official permission, approval, or acceptance
+
+	- a resolution to impose sanctions on DPRK
+	- the threat of trade sanctions
+	- a newspaper run by citizens without the sanction of the government
