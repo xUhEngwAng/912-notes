@@ -1125,3 +1125,87 @@ Some Words
 	- a resolution to impose sanctions on DPRK
 	- the threat of trade sanctions
 	- a newspaper run by citizens without the sanction of the government
+
+## 11th, October
+
++ tone
+> (n)how firm and strong your muscles or skin are
+
+	- A regular brisk walk will improve muscle tone.
+
++ brisk
+> (adj)quick and full of energy</br>
+> (adj)quick, pratical, and showing that you want to get things done quickly</br>
+> (adj)trade or business that is brisk is very busy, with a lot of products being sold</br>
+> (adj)weather that is brisk is cold and clear
+
+	- They set off at a brisk pace.
+	- Her tone of voice is brisk.
+	- The public bar was already doing a brisk trade.
+	- a typically brisk winter's day on the south coast
+
++ conceivable
+>(adj)able to be believed or imagined
+
+	- It is conceivable that you may get full compensation, but it's not likely.
+	- We were discussing the problems from every conceivable angle.
+	- Conceivably, interest rates could rise very high indeed.
+
++ subconscious
+>(adj)subconscious feelings, desires, etc are hidden in your mind and affect your behavious, but you do not know that you have them
+
+	- a subconscious fear of failure
+	- Subconciously, he blames himself for the accident.
+
++ acclaim
+> (v)to praise someone or something publicly.</br>
+> (n)public praise for something or someone
+
+	- His work was acclaimed by art critics.
+	- Their recordings have won great acclaim.
+
++ hooray
+> shouted when you are very glad about something
+
++ sober
+> (adj)not drunk</br>
+> (adj)serious, and thinking or making you think carefully about things.</br>
+> (adj)plain and not at all brightly coloured
+
+	- He's a nice guy when he's sober.
+	- a sober, hard-working yound man
+	- It was a room filled with sober faces.
+	- He dressed in sober grey suits.
+
++ hitherto
+> (adv)up to this time
+
+	- a species of fish hitherto unknown in the west
+
++ damn sb with faint praise
+> (v)to praise someone so slightly that it suggests you do not really adimre them
+
+	- He was so jealous of his colleague's talent that he tried to damn him with faint praise.
+
++ inferior
+> (adj)not good, or as good as someone or something else, opp superior</br>
+> (adj)lower in rank
+
+	- I felt inferior among all those academics.
+	- wine of inferior quality
+	- Their performance was inferior to that of other teams.
+	- an inferior court of law
+	- He refused to accept a job of inferior status.
+
++ philharmonic
+> used in the names of musical groups, especially orchestras
+
+	- He will condcuct the Berlin Philharmonic in the final concert of the season.
+	- the Vienna Philharmonic Orchestra.
+
++ vibrant
+> (adj)full of activity or energy in a way that is exciting and attractive, lively</br>
+> (adj)a vibrant colour is bright and strong
+
+	- Tom felt himself being drawn towards her vibrant personality.
+	- a painting full of vibrant reds and blues
