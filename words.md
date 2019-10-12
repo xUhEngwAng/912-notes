@@ -1209,3 +1209,145 @@ Some Words
 
 	- Tom felt himself being drawn towards her vibrant personality.
 	- a painting full of vibrant reds and blues
+
+## 12th, October
+
++ cloak
+>(v)to deliberately hide facts, feelings etc so that people do not see or understand them -- used especially in news report</br>
+>(v)to cover something, for example with darkness or snow</br>
+>(n)
+
+	- He has always kept his love affairs cloaked in secrecy.
+	- hills cloaked in mist
+	- prejustice hiding under the cloak of religion
+	- The political party is used as a cloak for terrorist activities.
+
++ pronouncement
+> (n)an official public statement
+
+	- the Pope's last pronouncement on birth control
+	- the President's lastest pronouncement about the protection of minorities
+
++ turbulent
+> (adj)a turbulent situation or period of time is one in which there are a lot of sudden changes</br>
+> (adj)turbulent air or water moves around a lot
+
+	- the turbulent times of the French Revolution
+	- He has had a turbulent political career.
+	- the dark turbulent waters of the river
+
++ abound
+> (v)to exist in very large numbers
+
+	- Stories abound about when he was in charge.
+	- The forests abound with deer, birds, and squirrels.
+
++ deputy
+> (n)someone who is directly below another person in rank, and who is officially in charge when that person is not there
+
+	- the deputy Secretary of State
+
++ turnover
+> (n)the amount of business done during a particular period, profit</br>
+> (n)the rate at which people leave an organization and are replaced by others
+
+	- The company had a turnover of $3.8 million.
+	- Short-term contracts increase staff turnover.
+	- Low pay accounts for the high turnover.
+
++ spur
+> (n)a fact or event that makes you try harder to do something</br>
+> (n)a sharp pointed object on the heel of a rider’s boot which is used to encourage a horse to go faster</br>
+> (v)to encourage someone or make them want to do something</br>
+> (v)to make an improvement or change happen faster, encourage
+
+	- We would often decide what to play on the spur of the moment.
+	- a belief in competition as a spur to efficiency
+	- The band were spurred on by the success of their last two singles.
+	- Lower taxes would spur investment and help economic growth.
+
++ leverage
+> (n)the action or advantage of using a lever</br>
+> (n)influence that you can use to make people do what you want</br>
+> (v)to use borrowed money to buy an investment or company</br>
+> (v)to use something you already have in order to achieve something new or better
+
+	- If the United Nations had more troops in the area, it would have greater leverage.
+	- We can gain a market advantage by leveraging our network of partners.
+	- He might feel that leveraging the company at a time when he sees tremendous growth opportunities would be a mistake. 
+
++ infancy
+> (n)the period of a child's life before they can walk or talk</br>
+> (n)the time when something is just starting to be developed
+
+	- In the past, many children died in infancy.
+	- Computing science was still in its infancy.
+
++ harassment
+> (n)when someone behaves in an unpleasant or threatening way towards you
+
+	- African Americans have been complaining about police harassment for years.
+	- Political paries are banned, and harassment of dissidents is commonplace.
+
++ allegation
+> (n)a statement that someone has done something wrong or illegal, but that has not been proved.
+
+	- Mr Singh has strongly denied the allegations of sexual harassment.
+	- A committee will investigate the allegations of racial discrimination.
+
++ stakeholder
+> (n)someone who has invested money into something, or who has some important connection with it, and therefore is affected by its success or failure
+
+	- Citizens should be stakeholders in the society they live in.
+
++ boycott
+> (v)to refuse to buy something, use something, or take part in something as a way of protesting
+
+	- We boycott all products tested on animals.
+
++ alleviate
+> (n)to make something less painful or difficult to deal with
+
+	- measures to alleviate poverty
+	- a new medicine to alleviate the symptoms of flu
+
++ kitten
+> (n)a yound cat
+
++ madonna
+> (n)Mary, the mother of Jesus, in the Christian religion
+
+	- a picture of the Modonna
+
++ newsstand
+> (n)a place on a street where newspapers and magazines are sold
+
+	- Eight new national newspapers have appeared on the newsstands since 1981.
+
++ procreate
+> (n)to produce children or bady animals, reproduce
+
+	- Most yound women feel a biological need to procreate.
+	- Early marriage and procreation are no longer discouraged there.
+
++ glamorous
+> (adj)attractive, exciting, and related to wealth and success
+
+	- She led an exciting and glamorous life.
+	- the most glamorous neighbourhood in the city
+
++ retrospect
+> (n)thinking back to a time in the past, especially with the advantage of knowing more now than you did then
+
+	- In retrospect, I wonder if we should have done more.
+
++ soothe
+> (v)to make someone feel calmer and less anxious, upset or angry</br>
+> (v)to make a pain become less severe, or slowly disappear</br>
+> (adj)soothing
+
+	- Lucy soothed the baby by rocking it in her arms.
+	- She made a cup of tea to soothe her nerves.
+	- Massage can gently soothe away your aches and pains.
+
+
