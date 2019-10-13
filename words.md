@@ -1349,5 +1349,3 @@ Some Words
 	- Lucy soothed the baby by rocking it in her arms.
 	- She made a cup of tea to soothe her nerves.
 	- Massage can gently soothe away your aches and pains.
-
-
