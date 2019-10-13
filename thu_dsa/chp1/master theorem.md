@@ -5,7 +5,7 @@ Conclusion on Master Theorem
 
 In the analysis of algorithms, `Master Theorem` provides a simple way to compute the time complexity(using big O notation) for `divide-and-conquer` recurrences.
 
-We all know that for `divide-and-conquer` algorithms, there are two way to analysis their time complexity, i.e. _recursion track_ and _recurrence equation_. Master Theorem is a way to compute such time complexity using both the two way: it tries to solve the _recurrence equation_ by means of _recusion track_.
+We all know that for `divide-and-conquer` algorithms, there are two ways to analyze their time complexity, i.e. _recursion track_ and _recurrence equation_. Master Theorem is a way to compute such time complexity using both the two way: it tries to solve the _recurrence equation_ by means of _recusion track_.
 
 ## Introduction
 
@@ -71,7 +71,7 @@ $$
 > Case 3: q > 1
 
 $$
-T(n) = n^d(1 + q + q^2 + ... + q^k) = n^d * \frac{1-q^{k+1}}{1-q} = O(n^d * q^k = O(a^{log_{b}^{n}})
+T(n) = n^d(1 + q + q^2 + ... + q^k) = n^d * \frac{1-q^{k+1}}{1-q} = O(n^d * q^k) = O(a^{log_{b}^{n}})
 $$
 
 To further simplify this, we need to apply the following equation:
