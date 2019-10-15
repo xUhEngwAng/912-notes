@@ -1200,7 +1200,7 @@ Some Words
 + philharmonic
 > used in the names of musical groups, especially orchestras
 
-	- He will condcuct the Berlin Philharmonic in the final concert of the season.
+	- He will conduct the Berlin Philharmonic in the final concert of the season.
 	- the Vienna Philharmonic Orchestra.
 
 + vibrant
