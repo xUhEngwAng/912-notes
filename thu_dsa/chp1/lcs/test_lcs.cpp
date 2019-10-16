@@ -75,4 +75,3 @@ void test_lcslenRe(){
 	cout << "Recursive lcs test passed." << endl;
 	cout << "Running time: " << end - begin << endl;
 }
-

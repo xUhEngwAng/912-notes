@@ -114,5 +114,3 @@ string lcsIt(string one, string two, int len1, int len2){
 	}
 	return lcs;
 }
-
-
