@@ -1349,3 +1349,62 @@ Some Words
 	- Lucy soothed the baby by rocking it in her arms.
 	- She made a cup of tea to soothe her nerves.
 	- Massage can gently soothe away your aches and pains.
+
+## 18th, October
+
++ econometrics
+> (n)the application of mathematical and statistical techniques to economic problems and theories
+
++ mischievous
+> (adj)someone who is mischievous likes to have fun, especially by playing tricks on people or doing things to annoy or embarrass them.
+
+	- Their sons are noisy and mischievous.
+	- Gabby looked at him with a mischievous grin.
+	- There was a mischievous gleam in her eyes.
+
++ allege
+> (v)to say that something is true or that someone has done something wrong, although it has not been proved.
+
+	- It was alleged that the policeman had accepted bribes.
+	- The prosecution alleged that the man had been responsible for an act of terrorism.
+	- The water is alleged to be polluted with mercury.
+
++ prosecution
+> (n)when a charge is made against someone for a crime, or when someone is judged for a crime in a court of law</br>
+> (n)the lawyers who try to prove in a court of law that someine is guilty of a crime</br>
+> (n)when you do something that is your job
+
+	- a criminal prosecution
+	- The evidence is not sufficient to bring a prosecution against him.
+	- Walters could face prosecution for his role in the robbery.
+	- the chief witness for the prosecution
+	- the prosecution of her duties
+
++ pin down
+> (v)if you try to pin something down, you try to discover exactly what, where, or when it is.
+
+	- It has taken until now to pin down it exact location.
+	- The fire department is trying to pin down the cause of Wednesday's fire.
+
++ duly
+> (adv)in the proper or expected way</br>
+> (adv)at the proper time or as expected
+
+	- Here are your travel documents, all duly signed.
+	- The Queen duly appeared on the balcony to wave to the crowds. 
+
++ shop floor
+> (n)the area in a factory where the ordinary workers do their work</br>
+> (n)the ordinary workers in a factory, not the managers
+
+	- The chairwoman started her working life on the shop floor.
+	- negotiations between the shop floor and management
+
++ be subject to
+> to have or experience a particular thing, especially something unpleasant</br>
+> only able to happen if something else happens
+
+	- Cars are subject to high domestic tax.
+	- In recent years, she has been subject to attacks of depression.
+	- We plan to go on Wednesday, subject to your approval.
+	- Moving all the books should not take long, subject to there being enough helpers.
