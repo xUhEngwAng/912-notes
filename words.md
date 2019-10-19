@@ -1408,3 +1408,42 @@ Some Words
 	- In recent years, she has been subject to attacks of depression.
 	- We plan to go on Wednesday, subject to your approval.
 	- Moving all the books should not take long, subject to there being enough helpers.
+
+## 19th, October
+
++ inexorable
+> (adj)an inexorable process cannot be stopped, unstoppable
+
+	- the inexorable decline of Britain's manufacturing industry
+	- the seemingly inexorable rise in crime
+
++ save
+> (adv)except
+
+	- She answered all the questions save one.
+	- Little is known about his early life, save that he had a brother.
+
++ headlong
+> (adj, adv)with great speed or without thinking</br>
+> (adj)moving forward with your head first
+
+	- In the headlong rush to buy houses, many people got into debt.
+	- a headlong plunge into the lake
+
++ prose
+> (n)language in its usual form, as opposed to poetry
+
+	- I've always preferred reading prose to poetry.
+
++ stylist
+> (n)a person whose job is to arrage, shape, or design something, such as a person's hair</br>
+> (n)a writer who has a good writing style and chooses the words they use very carefully
+
+	- She gave up a career as a fashion stylist to rear two daughters.
+	- She's no stylist, but she writes very exciting stories.
+
++ scale back
+> (v)to reduce something in size, amount, or production
+
+	- Sid will have to scale back his plans.
+	- Some firms may scale back their expansion plans in the region as a result of the downturn.
