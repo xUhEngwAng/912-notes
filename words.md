@@ -1447,3 +1447,76 @@ Some Words
 
 	- Sid will have to scale back his plans.
 	- Some firms may scale back their expansion plans in the region as a result of the downturn.
+
+## 20th, October
+
++ conditioning
+> (n)the process by which people or animals are trained to behave in a particular way when particular things happen.
+
+	- Social conditioning makes crying more difficult for men.
+	- Conditioning starts as soon as boys are given guns to play with and girls are given dolls.
+
++ wistful
+> (adj)thinking sadly about something you would like to have but cannot have, especially something that you used to have in the past
+
+	- a wistful smile
+	- "That's the house where I was born," she said wistfully.
+	- A child stood looking with wistful eyes at the toys in the shop window.
+
++ inconclusive
+> (adj)not giving or having a result or decision
+
+	- The medical tests were inconclusive, and will need to be repeated.
+	- The evidence is inconclusive, and no arrest is warranted.
+
++ spontaneous
+> (adj)something that is spontaneous has not been planned or organized, but happens by itself, or because you suddenly feel you want to do it.
+
+	- The crowd gave a spontaneous cheer.
+	- My spontaneous reaction was to run away.
+
++ better still
+> used to say that a particular choice would be more satisfactory
+
+	- Why don't you give her a call or, better still, go and see her?
+
++ herd
+> (n)a group of animals of one kind that live and feed together</br>
+> (n)people generally, especially when thought of as being easily influenced by others
+
+	- a herd of cattle
+	- herds of elephants
+	- You have to be an individual; it's no use running with the herd.
+
++ hawk
+> (n)a large bird that hunts and eats small birds and animals.</br>
+> (v)to try to sell goods, usually by going from place to place and trying to persuade people to buy them.
+
+	- On every street corner there were traders hawking their wares.
+
++ deride
+> (v)to make remarks or jokes that show you think someone or something is silly or useless, mock
+
+	- You shouldn't deride their efforts.
+	- The party was derided as totally lacking in ideas.
+
++ preoccupation
+> (n)a state when someone thinks or worries about something a lot, with the result that they do not pat attention to other things.</br>
+> (n)something that you give all your attention to
+
+	- the current preoccupation with sex and scandal
+	- The management's preoccupation with costs and profits resulted in a drop in quality and customer service.
+	- Their main preoccupation was how to feed their families.
+
++ superstitious
+> (adj)based on or believing in superstitions(belief based on old ideas about luck and magic rather than science and reason)
+
+	- the old superstition that walking under a ladder is unlucky
+	- A wave of superstitious fear spread among the townpeople.
+	- Jean was extremely superstitious and believed the colour green brought bad luck.
+
++ sermon
+> (n)a talk given as part of a Christian church service, usually on a religious or moral subject.
+
+	- Today's sermon was on the importance of compassion.
+	- deliver a sermon
