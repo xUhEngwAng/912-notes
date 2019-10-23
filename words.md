@@ -1501,7 +1501,7 @@ Some Words
 	- The party was derided as totally lacking in ideas.
 
 + preoccupation
-> (n)a state when someone thinks or worries about something a lot, with the result that they do not pat attention to other things.</br>
+> (n)a state when someone thinks or worries about something a lot, with the result that they do not pay attention to other things.</br>
 > (n)something that you give all your attention to
 
 	- the current preoccupation with sex and scandal
