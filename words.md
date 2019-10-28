@@ -1520,3 +1520,43 @@ Some Words
 
 	- Today's sermon was on the importance of compassion.
 	- deliver a sermon
+
+## 27th, October
+
++ independently of
+
+	- The person appointed here shall act independently of the Board.
+
++ rare bird
+> (n)an unusual person
+
+	- He's that rare bird, a bartender who doesn't drink alcohol.
+
++ bartender
+> (n)someone who makes and serves drinks in a bar
+
++ sb/sth in question
+> the person or thing that is being discussed
+
+	- I stayed at home on the night in question.
+
++ disproportionate
+> (adj)too large or small in comparison to something else, or not deserving its importance or influence
+
+	- There are disproportionate number of girls in the class.
+	- The country's great influence in the world is disproportionate to its relatively small size.
+
++ put sth down to sth
+> (v)to think that a problem or situation is caused by a particular thing
+
+	- I put the children's bad behaviour down to the fact that they were tired.
+	- She did seem rather unhappy, but I just put it down to the pressure she was under at work.
+
++ affirm
+> (v)to state something as true</br>
+> (v)to publicly show your support for an opinion or idea
+
+	- She affirmed her intention to apply for the post.
+	- The government has affirmed its commitment to equal rights.
+
++ 
