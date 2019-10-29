@@ -1559,4 +1559,67 @@ Some Words
 	- She affirmed her intention to apply for the post.
 	- The government has affirmed its commitment to equal rights.
 
-+ 
+## 28th, October
+
++ susceptible
+> (adj)easily influenced or harmed by something</br>
+> (adj)used to describe someone who is easily emotionally influenced
+
+	- These plants are particularly susceptible to frost.
+	- She isn't very susceptible to flattery.
+	- They persuade susceptible teenagers to part with their money.
+
++ psychiatrist
+> (n)a doctor who treats people suffering from mental illness.
+
++ affiliation
+> (n)a connection with a political party or religion, or with a larger organization.
+
+	- Their lack of affiliation to any particular bank allows them to give objective financial advice.
+	- The kidnappers had no affiliation with any military group.
+
++ substantial
+> (adj)large in size, value or importance
+
+	- The findings show a substantial difference between the opinions of men and women.
+	- She inherited a substantial fortune from her grandmother.
+
++ bipedal
+> (adj)walking on two legs, or relating to this movement
+
+	- He was facinated by the gaint, bipedal ape.
+	- Some dinosaurs were capable of bipedal walking.
+
++ bedrock
+> (n)the solid rock in the ground which supports all the soil above it.</br>
+> (n)the bedrock of something is the principles, ideas, or facts on which it is based.
+
+	- Mutual trust is the bedrock of a relationship.
+	- We believe in religious freedom as a bedrock principle of our democracy.
+
++ railroad
+> (v)to force something to happen or force someone to do something, especially quickly or unfairly.
+
+	- We were railroaded into signing the agreement.
+	- He more or less railroaded the rest of the Europe into recognising the new "independent" states.
+
++ substantiate
+> (v)to show something to be true, or to support a claim with facts.
+
+	- We have evidence to substantiate the allegations against him.
+	- Reports that children had been hurt have not been substantiated.
+
++ chauvinistic
+> (adj)believing or showing an unreasonable belief that your own country or race is the best or most important.</br>
+> (adj)believing that or behaving as if women are naturally less important, intelligent, or able than men.
+
+	- It is a deeply chauvinistic community where the few women who have jobs are ridiculed.
+
++ prod
+> (v)to push something or someone with your finger or with a pointed object.</br>
+> (v)to encourage someone to take action, especially when they are being slow or unwilling.
+
+	- I prodded her in the back to get her attention.
+	- She prodded the cake with her fork to see if it was cooked.
+	- He gets things done, but only after I've prodded him into doing them.
+ 

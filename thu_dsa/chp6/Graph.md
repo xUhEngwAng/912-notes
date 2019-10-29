@@ -19,8 +19,8 @@ Conclusion on Chapter Six: Graph
 + 简单通路：沿途顶点互异的通路。
 + 简单环路：除起点和终点外沿途所有顶点均互异的环路。
 
-欧拉环路：经过图中各边一次且恰好一次的环路。比如说一笔画问题。
-哈密尔顿环路：经过图中各顶点一次且恰好一次的环路。
++ 欧拉环路：经过图中各边一次且恰好一次的环路。比如说一笔画问题。
++ 哈密尔顿环路：经过图中各顶点一次且恰好一次的环路。
 
 ## 图的表示
 
@@ -66,7 +66,7 @@ void Graph<Tv, Te>::BFS(int x, int& clock){
 	Q.enqueue(x);
 	while(!Q.empty()){
 		x = Q.dequeue();
-		for(int w = firstNeighbor(x); w != -1; w = nextNeighbor(x, w))
+		for(int w = firstNeighbor(x); w != -1; w = nextNeighbor(x, w)){
 			if(status(w) == UNDISCOVERED){
 				status(w)  = DISCOVERED;
 				dtime(w)   = ++clock;
@@ -75,8 +75,9 @@ void Graph<Tv, Te>::BFS(int x, int& clock){
 				Q.enqueue(w);
 			}
 			else type(x, w) = CROSS;
+		}
+		status(x) = VISITED;
 	}
-	status(x) = VISITED;
 }
 ```
 
@@ -163,7 +164,7 @@ DFS的时间复杂度也与BFS一致。
 
 根据各个顶点的发现时间`dtime`和访问时间`ftime`，可以对顶点进行分类，获得顶点之间的祖先与后代关系信息。
 
-记`active(u) = [dtime(x), ftime(x)]`为顶点x在有向图G中的活跃期，括号引理即
+记`active(u) = [dtime(u), ftime(u)]`为顶点`u`在有向图G中的活跃期，括号引理即
 
 + 若$active(u) \subseteq active(v)$，则u是v的后代。
 + 若$active(u) \supseteq active(v)$，则u是v的祖先。
