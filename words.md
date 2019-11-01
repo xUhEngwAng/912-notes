@@ -1524,6 +1524,7 @@ Some Words
 ## 27th, October
 
 + independently of
+> 
 
 	- The person appointed here shall act independently of the Board.
 
