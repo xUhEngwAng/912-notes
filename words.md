@@ -1623,4 +1623,56 @@ Some Words
 	- I prodded her in the back to get her attention.
 	- She prodded the cake with her fork to see if it was cooked.
 	- He gets things done, but only after I've prodded him into doing them.
+
+## 4th, November
+
++ plea
+> (n)an urgent and emotional request</br>
+> (n)the answer that a person gives in court when they have been accused of committing a crime.
+
+	- They made a desperate plea for help.
+	- The president has made an emotional plea for the killing to stop.
+	- The prisoner entered a plea of not guilty.
+
++ sovereign
+> (n)a king or queen</br>
+> (adj)having the highest power or being completely independent.
+
+	- Sovereign power is said to lie with the people in some countries, and with a ruler in others.
+	- We must respect the rights of sovereign states to conduct their own affairs.
+
++ viable
+> (adj)able to work as intended or able to succeed.
+
+	- In order to make the company viable, it will unfortunately be necessary to reduce staffing levels.
+	- She's going to have to cut costs to maintain the viability of her business.
+
++ regime
+> (n)a particular government or a system or method of government.</br>
+> (n)a particular way of operating or organising a business, etc.
+
+	- the collapse of the Fascist regime at the end of the war
+	- The old, corrupt, totalitarian regime was overthrown.
+	- The regime in this office is hard work and more hard work.
+
++ tribute
+> (n)something that you say, or give that shows your respect and admiration for someone, especially on a formal occasion.
+
+	- Tributes have been pouring in from all over the world for the famous actor who died yesterday.
+
++ totalitarian
+> (adj)of or being a political system in which those in power have complete control and do not allow people freedom to oppose them.
+
+	- a totalitarian regime
+
++ egalitarian
+> (adj)believing that all people are equally important and should have the same rights and opportunities in life.
+
+	- I still believe in the notion of an egalitarian society
+
++ temper
+> (v)to make something less strong, extreme, etc.
+
+	- My enthusiasm for the venture was tempered by my knowledge of the hard work that would be involved.
+	- I learned to temper my criticism.
  
