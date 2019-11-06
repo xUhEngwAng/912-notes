@@ -1371,7 +1371,7 @@ Some Words
 
 + prosecution
 > (n)when a charge is made against someone for a crime, or when someone is judged for a crime in a court of law</br>
-> (n)the lawyers who try to prove in a court of law that someine is guilty of a crime</br>
+> (n)the lawyers who try to prove in a court of law that someone is guilty of a crime</br>
 > (n)when you do something that is your job
 
 	- a criminal prosecution
