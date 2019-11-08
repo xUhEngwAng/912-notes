@@ -85,7 +85,7 @@ void QuadList<T>::insert_before_above(QuadNodePosi(T) p, T const & entry, QuadNo
 
 template <typename T>
 void QuadList<T>::insert_after_above(QuadNodePosi(T) p, T const & entry, QuadNodePosi(T) base) {
-	insert_before_above(p->prev, entry, base);
+	insert_before_above(p->next, entry, base);
 }
 
 template <typename T>

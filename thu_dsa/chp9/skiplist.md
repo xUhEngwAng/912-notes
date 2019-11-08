@@ -68,17 +68,17 @@ n + n / 2 + n / 4 + ...... + 2 + 1 < 2n = O(n)
 ### 跳转表的搜索算法
 
 实际上，在上面地铁那里已经叙述过跳转表的搜索算法了，即首先坐上层的大站车快速到达距离小站最近的位置，然后换乘底层的小站车。用算法的语言描述，即自上而下，自左而右地搜索，对于每一层的列表，从左至右遍历它的每一个元素，直到发现第一个大于搜索值`key`的元素，然后后退一步，如果当前节点的`key`值等于搜索值，则成功返回，否则表示应该在这里下车换乘了。如果当前列表还不是最底层，则切换到下一层的列表，并且重复上面的操作，直到查找成功，或者因为不存在该`key`值而查找失败。
-这里的搜索算法将基于遵循前面列表的约定，即总是返回不大于`key`值节点中的最靠右者。跳转表的搜索算法实现如下：
+这里的搜索算法将基于遵循前面列表的约定，即返回总是某一层次中不大于`key`值节点中的最靠右者。跳转表的搜索算法实现如下：
 
 ```cpp
 template <typename K, typename V>
 QuadNode<entry<K, V>>* SkipList<K, V>::skipSearch(K key) {
 	QuadNode<entry<K, V>>* qnode = last()->val->first();			//the first quadlist node of the last quadlist
 	while (1) {	
-		while (qnode->entry.key < key) qnode = qnode->next;
+		while (qnode->entry.key <= key) qnode = qnode->next;
+		qnode = qnode->prev;
 		if (qnode->entry.key == key) return qnode;
 		//else
-		qnode = qnode->prev;
 		if (qnode->below == nullptr) return qnode;
 		//else
 		qnode = qnode->below;
@@ -90,7 +90,7 @@ QuadNode<entry<K, V>>* SkipList<K, V>::skipSearch(K key) {
 
 下面可以严格地证明横向跳转的次数的期望等于跳转表的层数`O(h)`。
 
-考虑搜索过程的逆过程，即从底层列表向右向上移动，该移动过程可以描述为：在某一层不断向右移动，直到发现了第一个向上生长的节点，或者直到到达第一个可以换乘的大站。设某一层横向移动的次数为`K`，有
+考虑搜索过程的逆过程，即从底层列表向左向上移动，该移动过程可以描述为：在某一层不断向左移动，直到发现了第一个向上生长的节点，或者直到到达第一个可以换乘的大站。设某一层横向移动的次数为`K`，有
 
 $$
 \begin{aligned}
@@ -107,11 +107,11 @@ $$
 
 ## 跳转表的插入算法
 
-为了将一个新的词条插入到跳转表中，首先需要调用一次搜索算法来找到正确的插入位置，得益于搜索算法的语义，如果的确查找到了要新插入的关键码，则返回的位置必然是相同关键码的词条中最左侧的一个，应该将新的词条插入到它的左侧；如果没有找到新的关键码，则返回的是不大于该关键码词条中最右侧的一个，此时应该将新的词条插入到它的右侧。
+为了将一个新的词条插入到跳转表中，首先需要调用一次搜索算法来找到正确的插入位置，得益于搜索算法的语义，返回的位置必然某一层次中是不大于待插入关键码的最右词条，因此无论该关键码是否已经在跳转表中存在，都可以简单地插入到该词条的右侧。
 
 在定位了插入位置后，为了将新的词条插入，首先需要将插入位置指针强制转移到底层，从最底层开始插入，完成实质性的插入操作只需要修改前后词条的指针即可。此后，还需要保证`生长概率逐层减半`，可以通过一个随机数来实现，如果生成的随机数是奇数（或偶数），则继续在上一层插入，这个过程不断重复，直到生成的随机数表示不继续插入。
 
-为了将新的词条在上一层插入，需要找到该词条在上一层的前驱或者后继节点。一种策略是遍历上一层的全部节点，直到找到新词条的前驱或者后继，其时间复杂度为`O(n)`，毋庸置疑，这种策略的开销太高了。为了快速地找到新词条的后继，可以沿用搜索过程中的跳转策略，具体说来就是在当前层次继续向后遍历，直到发现第一个向上生长的节点，在这里向上层跳转，就是新词条的后继节点了。在前面也已经证明过了，这种遍历进行次数的期望仅为`O(1)`，因此插入的时间复杂度，主要是消耗在了`search`过程中，其总体的时间复杂度也是`O(logn)`。插入过程的具体代码如下：
+为了将新的词条在上一层插入，需要找到该词条在上一层的前驱或者后继节点。一种策略是遍历上一层的全部节点，直到找到新词条的前驱或者后继，其时间复杂度为`O(n)`，毋庸置疑，这种策略的开销太高了。为了快速地找到新词条的前驱（或者后继），可以沿用搜索过程中的跳转策略，具体说来就是在当前层次继续向前遍历，直到发现第一个向上生长的节点，在这里向上层跳转，就是新词条的前驱节点了。在前面也已经证明过了，这种遍历进行次数的期望仅为`O(1)`，因此插入的时间复杂度，主要是消耗在了`search`过程中，其总体的时间复杂度也是`O(logn)`。插入过程的具体代码如下：
 
 ```cpp
 template <typename K, typename V>
@@ -122,8 +122,7 @@ bool SkipList<K, V>::put(K key, V value){
 	QuadList<entry<K, V>> *newlist;
 
 	while (qnode->below != nullptr) qnode = qnode->below;
-	if (qnode->entry.key != key) qnode = qnode->next;
-	qlist->val->insert_before_above(qnode, entry<K, V>(key, value));
+	qlist->val->insert_after_above(qnode, entry<K, V>(key, value));
 	if (next(qlist) == nullptr) {
 		newlist = new QuadList<entry<K, V>>();
 		newlist->sethead(entry<K, V>(MININT, 0));
@@ -133,11 +132,11 @@ bool SkipList<K, V>::put(K key, V value){
 	}
 
 	while(rand() % 2 == 0){
-		belowNode = qnode->prev;
+		belowNode = qnode->next;
 		qlist = next(qlist);
-		while (qnode->above == nullptr) qnode = qnode->next;
+		while (qnode->above == nullptr) qnode = qnode->prev;
 		qnode = qnode->above;
-		qlist->val->insert_before_above(qnode, entry<K, V>(key, value), belowNode);
+		qlist->val->insert_after_above(qnode, entry<K, V>(key, value), belowNode);
 		if (next(qlist) == nullptr) {
 			newlist = new QuadList<entry<K, V>>();
 			newlist->sethead(entry<K, V>(MININT, 0));

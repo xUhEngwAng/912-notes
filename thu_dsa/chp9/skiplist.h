@@ -7,6 +7,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include <cassert>
 #include <ctime>
 
 using std::cerr;
@@ -59,10 +60,10 @@ template <typename K, typename V>
 QuadNode<entry<K, V>>* SkipList<K, V>::skipSearch(K key) {
 	QuadNode<entry<K, V>>* qnode = last()->val->first();			//the first quadlist node of the last quadlist
 	while (1) {	
-		while (qnode->entry.key < key) qnode = qnode->next;
+		while (qnode->entry.key <= key) qnode = qnode->next;
+		qnode = qnode->prev;
 		if (qnode->entry.key == key) return qnode;
 		//else
-		qnode = qnode->prev;
 		if (qnode->below == nullptr) return qnode;
 		//else
 		qnode = qnode->below;
@@ -75,6 +76,7 @@ template <typename K, typename V>
 V SkipList<K, V>::get(K key){
 	QuadNode<entry<K, V>>* res;
 	res = skipSearch(key);
+	//assert(res->next->entry.key > key);
 	if(res->entry.key != key){
 		cerr << "key:" << key << "is not in SkipList!" << endl;
 	}
@@ -89,8 +91,7 @@ bool SkipList<K, V>::put(K key, V value){
 	QuadList<entry<K, V>> *newlist;
 
 	while (qnode->below != nullptr) qnode = qnode->below;
-	if (qnode->entry.key != key) qnode = qnode->next;
-	qlist->val->insert_before_above(qnode, entry<K, V>(key, value));
+	qlist->val->insert_after_above(qnode, entry<K, V>(key, value));
 	if (next(qlist) == nullptr) {
 		newlist = new QuadList<entry<K, V>>();
 		newlist->sethead(entry<K, V>(MININT, 0));
@@ -100,11 +101,11 @@ bool SkipList<K, V>::put(K key, V value){
 	}
 
 	while(rand() % 2 == 0){
-		belowNode = qnode->prev;
+		belowNode = qnode->next;
 		qlist = next(qlist);
-		while (qnode->above == nullptr) qnode = qnode->next;
+		while (qnode->above == nullptr) qnode = qnode->prev;
 		qnode = qnode->above;
-		qlist->val->insert_before_above(qnode, entry<K, V>(key, value), belowNode);
+		qlist->val->insert_after_above(qnode, entry<K, V>(key, value), belowNode);
 		if (next(qlist) == nullptr) {
 			newlist = new QuadList<entry<K, V>>();
 			newlist->sethead(entry<K, V>(MININT, 0));
