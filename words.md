@@ -1675,4 +1675,103 @@ Some Words
 
 	- My enthusiasm for the venture was tempered by my knowledge of the hard work that would be involved.
 	- I learned to temper my criticism.
+
+## 8th, November
+
++ quirk
+> (n)an unusual habit or part of someone's personality, or something that is strange and unexpected
+
+	- You have to get used to other people's quirks and foibles.
+	- By some strange quirk, we ended up on the same train.
+
++ foible
+> (n)a small fault or foolish habit
+
+	- We all have our little foibles.
+
++ astrological
+> (adj)involving or relating to astrology(the belief that the positions of the sun, moon, planets, and stars affect people's lives and character)
+
+	- He likes to talk about his astrological sign, which is Leo.
+
++ confer
+> (v)to exchange ideas on a particular subject, ofter in order to reach a decision on what action to take.</br>
+> (v)to give an official title, honour or advantage to someone
+
+	- I need some time to confer with my lawyer.
+	- An honorary doctorate was conferred on him by Columbia University.
+	- Certain astrological signs confer superior soccer skills.
+
++ doctorate
+> (n)the highest degree from a university
+
+	- She has a doctorate in physics from Yale.
+
++ stamina
+> (n)the physical or mental strength to do something that might be difficult and will take a long time.
+
+	- The triathlon is a great test of stamina.
+	- You have to have a lot of stamina to be top-class dancer.
+
++ mania
+> (n)a very strong interest in something that fills a person's mind or uses up all their time.
+
+	- The article describes the religious mania that is sweeping the US.
+	- Van Gogh suffered from acute persecution mania.
+
++ persecution
+> (n)unfair or cruel treatment over a long period of time because of race, religion or political beliefs.
+
+	- refugees escaping from political persecution
+	- the persecution of minorities
+
++ swamp
+> (n)an area of very wet, soft land</br>
+> (v)to cover a place or thing with a large amount of water</br>
+> (v)if something swamps a person, system or place, more of it arrives than can be easily dealt with.
+
+	- an alligator-infested swamp
+	- High tides have swamped the coast.
+	- The boat was swamped by an enormous wave.
+	- Foreign cars have swamped the UK market.
+	- I'm swamped with work at the moment.
+	- Don't let feelings of depression swamp you.
+
++ entail
+> (v)to make something necessary, or to involve something.
+
+	- Such a large investment inevitably entails some risk.
+	- Repairing the roof will entail spending a lot of money.
+
++ hysteria
+> (n)extreme fear, excitement, anger etc. that cannot be controlled
+
+	- One woman, close to hysteria, grabbed my arm.
+
++ overlook
+> (v)to provide a view of, especially from above</br>
+> (v)to fail to notice or consider something or someone
+
+	- Our hotel room overlooked the harbour.
+	- I think there is one key fact that you have overlooked.
+
++ nurture
+> (v)to feed or care for a child, or to help someone or something develop by encouraging that person or thing.</br>
+> (n)the way in which children are treated as they are growing, especially as compared with the characteristics they are born with.
+
+	- Which do you believe has the strongest influence on how children develop -- nature or nurture.
+	- As a record company director, his job is to nurture yound talent.
+	- a carefully nurtured garden
+
++ take to
+> (v)to start doing something often
+
+	- She was so depressed that she took to drink.
+	- He's taken to staying out very late.
+
++ vaunt
+> (v)to speak proudly about or praise something, especially in a way that is more than acceptable or reasonable.
+
+	- The local people like to vaunt the glories of their faded past.
+	- His much vaunted new plan has serious weaknesses.
  
