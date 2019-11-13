@@ -1774,4 +1774,32 @@ Some Words
 
 	- The local people like to vaunt the glories of their faded past.
 	- His much vaunted new plan has serious weaknesses.
+
+## 11th, November
+
++ shelter
+> (n)(a building designed to give) protection from bad weather, danger or attack
+
+	- They opened a shelter to provide temporary housing for the city's homeless.
+	- a shelter for homeless women
+
++ comprehensive
+> (adj)complete and including everything that is necessary
+
+	- He has writen a fully comprehensive guide to Rome.
+	- We offer you a comprehensive training in all aspected of the business.
+
++ coordination
+> (n)the act of making all the people involved in a plan or activity work together in an organized way.
+
+	- the lack of coordination between the civilian and military authorities
+
++ package deal
+> (n)a set of arrangements that must be accepted together and not separately.</br>
+> (n)the offer of a low price if several things are bought together.
+
+	- The package deal under discussion will require every country to be flexible on its immigration laws.
+	- Many small hotels offer accommodation and breakfast as a package deal.
+
++ 
  
