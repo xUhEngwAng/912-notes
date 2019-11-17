@@ -1787,7 +1787,7 @@ Some Words
 > (adj)complete and including everything that is necessary
 
 	- He has writen a fully comprehensive guide to Rome.
-	- We offer you a comprehensive training in all aspected of the business.
+	- We offer you a comprehensive training in all aspects of the business.
 
 + coordination
 > (n)the act of making all the people involved in a plan or activity work together in an organized way.
