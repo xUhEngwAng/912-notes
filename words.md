@@ -1801,5 +1801,107 @@ Some Words
 	- The package deal under discussion will require every country to be flexible on its immigration laws.
 	- Many small hotels offer accommodation and breakfast as a package deal.
 
-+ 
+## 18, November
+
++ justify
+> (v)to show that something is reasonable, right or true.
+
+	- Her fears of a low voter turnout were justified when fewer than half of the people voted.
+	- She said that there was no justification for such a rude behaviour.
+
++ turnout
+> (n)the number of people who are present at an event, especially the number who go to vote at an election.
+
+	- Good weather on polling day should ensure a good turnout.
+
++ dim
+> (adj)not very clever
+
+	- He's a nice guy, but a little dim.
+
++ corporate
+> (adj)relating to a business, especially a large business.</br>
+> Corporate America: used to refer to large companies that have a lot of influence in the economy of the US.
+
+	- Analysts are expecting share prices to fall in the first quarter of next year because of poor corporate earnings.
+
++ put sb on notice
+> (v)to warn someone offically that something is going to happen, or could possibly happen.
+
+	- The facility was put on notice that its funding was in danger if improvements were not carried out.
+
++ compliance
+> (n)the act of obeying an order, rule or request.
+
+	- It is the job of the inspectors to enforce compliance with the regulations.
+	- We've been working hard to remain in compliance with all air pollution control laws.
+
++ feeble
+> (adj)weak and without energy, strength or power.
+
+	- He was a feeble, helpless old man.
+	- Opposition to the plan was rather feeble.
+	- a feeble joke/excuse
+
++ pink slip
+> (n)a document given to an employee to tell them that they do not have a job any longer.
+
+	- Eastern Airlines shut down operations at midnight, and 18,000 employees were given their pink slips.
+
++ outlive
+> (v)to live or exist longer than someone or something.
+
+	- He outlived all of his brothers.
+
++ deductible
+> (adj)a deductible expense is a cost that you can subtract from the earnings on which you have to pay income tax.</br>
+> (n)a part of the cost of an accident, injury etc that you agree to pay yourself when you buy insurance.
+
+	- Customers can lower insurance premiums by taking higher deductibles.
+
++ odds
+> (n)the probability that a particular thing will or will not happen.
+
+	- If you drive a car all your life, the odds are that you'll have an accident at some point.
+
++ attendant
+> (adj)coming with a stated thing or resulting from it.
+
+	- debt and its attendant problems
+	- There are too many risks attendant on such a large investment of money.
+
++ eightfold
+> (adj, adv)eight times as big or as much
+
+	- an eightfold increase
+	- Drug-related crimes jumped eightfold.
+
++ elude
+> (v)if something that you want eludes you, you do not succeed in achieving it.</br>
+> (v)if a piece of information eludes you, you cannot remember it.</br>
+> (v)if you elude someone or something, you avoid them or escape from them.
+
+	- Sleep eluded her.
+	- They had minor breakthroughs but real success eluded them.
+	- I know who you mean but her name eludes me.
+	- He eluded the police for 13 years.
+
++ encompass
+> (v)to include different types of things.
+
+	- The festival is to encompass everything from music, theatre and ballet to literature, cinema and the visual arts.
+
++ chronological
+> (adj)following the order in which a series of events happened
+
+	- Give me the dates in chronological order.
+	- I have arranged these stories in chronological order.
+	- The exhibition is organized chronologically.
+
++ toil
+> (v)to work hard</br>
+> (n)hard work, especially work that makes you feel physically tired.
+
+	- People who toiled in dim factores were too exhausted to enjoy their family life.
+	- Well, after a day's toil in the office I like to relax a little.
  
