@@ -1857,6 +1857,7 @@ Some Words
 > (adj)a deductible expense is a cost that you can subtract from the earnings on which you have to pay income tax.</br>
 > (n)a part of the cost of an accident, injury etc that you agree to pay yourself when you buy insurance.
 
+	- Expenses like office phone bills are tax-deductible.
 	- Customers can lower insurance premiums by taking higher deductibles.
 
 + odds
@@ -1902,6 +1903,6 @@ Some Words
 > (v)to work hard</br>
 > (n)hard work, especially work that makes you feel physically tired.
 
-	- People who toiled in dim factores were too exhausted to enjoy their family life.
+	- People who toiled in dim factories were too exhausted to enjoy their family life.
 	- Well, after a day's toil in the office I like to relax a little.
  
