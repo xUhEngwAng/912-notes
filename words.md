@@ -1905,4 +1905,163 @@ Some Words
 
 	- People who toiled in dim factories were too exhausted to enjoy their family life.
 	- Well, after a day's toil in the office I like to relax a little.
- 
+
+## 24th, November
+
++ deteriorate
+> (v)to become worse
+
+	- She was taken to hospital last week when her condition suddenly deteriorated.
+	- There are fears that the situation might deteriorate into full-scale war.
+	- concern about the rapid deterioration in relations between the two countries
+
++ divisive
+> (adj)tending to cause disagreements that seperate people into opposing groups.
+
+	- The Vietnam War was an extremely divisive issue in the US.
+
++ seethe
+> (v)to feel very angry but to be unable or unwilling to express it clearly.
+
+	- The rest of the class positively seethed with indignation when Julia won the award.
+	- She took it calmly at first but under the surface she was seething.
+
++ uniformity
+> (n)the quality or fact of being the same, or of not changing or being different in any way.
+
+	- We do not seek to impose uniformity on every single decision that is made.
+	- He argues that we need statewide uniformity.
+
++ deference
+> (n)respect or politeness.
+
+	- He treats her with such a deference.
+	- She covered her head in deference to Muslim custom.
+
++ in a row
+> (adv)one after another without a break
+
+	- She's been voted Best Actress three years in a row.
+
++ worthy
+> (adj)deserving respect, admiration or support.
+
+	- Every year she makes a large donation to a worthy cause.
+
++ sandal
+> (n)a light shoe, especially worn in warm weather, consisting of a bottom part held onto the foot by straps.
+
+	- a pair of open-toed sandals
+
++ fishery
+> (n)an area of water where fish are caught so that they can be sold.
+
+	- an offshore fishery
+
++ daffodil
+> (n)a yellow, bell-shaped flower with a long stem that is commonly seen in the spring.
+
++ massacre
+> (n)an act of killing a lot of people</br>
+> (n)a bad defeat, especially in a sport.</br>
+> (v)
+
+	- He ordered the massacre of 2,000 women and children.
+	- The manager resigned after the team's 7-2 massacre in the final.
+	- Hundreds of cilivians were massacred in the raid.
+	- English was massacred 5-0 by France in the semi-final.
+
++ anchor
+> (n)a person who reports the news and manages reports by others on a television or radio program.
+
+	- The mayor grants frequent interviews to local news anchors.
+
++ phony
+> (adj)represented as real but actually false; intended to deceice.</br>
+> (n)a person who falsely pretends to be something.
+
+	- They were accused of submitting phony claims to insurers, including Medicare.
+	- I thins he's a phony.
+
++ arthritis
+> (n)a serious condition in which a person's joints become painful, swollen and stiff.
+
+	- In later life She was crippled with arthritis.
+
++ auditor
+> (n)someone whose job is to carry out an official examination of the accounts of a business and to produce a report.
+
+	- The committee will appoint an independent auditor to examine the annual accounts.
+
++ compulsive
+> (adj)doing something wrong or harmful a lot and unable to stop doing it.</br>(not compulsory)
+> (adj)If a film, play, sports event, boot, etc. is compulsive, it is so interesting or exciting that you do not want to stop watching or reading it.
+
+	- a compulsive liar/thief/eater
+	- He was a compulsive gambler and often heavily in debt.
+	- compulsive behaviour
+	- Her new series is compulsive viewing.
+
++ suit
+> (n)a problem taken to a law court by ordinary person or an organization rather than the police in order to obtain a legal decision, lawsuit
+
+	- Two of the directors filed a suit against their former employer.
+	- They brought a lawsuit against the company
+
++ sue
+> (v)to take legal action against a person or organization, especially by making a legal claim for money because of some harm that they have caused you.
+
+	- Mr. Warren sued for libel over the remarks.
+	- The company could be sued for damages.
+
++ patronize
+> (v)to speak or behave towards someone in a way that seems friendly, but that shows that they think they are superior to you in some way.</br>
+> (v)to be a regular customer of a shop or restaurant, etc.
+
+	- Don't you patronize me.
+	- The restaurant was patronized by many artists and writers during the 1920s.
+	- We'd like to thank all of our customers for their patronage in the past.
+
++ windfall
+> (n)an amount of money that you win or receive from someome unexpectedly.
+
+	- the man who received a $250,000 windfall after a banking error.
+
++ wager
+> (v)to risk money by guessing the result of something.</br>
+> (n)an amount of money that you risk in the hope of winning more.
+
+	- She put a cash wager of $25 on the race.
+	- I wager you $5 that they'll get there first.
+	- I'd wager that she's interested in you.
+
++ pepper
+> (v)to direct something suddenly and repeated at someone, as if attacking the person.
+
+	- He was wounded in both legs and severely peppered with sharpnel.
+	- The mayor was peppered with questions from reporters about the municipal corruption scandal.
+
++ shrapnel
+> (n)some pieces of metal that fly through the air when a bomb or simialr weapon explodes and are intended to injure people.
+
+	- Twelve people were hit by shrapnel in the attack.
+
++ municipal
+> (adj)of or belonging to a town or city
+
+	- They are responsible for municipal leisure facilities.
+	- next month's municipal elections
+
++ libel
+> (n)a piece of writing that contains bad and false things about a person.</br>
+> (v)to write and publish something that contains bad and false things about a person.
+
+	- She threatened to sue the magazines for libel.
+	- She claims the newspaper libelled her in editorials and news articles.
+	- With a few exceptions, no writer consciously sits down with the aim of libelling anyone.
+
++ pathological
+> (adj)(of a person)unable to control part of their behaviour; unreasonable
+
+	- a pathological liar
+	- He experiences chronic, almost pathological jealousy.
