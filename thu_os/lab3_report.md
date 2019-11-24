@@ -191,7 +191,7 @@ do_pgfault(struct mm_struct *mm, uint32_t error_code, uintptr_t addr) {
 但是这里需要考虑特殊的情况，假如当前内存中已经没有空闲的页面了，又应该如何操作呢？在lab2中我们是直接返回错误码，然后就退出了，但是这在引入了虚拟内存地址的现在显然是不合适的。因此，此时是需要调用页面置换算法，从当前进程的页面中，选择一个置换到外存中，随后再进行存储空间的分配。然后这一系列的操作，老师都已经封装成的一个函数，见下面的代码：
 
 ```c
-	uint32_t perm = PTE_U;
+    uint32_t perm = PTE_U;
     if (vma->vm_flags & VM_WRITE) {
         perm |= PTE_W;
     }
@@ -200,7 +200,7 @@ do_pgfault(struct mm_struct *mm, uint32_t error_code, uintptr_t addr) {
     pte_t *ptep=NULL;
 
     /*LAB3 EXERCISE 1: YOUR CODE*/
-    ptep = get_pte(mm->pgdir, addr, 1);                   //(1) try to find a pte, if pte's PT(Page Table) isn't existed, then create a PT.
+    ptep = get_pte(mm->pgdir, addr, 1);                   //(1) try to find a pte, if pte's PT(Page Table) doesn't existed, then create a PT.
     if (*ptep == 0) {
         pgdir_alloc_page(mm->pgdir, addr, perm | PTE_P);  //(2) if the phy addr isn't exist, then alloc a page & map the phy addr with logical addr
     }
