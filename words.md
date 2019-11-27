@@ -1994,8 +1994,8 @@ Some Words
 	- The committee will appoint an independent auditor to examine the annual accounts.
 
 + compulsive
-> (adj)doing something wrong or harmful a lot and unable to stop doing it.</br>(not compulsory)
-> (adj)If a film, play, sports event, boot, etc. is compulsive, it is so interesting or exciting that you do not want to stop watching or reading it.
+> (adj)doing something wrong or harmful a lot and unable to stop doing it.(not compulsory)</br>
+> (adj)If a film, play, sports event, book, etc. is compulsive, it is so interesting or exciting that you do not want to stop watching or reading it.
 
 	- a compulsive liar/thief/eater
 	- He was a compulsive gambler and often heavily in debt.

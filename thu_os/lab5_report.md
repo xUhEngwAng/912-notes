@@ -223,7 +223,7 @@ copy_range(pde_t *to, pde_t *from, uintptr_t start, uintptr_t end, bool share) {
 
 ### `COW`机制实现
 
-简单的版本的话，就是在`do_fork`函数中，只是让子进程拷贝父进程的地址空间。一旦父进程或者子进程试图写它们共享的空间，可以通过`Page Fault`机制，为该页新分配一个空间，并且修改对应进程的页表。这样，被修改的页就只有修改页的那个进程可以看到，对于其他进程修改都是不可见的。当然，要是具体实现的话，需要考虑许多问题，情况比较复杂，我以后再好好专研吧。
+简单的版本的话，就是在`do_fork`函数中，只是让子进程拷贝父进程的地址空间。一旦父进程或者子进程试图写它们共享的空间，可以通过`Page Fault`机制，为该页新分配一个空间，并且修改对应进程的页表。这样，被修改的页就只有修改页的那个进程可以看到，对于其他进程修改都是不可见的。当然，要是具体实现的话，需要考虑许多问题，情况比较复杂，我以后再好好钻研吧。
 
 ## 练习3: 阅读分析源代码，理解进程执行`fork/exec/wait/exit`的实现，以及系统调用的实现（不需要编码）
 
@@ -369,7 +369,7 @@ syscall(void) {
 
 随后，该进程还不能完全退出，而是进入`ZOMBIE`状态，即僵尸态。这是因为，它在完全退出之前，还需要唤醒父进程，并且等待它的父进程对它的处理，只有父进程完成对它处理，或者父进程不存在，比如已经退出了，该进程才能退出。这也是这里的`do_exit`需要一个`error_code`参数的原因，这样父进程就可以根据这个错误码的不同值，来完成不同的处理结果。在父进程完成对它的处理前，该进程需要调用调度函数`schedule`，让出CPU的控制权。
 
-原理课上就讲到这么多，但是在ucore里面还做了进一步操作。因为当前要退出的进程有可能还有子进程，ucore还完成了这些子进程的移交，从而避免它们成为没有父进程的孩子。具体的操作就是将这些子进程【过继】给了第一个内核线程，其中主要就涉及到几个指针`proc_struct.parent/cptr/optr/yptr`的修改。需要指出的是，这里的`cptr`在进程具有多个孩子的情形下，总是指向最小的一个孩子。具体的代码如下：
+原理课上就讲到这么多，但是在ucore里面还做了进一步操作。因为当前要退出的进程有可能还有子进程，ucore还完成了这些子进程的移交，从而避免它们成为没有父进程的孩子。具体的操作就是将这些子进程`过继`给了第一个内核线程，其中主要就涉及到几个指针`proc_struct.parent/cptr/optr/yptr`的修改。需要指出的是，这里的`cptr`在进程具有多个孩子的情形下，总是指向最小的一个孩子。具体的代码如下：
 
 ```c
 // do_exit - called by sys_exit
@@ -590,12 +590,83 @@ copy_thread(struct proc_struct *proc, uintptr_t esp, struct trapframe *tf) {
 
 ## 进程的切换与退出
 
-之前我一直很迷惑，这里ucore的进程怎么实现切换的，最后又是怎么退出的，一开始感觉非常神奇，后来发现原来是最朴素的策略。原来这里根本就没有什么所谓的时间片轮转算法，没有抢占机制，一切的切换都是进程自己主动通过系统调用执行的。
+之前我一直很迷惑，这里ucore的进程怎么实现切换的，最后又是怎么退出的，一开始感觉非常神奇，实际上在`lab5`里面是实现了一个简单的`时间片轮转算法`，这里的时间片长度就是`TICK_NUM`个时钟周期：
 
-例如一个进程切换到另一个进程，只有下面几种可能性：
+```c
+trap_dispatch(struct trapframe *tf) {
+    char c;
+
+    int ret=0;
+
+    switch (tf->tf_trapno) {
+    ......
+    case IRQ_OFFSET + IRQ_TIMER:
+        if(++ticks == TICK_NUM){
+            ticks = 0;
+            print_ticks();
+            current->need_resched = 1;
+        }
+        break;
+```
+
+在设置了`need_resched`标志位后，在`trap`函数中进行进程的切换：
+
+```c
+void
+trap(struct trapframe *tf) {
+    // dispatch based on what type of trap occurred
+    // used for previous projects
+    if (current == NULL) {
+        trap_dispatch(tf);
+    }
+    else {
+        // keep a trapframe chain in stack
+        struct trapframe *otf = current->tf;
+        current->tf = tf;
+    
+        bool in_kernel = trap_in_kernel(tf);
+    
+        trap_dispatch(tf);
+    
+        current->tf = otf;
+        if (!in_kernel) {
+            if (current->flags & PF_EXITING) {
+                do_exit(-E_KILLED);
+            }
+            if (current->need_resched) {
+                schedule();
+            }
+        }
+    }
+}
+```
+
+此外，一个进程切换到另一个进程，还有下面几种可能性：
 
 + 主动调用`schedule`，实现进程的切换。
 + 通过`do_wait`函数，在没有子进程退出时，会调用`schedule`来完成切换。
 + 通过`do_exit`函数，进入`ZOMBIE`状态后，会调用`schedule`来完成切换。
 
-此外，进程的退出也是一样，都是自己调用了`exit`系统调用来退出的，这和我们正常的系统不一样，所以一开始不能理解。我们实际用的系统，对于我平时写的沙雕程序，应该是系统或者编译器自动在程序结束时添加了系统调用`exit`，来退出的。
+此外，进程的退出，是自己调用了`exit`系统调用来退出的，这和我们正常的系统不一样，所以一开始不能理解。我们实际用的系统，对于我平时写的沙雕程序，应该是系统或者编译器自动在程序结束时添加了系统调用`exit`来退出的。
+
+## 内核线程与用户进程的创建
+
+通过`lab4`和`lab5`的讨论，应该可以看到内核线程和用户进程的创建是具有比较大的区别的，同时它们也具有一些共性，在这里做一个简单的总结。
+
+对于一般的用户进程的创建（并非第一个用户进程），都是通过它的父进程调用`fork`来实现的，这里应该保证子进程与父进程几乎是相同的，包括执行相同的程序，具有相同的内存，打开文件表等。为了保证父子进程执行同一个程序，在`copy_thread`中将父进程的`tf`拷贝到子进程的`tf`中，并且设置子进程的
+
+```c
+proc->tf->tf_regs.reg_eax = 0;
+proc->tf->tf_esp = esp;
+
+context.eip = (uintptr_t)forkrets;
+context.esp = (uintptr_t)proc->tf;
+```
+
+这样就可以使子进程中断返回后，是从父进程被中断的位置开始执行，并且`fork`的返回值是零。而父进程的返回值则是子进程的`pid`。
+
+对于内核线程的创建（并非第零号内核线程），总是通过某个内核线程调用`kernel_thread`，来将该内核线程的执行位置设置为`kernel_thread_entry`，在其中再跳转到实际执行的代码。可以看到，内核线程的创建没有用到它的父亲线程的`tf`信息，而是通过`kernel_thread`硬构建了一个。因此内核子线程自然不会从父亲线程处开始执行。
+
+但是无论如何，两种线程都需要在`do_fork`中调用`copy_thread`函数，设置其上下文信息为`forkrets`，此后再通过`iret`跳转到它们的起始执行位置。这是两种线程的共性。
+
+而对于第零个内核线程和第一个用户进程，它们两者的创建却具有相同的思想，即都是硬构造出自己的`tf`帧，然后通过`iret`转入实际执行的位置。它们的区别仅仅在于跳转的位置不同而已，一个是内核空间，而一个是用户空间。

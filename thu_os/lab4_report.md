@@ -134,25 +134,25 @@ proc_init(void) {
 alloc_proc(void) {
     struct proc_struct *proc = kmalloc(sizeof(struct proc_struct));
     if (proc != NULL) {
-    proc->state  = PROC_UNINIT;
-	proc->pid    = -1;
-	proc->runs   = 0;
-	proc->kstack = 0;
-	proc->cr3    = boot_cr3;
-	proc->flags  = 0;
-	proc->parent = NULL;
-	proc->mm     = NULL;
-	proc->tf     = NULL;
-	set_proc_name(proc, "undefined");
-	proc->need_resched = 0;
-	proc->context.eip = 0;
-	proc->context.esp = 0;
-	proc->context.ebx = 0;
-	proc->context.ecx = 0;
-	proc->context.edx = 0;
-	proc->context.esi = 0;
-	proc->context.edi = 0;
-	proc->context.ebp = 0;
+        proc->state  = PROC_UNINIT;
+        proc->pid    = -1;
+        proc->runs   = 0;
+        proc->kstack = 0;
+        proc->cr3    = boot_cr3;
+        proc->flags  = 0;
+        proc->parent = NULL;
+        proc->mm     = NULL;
+        proc->tf     = NULL;
+        set_proc_name(proc, "undefined");
+        proc->need_resched = 0;
+        proc->context.eip = 0;
+        proc->context.esp = 0;
+        proc->context.ebx = 0;
+        proc->context.ecx = 0;
+        proc->context.edx = 0;
+        proc->context.esi = 0;
+        proc->context.edi = 0;
+        proc->context.ebp = 0;
     }
     return proc;
 }
