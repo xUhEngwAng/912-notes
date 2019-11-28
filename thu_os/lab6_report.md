@@ -487,15 +487,15 @@ stride_pick_next(struct run_queue *rq) {
 
 容易证明，在任何一次进行调度时，就绪队列中的任意两个进程都满足
 
-$$
-| pass__1 - pass__2 | \le stride__max
-$$
+```
+|pass_1 - pass_2 | <= stride_max
+```
 
 其中，`stride_max`表示所有进程中的最大步进值。这样，可以进一步
 
-$$
-pass__max - pass__min \le BIG__STRIDE
-$$
+```
+pass_max - pass_min <= BIG_STRIDE
+```
 
 因此一种解决方案是，对两个`pass`之差的结果进行分析，如果它是介于`-BIG_STRIDE`到`BIG_STRIDE`之间的，则认为是一个合理值，返回正常的结果。若这个差值在上述区间之外，则认为其中一个`pass`已经发生了溢出，因此取相反的结果，对应的比较函数的实现如下：
 
@@ -532,8 +532,8 @@ proc_stride_comp_f(void *a, void *b)
 
 此时仍然有：
 
-$$
-|pass__1 - pass__2| \le BIG__STRIDE
-$$
+```
+|pass_1 - pass_2| <= BIG_STRIDE
+```
 
 因此，只需要选择32位下最大的有符号整数`0x7fffffff`，当`BIG_STRIDE = 0X7fffffff`时，上面的式子总是满足的，此时就可以用第二个版本简单的比较函数了。需要注意的是，两个版本的比较函数在实质上仍然是相同的。
