@@ -44,7 +44,7 @@ lab7的主要任务其实就只有两个，即在ucore中实现信号量机制�
 
 首先将信号量`P`和`V`操作的伪代码贴在下面：
 
-```c
+```cpp
 class Semaphore{
 private:
 	int sem;
