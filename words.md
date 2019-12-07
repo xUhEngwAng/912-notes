@@ -1108,6 +1108,7 @@ Some Words
 > (adj)being one of the parts of something
 
 	- Oxygen is a constituent of air.
+	- He told his constituents that he would continue to represent them to the best of his ability.
 	- Let's look at the constituent parts of this sentence.
 	- the EU and its constituent members
 
