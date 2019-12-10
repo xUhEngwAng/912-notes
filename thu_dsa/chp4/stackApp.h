@@ -6,9 +6,9 @@
 #define NOPTR 9
 
 static char digits[] = { '0','1','2','3','4','5','6','7','8','9',
-						 'a','b','c','d','e','f','g','h','i','j',
-					 	 'k','l','m','n','o','p','q','r','s','t',
-						 'u','v','w','x','y','z' };
+                         'a','b','c','d','e','f','g','h','i','j',
+                         'k','l','m','n','o','p','q','r','s','t',
+                         'u','v','w','x','y','z' };
 /*
  * @brief : convert a decimal digit n to any base(2 <= base <= 36)
  * @args  : 
@@ -51,5 +51,12 @@ double evaluate(char* infixExpr);
  * @others: only consider valid infix expression
  */
 char* toPostfix(char* infixExpr);
+
+/*
+ * @brief : to generate a very long expression in the pattern 1+0*1^(1+0*1^(1+0*1^(......)
+ * @args  : number of brackets in the expression
+ * @return: the long expression
+ */
+char* generateLongExpr(int n);
 
 #endif

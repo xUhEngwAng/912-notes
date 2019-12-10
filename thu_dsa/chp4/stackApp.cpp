@@ -142,6 +142,22 @@ char* toPostfix(char* infixExpr){
 	}
 	return postfixExpr;
 }
+/*
+ * @brief : to generate a very long expression in the pattern '1+0*1^(1+0*1^(1+0*1^(......)'
+ * @args  : number of brackets in the expression
+ * @return: pointer to the long expression
+ */
+char* generateLongExpr(int n){
+	char* expr = new char[8 * n + 8];
+	int pos = 0;
+	for(int ix = 0; ix != n; ix++, pos += 7)
+		memcpy(expr + pos, "1+0*1^(", 7);
+	expr[pos++] = '1';
+	for (int ix = 0; ix != n; ++ix)
+		expr[pos++] = ')';
+	expr[pos] = '\0';
+	return expr;
+}
 
 /*-----------build-in functions----------*/
 int readNumber(char* &expr){
