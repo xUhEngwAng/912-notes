@@ -210,7 +210,7 @@ void preOrder_It2(BinNodePosi(T) x, VST &visit){
 
 所以中序遍历迭代版的算法如下：
 
-```
+```cpp
 template <typename T>
 void goAlongLeftBranch(BinNodePosi(T) x, Stack<BinNodePosi(T) &S){
 	while(x){
