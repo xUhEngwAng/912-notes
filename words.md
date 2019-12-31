@@ -2066,3 +2066,42 @@ Some Words
 
 	- a pathological liar
 	- He experiences chronic, almost pathological jealousy.
+
+## 30th, December
+
++ spam
+> (n)unwanted email, ususually advertisements</br>
+> (v)to send someone advertisements by email that they do not want.
+
+	- Some Internet service providers block spam to subscribers.
+	- He spammed the message to 30,000 addresses in a week.
+
++ tumor
+> (n)a mass of cell in the body that grow faster than usual and can cause illness.
+
+	- a malignant/benign tumor
+
++ malignant
+> (adj)a malignant disease or growth is cancer or is related to cancer, and is likely to be harmful.</br>
+> (adj)having a strong wish to do harm
+
+	- The process by which malignant cancer cells multiply isn't fully understood.
+	- He developed a malignant hatred for the land of his birth.
+
++ benign
+> (adj)pleasant or kind; not harmful or severe</br>
+> (adj)a benign growth is not cancer and is not likely to be harmful
+
+	- a benign tumor
+	- They are normally a more benign audience.
+	- I just smiled benignly and stood back.
+
++ inventory
+> (n)a detailed list of all the things in a place.</br>
+> (n)the amount of goods a store or business has for sale at a particular time, or their value.
+
+	- About half of the shop's inventory was damaged in the tornado.
+	- Before starting, he made an inventory of everything that was to stay.
+
++ tornado
+> (n)a strong, dangerous wind that forms itself into an upside-down spinning cone and is able to destroy buildings as it moves across the ground.

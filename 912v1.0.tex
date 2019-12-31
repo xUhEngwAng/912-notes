@@ -1,0 +1,102 @@
+\documentclass[UTF8,12pt]{ctexart}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\CTEXsetup[format={\Large\bfseries}]{section}
+\title{\kaishu 912回忆版}
+\author{by Shine Wong}
+\date{12/22}
+
+\begin{document}
+\maketitle
+
+	\section{数据结构}
+
+	\subsection{判断题}
+
+		\begin{itemize}
+
+			\item[1)]$log^nn = \Omega(n^{logn})$。
+			\item[2)]对一棵AVL树进行插入，则至多会引起$\Omega(logn)$次局部调整操作。
+			\item[3)]对一个理想随机输入的序列进行快速排序，则在平均情况下以及最坏情况下都可以达到$O(logn)$的时间复杂度性能。
+			\item[4)]在理想随机输入的情况下，尽管完全二叉堆的删除操作的最坏时间复杂度有$O(logn)$，平均时间复杂度仅为$O(1)$而已。
+			\item[5)]跳转表每一个节点所对应的塔的平均高度为$O(logn)$。\\
+			\item[6)]采用基于比较的算法，可以在$O(n)$的时间内找出序列的前10\%大的元素。
+			\item[7)]对一有向图进行DFS，共有$k$条边被标记为 BACKWARD，则该图中未必有$k$个环路。\\
+			\item[8)]败者树相对于胜者树，具有更优的渐进时间复杂度性能。\\
+			\item[9)]相对于闭散列，开散列可以更好地利用数据的局部性。\\
+			\item[10)]...remain to be added
+
+
+		\end{itemize}
+
+	\subsection{单向选择题}
+
+		\begin{itemize}
+
+			\item[1)]对一有向无环图，该图的拓扑排序序列恰好是DFS的$\underline{\hbox to 10mm{}}$\\
+			A.\ 被发现的顺序\\
+			B.\ 被发现的逆序\\
+			C.\ 回溯的顺序\\
+			D.\ 回溯的逆序
+
+			\item[2)]如果基数排序底层采用不稳定的排序算法，则所得的结果$\underline{\hbox to 10mm{}}$，并且基数排序的稳定性$\underline{\hbox to 10mm{}}$\\
+			A.\ 不再正确 \ 不再保持\\
+			B.\ 不再正确 \ 仍然保持\\
+			C.\ 仍然正确 \ 不再保持\\
+			D.\ 仍然正确 \ 仍然保持
+
+			\item[3)]逆波兰表达式$Blalala$的结果为2019，则中间缺失的操作符为\\
+			A \ + \\
+			B \ - \\
+			C \ * \\
+			D \ / \\
+			E \ \^ \\
+			F \ !
+
+			\item[4)]对于一个权重分别是1,1,2,3,5,8,13,21的字符集构造Huffman编码树，其中最大的深度为\\
+			A.\ 6\\
+			B.\ 7\\
+			C.\ 8\\
+			D.\ 9
+
+			\item[5)]含有$\underline{\hbox to 10mm{}}$个节点的真二叉树的数量，与2019对括号构成的合法表达式数量相同。\\
+			A.\ 1009\\
+			B.\ 1010\\
+			C.\ 2019\\
+			D.\ 4039
+
+			\item[6)]对一模式串HHBFHHBFHHBFSHH，考虑改进的next数组，则$next[14] - next[0] = \underline{\hbox to 10mm{}}$\\
+			A.\ 2\\
+			B.\ 3\\
+			C.\ 4\\
+			D.\ 5
+
+		\end{itemize}
+
+	\subsection{证明题}
+
+		已知一棵二叉搜索树的先序和后序遍历序列，是否可以构造出它的层次遍历序列？是则给出证明，否则给出一个反例。（5分）
+
+	\subsection{程序设计题}
+
+		给出二叉树节点BinNode的定义如下：\\
+
+		\noindent class BinNode{\\
+		public:\\
+			\indent BinNode* parent;\\
+			\indent BinNode* lc;\\
+			\indent BinNode* rc;\\
+			\indent int lsize;\\
+
+			\indent BinNode* zig(BinNode* x);//绕当前节点顺时针旋转，仍然返回旋转后根节点的左子树\\
+			\indent BinNode* zag(BinNode* x);//绕当前节点顺时针旋转，仍然返回旋转后根节点的右子树\\
+		}
+
+		\begin{itemize}
+
+			\item[]
+
+		\end{itemize}
+
+\end{document}
