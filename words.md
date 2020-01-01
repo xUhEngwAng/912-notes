@@ -2105,3 +2105,48 @@ Some Words
 
 + tornado
 > (n)a strong, dangerous wind that forms itself into an upside-down spinning cone and is able to destroy buildings as it moves across the ground.
+
+## 31st, December
+
++ delegate
+> (n)a person chosen or elected by a group to speak, vote, etc. for them, especially at a meeting.</br>
+> (v)to give a particular job, duty, right, etc. to someone else so that they do it for you.</br>
+> (v)to choose or elect someone to speak, vote, etc. for a group, especially at a meeting.
+
+	- Each union elects several delegates to the annual conference.
+	- He talks of travelling less, and delegating more authority to his deputies.
+	- A group of teachers were delegated to represent their colleagues at the union conference.
+
+## 1st, January
+
++ sloppy
+> (adj)very wet or liquid, often in a way that is unpleasant</br>
+> (adj)not taking care or making an effort
+
+	- She covered his face with sloppy kisses.
+	- Spelling mistakes always look sloppy in formal letters.
+	- He has little patience for sloppy work from colleagues.
+
++ substitute
+> (v)to use something or someone instead of another thing or person</br>
+> (v)substitute for sth: to perform the same job as another thing or to take its place.</br>
+> (n)a thing or person that is used instead of another thing or person.</br>
+> (n)in sports, a player who is used for part of a game instead of another player.
+
+	- You can substitute oil for butter in the recipe.
+	- I use that recipe but substitute wheat-free flour for regular flour.
+	- Of course, no book or course of study can substitute for experience.
+	- Gas-fired power station will substitute for less efficient coal-fired equipment.
+	- Vitamins should not be used as a substitute for a healthy diet.
+	- The manager brought on another substitute in the final minutes of the game.
+
++ sophomore
+> (n)a student studying in the second year of a course at a US college or high school.
+
++ frontage
+> (n)the front part of a building that faces a road or river, or land near a load or river.
+
+	- These apartments all have a delightful dockside frontage.
+	- The restaurant has a river frontage.
+
++ 
