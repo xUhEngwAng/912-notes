@@ -1,7 +1,9 @@
 #include <iostream>
+#include <list>
 #include <string>
+#include <forward_list>
 
-using std::string;
+using namespace std;
 
 class HasPtr {
 public:
@@ -45,6 +47,9 @@ int main(){
 	HasPtr ptr1("2020");
 	HasPtr ptr2("2019");
 	HasPtr ptr3 = ptr2;
+	forward_list<int> li({ 4, 5, 6 });
+	for (int e : li)
+		cout << e << " ";
 	ptr2 = ptr1;
 	ptr3 = ptr1;
 	f(ptr1);

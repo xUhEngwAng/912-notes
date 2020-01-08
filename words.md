@@ -2149,4 +2149,52 @@ Some Words
 	- These apartments all have a delightful dockside frontage.
 	- The restaurant has a river frontage.
 
-+ 
+## 7th, January
+
++ proprietary
+> (adj)relating to owning something, or relating to or like an owner.</br>
+> (adj)Propritary goods are made and sent out by a particular company whose name is on the product.
+
+	- I just assumed he owned the place - he had a proprietary air about him.
+	- some proprietary brands of dog food
+	- This is proprietary software, and you have no right to copy it without a license from the owner. 
+
++ recap
+> (v)to repeat the main points of something that has been discussed earlier at the end of a meeting or talk.</br>
+> (n)also a noun
+
+	- Let me just recap very briefly what I said earlier.
+	- To recap, our main aim is to increase sales by 15 percenet this year.
+	- Here's a recap of the week's most hotly debated new items.
+
++ defer 
+> (v)to delay something until a later time.</br>
+> (v)defer to: to allow someone or something to make decisions for you or tell you what to do because of your respect for them or because of their higher rank, authority, knowledge, etc.
+
+	- My bank has agreed to defer the payments of my loans.
+	- Can we defer making a decision until next week.
+	- I have to defer to my boss on important decisions.
+	- I defer to your judgement.
+
++ outlet
+> (n)a shop that is one of many owned by a particular company and that sells the goods that the company has produced.
+
+	- the largest retail outlet in the city
+	- At the factory outlet you'll find discounted items at up to 75% off regular prices.
+
++ intercept
+> (v)to stop and catch something or someone before before that thing or person is able to reach a particular place.</br> (n)the point at which a line intercepts a coordinate axis.
+
+	- Law enforcement agents intercepted a shipment of drugs from Central America.
+	- The ball was intercepted by Grady.
+
++ franchise
+> (n)a right to sell a company's products in a particular area using the company's name.
+
+	- Each store is owned by an individual who pays a fee for franchise.
+	- He lost the franchise after failing to meet the specified standards.
+
++ cosmetically
++ rationale
++ ameliorate
++ level off
