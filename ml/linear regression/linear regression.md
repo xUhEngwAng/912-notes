@@ -79,8 +79,7 @@ $$
 因此可以写出似然函数$L(\theta)$
 
 $$
-L(\theta) = \Pi_{i = 1}^m f(y^{(i)}|x^{(i)}) = (\frac{1}{\sqrt{2\pi}\sigma})^m\cdot e^{-\frac{1}{2\sigma^2}\Sigma_{i = 1}^m (y^{(i)} - \theta^Tx^{(i)})^2}\\
-
+L(\theta) = \Pi_{i = 1}^m f(y^{(i)}|x^{(i)}) = (\frac{1}{\sqrt{2\pi}\sigma})^m\cdot e^{-\frac{1}{2\sigma^2}\Sigma_{i = 1}^m (y^{(i)} - \theta^Tx^{(i)})^2}\\\
 lnL(\theta) = -mln(\sqrt{2\pi}\sigma) - \frac{1}{2\sigma^2}\Sigma_{i = 1}^m(y^{(i)} - \theta^Tx^{(i)})^2
 $$
 
@@ -169,11 +168,8 @@ $$
 H = \frac{1}{m}\left[
 	\begin{matrix}
 		\Sigma_{i = 1}^mx_0^{(i)^2} & \Sigma_{i = 1}^mx_0^{(i)}x_1^{(i)} & \cdots & \Sigma_{i = 1}^mx_0^{(i)}x_n^{(i)}\\
-		
-		\Sigma_{i = 1}^mx_1^{(i)}x_0^{(i)} & \Sigma_{i = 1}^mx_1^{(i)^2} & \cdots & \Sigma_{i = 1}^mx_1^{(i)}x_n^{(i)}\\
-		
-		\vdots & \vdots &  & \vdots&\\
-		
+		\Sigma_{i = 1}^mx_1^{(i)}x_0^{(i)} & \Sigma_{i = 1}^mx_1^{(i)^2} & \cdots & \Sigma_{i = 1}^mx_1^{(i)}x_n^{(i)}\\	
+		\vdots & \vdots &  & \vdots&\\	
 		\Sigma_{i = 1}^mx_n^{(i)}x_0^{(i)} & \Sigma_{i = 1}^mx_n^{(i)}x_1^{(i)} & \cdots & \Sigma_{i = 1}^mx_n^{(i)^2}\\
 	\end{matrix}
 \right]
