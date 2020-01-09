@@ -79,7 +79,7 @@ $$
 因此可以写出似然函数$L(\theta)$
 
 $$
-L(\theta) = \Pi_{i = 1}^m f(y^{(i)}|x^{(i)}) = (\frac{1}{\sqrt{2\pi}\sigma})^m\cdot e^{-\frac{1}{2\sigma^2}\Sigma_{i = 1}^m (y^{(i)} - \theta^Tx^{(i)})^2}\\\
+L(\theta) = \Pi_{i = 1}^m f(y^{(i)}|x^{(i)}) = (\frac{1}{\sqrt{2\pi}\sigma})^m\cdot e^{-\frac{1}{2\sigma^2}\Sigma_{i = 1}^m (y^{(i)} - \theta^Tx^{(i)})^2}\\\\
 lnL(\theta) = -mln(\sqrt{2\pi}\sigma) - \frac{1}{2\sigma^2}\Sigma_{i = 1}^m(y^{(i)} - \theta^Tx^{(i)})^2
 $$
 
@@ -135,7 +135,7 @@ $$
 
 学习率的选择在梯度下降法中至关重要。如果学习率太小，则需要更多次迭代才能找到最优解，需要较长的学习时间；而如果学习率太大，也有可能导致收敛速度慢，甚至可能会发散。这是因为学习率太大时，不再满足全微分方程中微小变化量的条件，因此每次迭代后被优化函数都未必可以取到比上一次迭代更小的值。学习率的选择对$J(\theta)$收敛速度的影响如下图所示：
 
-![select_alpha](images/select_alpha.png)
+[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-RqKOi1Aq-1578532827322)(images/select_alpha.png)]
 
 可以看到，当$\alpha$很小时（如图中红色曲线所示），损失函数$J(\theta)$收敛速度较慢。随着$\alpha$逐渐增大，曲线逐渐变得陡峭，收敛速度越来越快。可是当$\alpha$很大时（$\alpha = 1.3$，图中黑色曲线）收敛速度反而相对此前变慢了；$\alpha$继续增大将导致代价函数发散（图中洋红色曲线）。
 
@@ -145,7 +145,7 @@ $$
 
 从上面的讨论中可以看出，梯度下降法最终将收敛到某个局部最优点，而无法保证收敛到全局最优点。实际上，当选择不同的初始值时，使用梯度下降法往往会收敛到不同的极值点，如下图所示：
 
-![gd_diff_path](images/gd_diff_path.jpg)
+[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-epUtOmFv-1578532827324)(images/gd_diff_path.jpg)]
 
 因此，使用梯度下降法无法保证得到的结果一定是全局最优解。然而，需要指出，对于线性回归与平方损失函数，则不存在这个问题，因为平方损失函数是**凸函数**。证明如下：
 
@@ -158,7 +158,7 @@ $$
 所以
 
 $$
-\frac{\partial}{\partial \theta_j}J(\theta) = \frac{1}{m}\Sigma_{i = 1}^m(h_\theta(x^{(i)}) - y^{(i)})x_j^{(i)}\\
+\frac{\partial}{\partial \theta_j}J(\theta) = \frac{1}{m}\Sigma_{i = 1}^m(h_\theta(x^{(i)}) - y^{(i)})x_j^{(i)}\\\\
 \frac{\partial^2}{\partial \theta_j\partial \theta_k}J(\theta) = \frac{1}{m}\Sigma_{i = 1}^mx_j^{(i)}x_k^{(i)}
 $$
 
@@ -167,10 +167,10 @@ $$
 $$
 H = \frac{1}{m}\left[
 	\begin{matrix}
-		\Sigma_{i = 1}^mx_0^{(i)^2} & \Sigma_{i = 1}^mx_0^{(i)}x_1^{(i)} & \cdots & \Sigma_{i = 1}^mx_0^{(i)}x_n^{(i)}\\
-		\Sigma_{i = 1}^mx_1^{(i)}x_0^{(i)} & \Sigma_{i = 1}^mx_1^{(i)^2} & \cdots & \Sigma_{i = 1}^mx_1^{(i)}x_n^{(i)}\\	
-		\vdots & \vdots &  & \vdots&\\	
-		\Sigma_{i = 1}^mx_n^{(i)}x_0^{(i)} & \Sigma_{i = 1}^mx_n^{(i)}x_1^{(i)} & \cdots & \Sigma_{i = 1}^mx_n^{(i)^2}\\
+		\Sigma_{i = 1}^mx_0^{(i)^2} & \Sigma_{i = 1}^mx_0^{(i)}x_1^{(i)} & \cdots & \Sigma_{i = 1}^mx_0^{(i)}x_n^{(i)}\\\\
+		\Sigma_{i = 1}^mx_1^{(i)}x_0^{(i)} & \Sigma_{i = 1}^mx_1^{(i)^2} & \cdots & \Sigma_{i = 1}^mx_1^{(i)}x_n^{(i)}\\\\
+		\vdots & \vdots &  & \vdots&\\\\	
+		\Sigma_{i = 1}^mx_n^{(i)}x_0^{(i)} & \Sigma_{i = 1}^mx_n^{(i)}x_1^{(i)} & \cdots & \Sigma_{i = 1}^mx_n^{(i)^2}\\\\
 	\end{matrix}
 \right]
 $$
@@ -229,25 +229,25 @@ $$
 $$
 X = \left[
 	\begin{matrix}
-	x^{(1)^T}\\
-	x^{(2)^T}\\
-	\vdots\\
+	x^{(1)^T}\\\\
+	x^{(2)^T}\\\\
+	\vdots\\\\
 	x^{(m)^T}
 	\end{matrix}
 \right],\ \ 
 Y = \left[
 	\begin{matrix}
-	y^{(1)}\\
-	y^{(2)}\\
-	\vdots\\
+	y^{(1)}\\\\
+	y^{(2)}\\\\
+	\vdots\\\\
 	y^{(m)}
 	\end{matrix}
 \right],\ \ 
 \theta = \left[
 	\begin{matrix}
-	\theta_0\\
-	\theta_1\\
-	\vdots\\
+	\theta_0\\\\
+	\theta_1\\\\
+	\vdots\\\\
 	\theta_n
 	\end{matrix}
 \right]
@@ -290,7 +290,7 @@ $$
 
 $$
 \begin{aligned}
-J(\theta) = &\frac{1}{2m}[(X\theta - Y)^T(X\theta - Y) + \lambda(I\theta)^TI\theta]\\
+J(\theta) = &\frac{1}{2m}[(X\theta - Y)^T(X\theta - Y) + \lambda(I\theta)^TI\theta]\\\\
  = &\frac{1}{2m}(\theta^TX^TX\theta - 2Y^TX\theta + Y^TY + \lambda(I\theta)^TI\theta]
  \end{aligned}
 $$
@@ -299,9 +299,9 @@ $$
 $$
 I = \left[
 \begin{matrix}
-0 & 0 & \cdots & 0\\
-0 & 1 & \cdots & 0\\
-\vdots & \vdots & & 0\\
+0 & 0 & \cdots & 0\\\\
+0 & 1 & \cdots & 0\\\\
+\vdots & \vdots & & \vdots\\\\
 0 & 0 & \cdots & 1
 \end{matrix}
 \right].
@@ -318,9 +318,9 @@ $$
 $$
 \theta = (X^TX + \lambda I)^{-1}X^TY = (X^TX + \lambda \left[
 \begin{matrix}
-0 & 0 & \cdots & 0\\
-0 & 1 & \cdots & 0\\
-\vdots & \vdots & & 0\\
+0 & 0 & \cdots & 0\\\\
+0 & 1 & \cdots & 0\\\\
+\vdots & \vdots & & \vdots\\\\
 0 & 0 & \cdots & 1
 \end{matrix}
 \right])^{-1}X^TY
@@ -343,17 +343,17 @@ $$
 $$
 X = \left[
 	\begin{matrix}
-	x^{(1)^T}\\
-	x^{(2)^T}\\
-	\vdots\\
+	x^{(1)^T}\\\\
+	x^{(2)^T}\\\\
+	\vdots\\\\
 	x^{(m)^T}
 	\end{matrix}
 \right] = \left[
 \begin{matrix}
-x_0^{(1)} & x_1^{(1)} & \cdots & x_n^{(1)}\\
-x_0^{(2)} & x_1^{(2)} & \cdots & x_n^{(2)}\\
-\vdots & \vdots & & \vdots\\
-x_0^{(m)} & x_1^{(m)} & \cdots & x_n^{(m)}\\
+x_0^{(1)} & x_1^{(1)} & \cdots & x_n^{(1)}\\\\
+x_0^{(2)} & x_1^{(2)} & \cdots & x_n^{(2)}\\\\
+\vdots & \vdots & & \vdots\\\\
+x_0^{(m)} & x_1^{(m)} & \cdots & x_n^{(m)}\\\\
 \end{matrix}
 \right]
 $$
@@ -363,10 +363,10 @@ $$
 $$
 X^T = \left[
 \begin{matrix}
-x_0^{(1)} & x_0^{(2)} & \cdots & x_0^{(m)}\\
-x_1^{(1)} & x_1^{(2)} & \cdots & x_1^{(m)}\\
-\vdots & \vdots & & \vdots\\
-x_n^{(1)} & x_n^{(2)} & \cdots & x_n^{(m)}\\
+x_0^{(1)} & x_0^{(2)} & \cdots & x_0^{(m)}\\\\
+x_1^{(1)} & x_1^{(2)} & \cdots & x_1^{(m)}\\\\
+\vdots & \vdots & & \vdots\\\\
+x_n^{(1)} & x_n^{(2)} & \cdots & x_n^{(m)}\\\\
 \end{matrix}
 \right]
 $$
