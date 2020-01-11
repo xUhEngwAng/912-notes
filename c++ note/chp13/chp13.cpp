@@ -2,6 +2,8 @@
 #include <list>
 #include <string>
 #include <forward_list>
+#include <vector>
+#include <array>
 
 using namespace std;
 
@@ -48,6 +50,14 @@ int main(){
 	HasPtr ptr2("2019");
 	HasPtr ptr3 = ptr2;
 	forward_list<int> li({ 4, 5, 6 });
+	array<int, 5> arr = { 1 };
+	arr = { 1, 2, 3, 4};
+	arr.assign(1);
+	arr.fill(4);
+	for (auto e : arr)
+		cout << e << " ";
+	cout << endl;
+
 	for (int e : li)
 		cout << e << " ";
 	ptr2 = ptr1;

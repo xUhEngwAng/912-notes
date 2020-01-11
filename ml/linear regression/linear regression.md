@@ -72,7 +72,7 @@ $$
 所以有
 
 $$
-y|x \sim N(h_\theta(x), \sigma^2)\\
+y|x \sim N(h_\theta(x), \sigma^2)\\\\
 f(y | x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(y - \theta^Tx)^2}{2\sigma^2}}
 $$
 
