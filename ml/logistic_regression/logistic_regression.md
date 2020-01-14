@@ -112,9 +112,9 @@ $$
 cost(h_\theta(x), y) = \left\{
 	\begin{aligned}
 	-log(h_\theta(x))&, y = 1\\\\
-	-log(1 - h_theta(x))&, y = 0
+	-log(1 - h_\theta(x))&, y = 0
 	\end{aligned}
-\right
+\right.
 $$
 
 可以分别画出$y = 0$与$y = 1$的损失函数的图像，以获得一个比较直观的理解。容易看到，当$y = 1$时，对输出的预测值$h_\theta(x)$越接近一，则损失函数的值越小；预测值越接近零，则损失函数的值越大。并且当$h_\theta(x) = 1$时，$cost(h_\theta(x), 1) = 0$，当$h_\theta(x) = 0$时，$cost(h_\theta(x), 1) = +\infty$。该性质是容易理解的，即预测值与真值越接近，则相应的损失就越小。$y = 0$时也有类似的性质。
@@ -239,7 +239,7 @@ H = \frac{1}{m}\left[
 \right]
 $$
 
-容易看出（？，
+容易看出（？
 
 $$
 H = \frac{1}{m}(GX)^TGX
@@ -270,7 +270,7 @@ $$
 为了解决过拟合，仍然可以对此前的对数损失函数添加**正则化项**，正则化后的损失函数$J(\theta)$
 
 $$
-J(\theta) = -\frac{1}{m}[\Sigma_{i = 1}^my^{(i)}log(h_\theta(x^{(i)})) + (1-y^{(i)})log(1 - logh_\theta(x^{(i)}))] + \frac{\lambda}{2m}\Sigma_{i = j}^n\theta_j^2
+J(\theta) = -\frac{1}{m}[\Sigma_{i = 1}^my^{(i)}log(h_\theta(x^{(i)})) + (1-y^{(i)})log(1 - logh_\theta(x^{(i)}))] + \frac{\lambda}{2m}\Sigma_{j = 1}^n\theta_j^2
 $$
 
 下面以一个具体实例，直观地展示过拟合现象以及正则化对过拟合的影响。这个实例是一个二类分类问题，输入$x$是一个二维向量，即具有两个特征$x_1, x_2$。首先对原始数据进行可视化，如下图所示：
