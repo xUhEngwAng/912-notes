@@ -109,7 +109,8 @@ $$
 因此，实际上并不是使用平方损失函数，而是**对数损失函数**，来作为逻辑回归的损失函数。此时，单个样本的损失函数$cost(h_\theta(x), y)$满足
 
 $$
-cost(h_\theta(x), y) = \left\{
+cost(h_\theta(x), y) = 
+	\left\{
 	\begin{aligned}
 	-log(h_\theta(x))&, y = 1\\\\
 	-log(1 - h_\theta(x))&, y = 0
@@ -122,13 +123,13 @@ $$
 可以用一种更加简单的方法来表示$cost(h_\theta(x), y)$，即
 
 $$
-cost(h_\theta(x), y) = -ylog(h_\theta(x)) - (1-y)log(1 - logh_\theta(x))
+cost(h_\theta(x), y) = -ylog(h_\theta(x)) - (1-y)log(1 - h_\theta(x))
 $$
 
 因此，整个样本的损失函数为
 
 $$
-J(\theta) = \frac{1}{m}\Sigma_{i = 1}^mcost(h_\theta(x^{(i)}), y^{(i)}) = -\frac{1}{m}[\Sigma_{i = 1}^my^{(i)}log(h_\theta(x^{(i)})) + (1-y^{(i)})log(1 - logh_\theta(x^{(i)}))]
+J(\theta) = \frac{1}{m}\Sigma_{i = 1}^mcost(h_\theta(x^{(i)}), y^{(i)}) = -\frac{1}{m}[\Sigma_{i = 1}^my^{(i)}log(h_\theta(x^{(i)})) + (1-y^{(i)})log(1 - h_\theta(x^{(i)}))]
 $$
 
 > 为什么使用对数似然函数？
@@ -165,7 +166,7 @@ $$
 对似然函数进行一些化简
 
 $$
-L(\theta) = \Pi_{i = 1}^m \{[h_\theta(x^{(i)})]^{y^{(i)}} \cdot [(1 - h\theta(x^{(i)}))]^{1-y^{(i)}}\}
+L(\theta) = \Pi_{i = 1}^m \{[h_\theta(x^{(i)})]^{y^{(i)}} \cdot [(1 - h_\theta(x^{(i)}))]^{1-y^{(i)}}\}
 $$
 
 从而可以得到
@@ -177,7 +178,7 @@ $$
 这样，求似然函数的最大值，就等价于求
 
 $$
-J(\theta) = -\frac{1}{m}[\Sigma_{i = 1}^my^{(i)}log(h_\theta(x^{(i)})) + (1-y^{(i)})log(1 - logh_\theta(x^{(i)}))]
+J(\theta) = -\frac{1}{m}[\Sigma_{i = 1}^my^{(i)}ln(h_\theta(x^{(i)})) + (1-y^{(i)})ln(1 - h_\theta(x^{(i)}))]
 $$
 
 的最小值。可见，对数损失函数，实际上与最大似然估计是一脉相承的。
@@ -189,7 +190,7 @@ $$
 再次给出$J(\theta)$的表达式：
 
 $$
-J(\theta) = -\frac{1}{m}[\Sigma_{i = 1}^my^{(i)}log(h_\theta(x^{(i)})) + (1-y^{(i)})log(1 - logh_\theta(x^{(i)}))]
+J(\theta) = -\frac{1}{m}[\Sigma_{i = 1}^my^{(i)}log(h_\theta(x^{(i)})) + (1-y^{(i)})log(1 - h_\theta(x^{(i)}))]
 $$
 
 所以
@@ -270,7 +271,7 @@ $$
 为了解决过拟合，仍然可以对此前的对数损失函数添加**正则化项**，正则化后的损失函数$J(\theta)$
 
 $$
-J(\theta) = -\frac{1}{m}[\Sigma_{i = 1}^my^{(i)}log(h_\theta(x^{(i)})) + (1-y^{(i)})log(1 - logh_\theta(x^{(i)}))] + \frac{\lambda}{2m}\Sigma_{j = 1}^n\theta_j^2
+J(\theta) = -\frac{1}{m}[\Sigma_{i = 1}^my^{(i)}log(h_\theta(x^{(i)})) + (1-y^{(i)})log(1 - h_\theta(x^{(i)}))] + \frac{\lambda}{2m}\Sigma_{j = 1}^n\theta_j^2
 $$
 
 下面以一个具体实例，直观地展示过拟合现象以及正则化对过拟合的影响。这个实例是一个二类分类问题，输入$x$是一个二维向量，即具有两个特征$x_1, x_2$。首先对原始数据进行可视化，如下图所示：
