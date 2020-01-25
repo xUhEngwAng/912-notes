@@ -110,7 +110,11 @@ $$
 
 $$
 cost(h_\theta(x), y) = 
+<<<<<<< HEAD
 	\left{
+=======
+	\left\\{
+>>>>>>> 78f580ddaa701274fd48a20e5ef6e7f7b497320a
 	\begin{aligned}
 	-log(h_\theta(x))&, y = 1\\\\
 	-log(1 - h_\theta(x))&, y = 0
