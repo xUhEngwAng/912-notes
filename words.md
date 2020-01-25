@@ -2194,7 +2194,27 @@ Some Words
 	- Each store is owned by an individual who pays a fee for franchise.
 	- He lost the franchise after failing to meet the specified standards.
 
+##19th, January
+
++ wade
+> (v)to walk through water or other liquid with some effort, because it is deep enough to come quite high up your legs, or thick.
+
+	- The river was full but we managed to wade across.-
+	- They had to wade through a swamp.
+
++ proposition
+> (n)an offer or suggestion, usually in business.</br>
+> (n)an idea or opinion<br>
+> (n)a statement or problem that must be solved or proved to be true or not true.</br>
+> (n)a question or statement about an issue of public policy that appears on a voting paper so that people can vote for it or against it.
+
+	- He wrote to me last week regarding a business proposition that he thought might interest me.
+	- They were debating the proposition that "All people are created equal".
+	- Under Proposition 71, the state will commit $3 billion to studying stem cells over the next 10 years.
+
 + cosmetically
 + rationale
 + ameliorate
 + level off
++ delve
++ coronary

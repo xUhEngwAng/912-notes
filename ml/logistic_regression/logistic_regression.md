@@ -110,7 +110,7 @@ $$
 
 $$
 cost(h_\theta(x), y) = 
-	\left\{
+	\left{
 	\begin{aligned}
 	-log(h_\theta(x))&, y = 1\\\\
 	-log(1 - h_\theta(x))&, y = 0
