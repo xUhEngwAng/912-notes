@@ -2212,6 +2212,13 @@ Some Words
 	- They were debating the proposition that "All people are created equal".
 	- Under Proposition 71, the state will commit $3 billion to studying stem cells over the next 10 years.
 
++ moisture
+> (n)a liquid such as water in the form of very small drops, either in the air, in a substance, or on a surface.
+
+	- These plants need a rich soil that remains moisture.
+	- It was a clear day with little moisture in the air.
+	- Plants absorb carbon dioxide from the air and moisture from the soil.
+
 + cosmetically
 + rationale
 + ameliorate
