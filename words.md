@@ -2194,7 +2194,7 @@ Some Words
 	- Each store is owned by an individual who pays a fee for franchise.
 	- He lost the franchise after failing to meet the specified standards.
 
-##19th, January
+## 19th, January
 
 + wade
 > (v)to walk through water or other liquid with some effort, because it is deep enough to come quite high up your legs, or thick.
@@ -2218,6 +2218,40 @@ Some Words
 	- These plants need a rich soil that remains moisture.
 	- It was a clear day with little moisture in the air.
 	- Plants absorb carbon dioxide from the air and moisture from the soil.
+
+## 21st, February
+
++ ostensible
+> (adj)appearing or claiming to be one thing when it is really something else.
+
+	- Their ostensible goal was to clean up government corruption, but their real aim was to unseat the government.
+
++ supersede
+> (v)to relace something, especially something older or more old-fashioned.
+
+	- Most of the old roads have been superseded by the great interstate highways.
+	- Hand tools are relics of the past that have now been superseded by the machine.
+
++ disentangle
+> (v)to separate things that have become joined or confused.
+
+	- It's difficult to disentangle hard fact from myth, or truth from lies.
+	- I tried to disentangle the wires under my desk.
+
+## 23rd, February
+
++ commensurate
+> (adj)in a correct and suitable amount compared to something else.
+
+	- a salary that is commensurate with skills and experience
+	- The agency's workload has increased without any commensurate increase in staff.
+
+## 29th, February
+
++ efficacy
+> (n)the ability, especially of a medicine or a method of achieving something, to produce the intended result, effectiveness.
+
+	- They recently ran a series of tests to meausre the efficacy of the drug.
 
 + cosmetically
 + rationale
