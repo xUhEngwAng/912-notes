@@ -1,4 +1,4 @@
-Lab 3 Report
+Lab3 Report
 ============
 
 ## 实验目的
