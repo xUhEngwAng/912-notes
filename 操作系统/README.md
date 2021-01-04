@@ -28,7 +28,7 @@
 + [进程管理（4）：信号量与管程](chp18.md)
 + [进程管理（5）：死锁](chp20.md)
 + [多进程互斥问题的软件实现方法](eisenberg.md)
-+ [多进程互斥问题的软件实现方法](philosopher.md)
++ [哲学家进餐问题及其实现](philosopher.md)
 + [栈式页面置换算法不会出现belady现象的证明](belady.md)
 
 > ucore lab 实验报告
